@@ -84,9 +84,10 @@ def test_exact_targets_are_not_self_or_suffix_targets():
     assert targets.tolist() == [-1, -1, -1, -1, -1, 2, 2, -1]
 
 
-def test_safetensors_auto_model_round_trip(tmp_path):
+@pytest.mark.parametrize("mode", ["rope", "ntk", "hierarchical", "key_end", "key_all"])
+def test_safetensors_auto_model_round_trip(tmp_path, mode):
     torch.manual_seed(11)
-    model = CaptionBertModel(config()).eval()
+    model = CaptionBertModel(config(mode)).eval()
     CaptionBertConfig.register_for_auto_class("AutoConfig")
     CaptionBertModel.register_for_auto_class("AutoModel")
     model.save_pretrained(tmp_path, safe_serialization=True)
@@ -94,6 +95,7 @@ def test_safetensors_auto_model_round_trip(tmp_path):
     assert not (tmp_path / "pytorch_model.bin").exists()
     with safe_open(tmp_path / "model.safetensors", framework="pt") as file:
         assert file.metadata()["format"] == "pt"
+        assert {"frequencies", "kinds"} <= set(file.keys())
     raw = json.loads((tmp_path / "config.json").read_text())
     assert set(raw["auto_map"]) == {"AutoConfig", "AutoModel"}
     auto_config = AutoConfig.from_pretrained(tmp_path, trust_remote_code=True)
@@ -101,5 +103,7 @@ def test_safetensors_auto_model_round_trip(tmp_path):
     loaded, info = AutoModel.from_pretrained(tmp_path, trust_remote_code=True, output_loading_info=True)
     assert not info["missing_keys"] and not info["unexpected_keys"]
     loaded.eval()
+    for name, expected_buffer in model.named_buffers():
+        assert torch.equal(expected_buffer, dict(loaded.named_buffers())[name]), name
     expected, actual = model(inputs()).pooler_output, loaded(inputs()).pooler_output
     torch.testing.assert_close(expected, actual, atol=2e-6, rtol=1e-5)

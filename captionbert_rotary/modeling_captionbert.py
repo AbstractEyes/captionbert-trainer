@@ -182,8 +182,11 @@ class CaptionBertModel(PreTrainedModel):
             base = 10000.0 * (4.0 ** (dim / (dim - 2)) if config.rotary_mode == "ntk" else 1.0)
             frequencies = base ** (-torch.arange(pairs, dtype=torch.float64) / pairs)
             kinds = torch.zeros(pairs, dtype=torch.long)
-        self.register_buffer("frequencies", frequencies.float(), persistent=False)
-        self.register_buffer("kinds", kinds, persistent=False)
+        # Save the small immutable rotary tables alongside the weights. Current
+        # Transformers materializes non-persistent buffers with empty_like when
+        # loading on meta; constructor-only initialization would then be lost.
+        self.register_buffer("frequencies", frequencies.float())
+        self.register_buffer("kinds", kinds)
         self.post_init()
 
     def _init_weights(self, module):
