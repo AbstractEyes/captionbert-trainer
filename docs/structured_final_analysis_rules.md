@@ -47,3 +47,12 @@ structured larger checkpoints; run the original binding/norm/phase checks on
 the complete KALLP screen pair even if that package is not promoted. Report
 development effects without treating a frozen intervention as an improved
 training recipe. This adds no new accuracy training.
+
+After the intact KALLP head reached perfect sampled top-one lookup, add a
+reconstructed zero-step control for its two registered seeds. This separates
+the architectural prior from changes due to training. Rebuild it in the same
+frozen runtime; do not describe it as an independently saved original birth
+checkpoint. This is a post-screen mechanism control and changes no selection
+rule or training recipe. Preserve the original intact measurements and write
+the follow-up, its software environment and TensorBoard endpoint scalars to a
+separate versioned folder.

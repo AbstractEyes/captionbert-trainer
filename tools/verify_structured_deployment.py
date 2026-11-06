@@ -9,6 +9,7 @@ from contextlib import nullcontext
 import hashlib
 import json
 from pathlib import Path
+import platform
 import sys
 import time
 
@@ -163,6 +164,8 @@ def main():
         state_tensors_equal=True, safetensors_metadata=metadata,
         loading_info={key: sorted(value) if isinstance(value, set) else value for key, value in info.items()},
         native_training_source_sha256=TRAIN_SOURCE_SHA256, tf32=False, cases=cases,
+        environment=dict(python=platform.python_version(), torch=torch.__version__,
+            cuda=torch.version.cuda, gpu=torch.cuda.get_device_name() if guard.enabled else None),
         hidden_states_count=13, attention_layers=12, attention_head_count=native.config.num_attention_heads,
         memory=guard.report(), training_performed=False,
         long_shapes_are_engineering_only=True)

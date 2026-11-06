@@ -8,6 +8,7 @@ from contextlib import contextmanager
 import hashlib
 import json
 from pathlib import Path
+import platform
 import sys
 import time
 from types import SimpleNamespace
@@ -176,11 +177,17 @@ def main():
                    help="Also score each frozen intervention on development teacher/STSB measurements")
     p.add_argument("--structural-ablations", action="store_true",
                    help="Exploratory anchor-angle and value-address interventions on structured models")
+    p.add_argument("--initialization-control", action="store_true",
+                   help="Probe a reconstructed zero-step model under the registered weight seed")
     p.add_argument("--long-shapes", action="store_true")
     p.add_argument("--device", default="cuda")
     p.add_argument("--memory-limit-gb", type=float, default=92.)
     p.add_argument("--push", action="store_true")
+    p.add_argument("--output-name", default="frozen-development",
+                   help="Versioned analysis folder; preserve earlier frozen reports")
     args = p.parse_args()
+    if Path(args.output_name).name != args.output_name or args.output_name in ("", ".", ".."):
+        p.error("Use a single analysis folder name")
     torch.set_num_threads(2)
     torch.backends.cuda.matmul.allow_tf32 = False
     guard = MemoryGuard(args.memory_limit_gb, args.device)
@@ -203,7 +210,7 @@ def main():
             raise ValueError("Engineering fixtures must never ship as scientific runs")
         if sha256_file(directory / "model.safetensors") != result["checkpoint_sha256"]:
             raise ValueError("Completed safetensors failed its recorded hash")
-        output = directory / "frozen-development"
+        output = directory / args.output_name
         output.mkdir(exist_ok=True)
         state = torch.load(directory / "state.pt", map_location="cpu", weights_only=True, mmap=True)
         if state["step"] != result["steps"] or any(state["identity"].get(k) != result.get(k) for k in ("arm", "seed", "config_id", "dataset_id")):
@@ -239,14 +246,40 @@ def main():
                     )
             measurements[name] = summary
             np.savez_compressed(output / f"{name}-queries.npz", **arrays)
+        initialization = None
+        if args.initialization_control:
+            from captionbert_rotary.train import seed_all
+            seed_all(result["seed"])
+            initial = CaptionBertModel(CaptionBertConfig.from_pretrained(directory)).to(args.device).eval()
+            summary, arrays = lookup_probe(initial, store, ix, vocabulary, special, args.batch, args.device)
+            np.savez_compressed(output / "initialization-queries.npz", **arrays)
+            initialization = dict(seed=result["seed"], training_steps=0, measurements=summary,
+                reference="reconstructed fresh initialization in the same frozen runtime; not a saved original step-zero file")
+            del initial
         row_hash = hashlib.sha256(ix.astype("<i8").tobytes()).hexdigest()
         report = dict(arm=result["arm"], seed=result["seed"], config_id=result["config_id"], dataset_id=result["dataset_id"],
             split="chunk061 development", rows=len(ix), row_seed=20261106, row_ids_sha256=row_hash,
             precision="fp32 TF32 off", measurements=measurements,
             sentence_measurements=sentence_measurements, independent_checkpoint_auto_parity=parity,
+            initialization_control=initialization,
             probe_source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            environment=dict(python=platform.python_version(), torch=torch.__version__,
+                cuda=torch.version.cuda, gpu=torch.cuda.get_device_name() if guard.enabled else None),
             memory=guard.report(), selection_use=False, training_performed=False)
         np.save(output / "row-ids.npy", ix)
+        from torch.utils.tensorboard import SummaryWriter
+        from captionbert_rotary.structured_campaign import tensorboard_scores
+        with SummaryWriter(str(output / "tensorboard")) as writer:
+            writer.add_text("frozen/protocol", json.dumps(dict(
+                arm=result["arm"], seed=result["seed"], rows=len(ix),
+                training_performed=False, probe_source_sha256=report["probe_source_sha256"])), result["steps"])
+            for name, values in measurements.items():
+                tensorboard_scores(writer, f"frozen/{name}/lookup", values, result["steps"])
+            for name, values in sentence_measurements.items():
+                tensorboard_scores(writer, f"frozen/{name}/sentence", values, result["steps"])
+            if initialization is not None:
+                tensorboard_scores(writer, "frozen/initialization/lookup", initialization["measurements"], 0)
+            writer.flush()
         (output / "report.json").write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
         print(json.dumps(dict(arm=result["arm"], seed=result["seed"], measurements=measurements)), flush=True)
         del model
@@ -255,7 +288,7 @@ def main():
         if args.push:
             from huggingface_hub import HfApi
             HfApi().upload_folder(repo_id="AbstractPhil/captionbert-8192-rotary", folder_path=output,
-                path_in_repo=f"experiments/{result['config_id']}/{directory.name}/frozen-development",
+                path_in_repo=f"experiments/{result['config_id']}/{directory.name}/{args.output_name}",
                 commit_message=f"Frozen development lookup/parity: {directory.name}")
 
 
