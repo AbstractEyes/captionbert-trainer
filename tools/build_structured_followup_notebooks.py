@@ -47,6 +47,7 @@ corpus/address census after the frozen probes. It changes no training recipe.
         ]
         if lane == "A":
             sources.append(("code", (ROOT / "notebooks/cells/ship_provenance_A.py").read_text(encoding="utf8")))
+        sources.append(("code", (ROOT / f"notebooks/cells/phase_control_{lane}.py").read_text(encoding="utf8")))
         cells = []
         for index, (kind, source) in enumerate(sources):
             if kind == "code":
