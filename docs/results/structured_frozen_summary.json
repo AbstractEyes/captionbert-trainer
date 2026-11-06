@@ -1,0 +1,2745 @@
+{
+  "binding": [
+    {
+      "arm": "KALLP",
+      "seed": 1,
+      "config_id": "dc37215529c188be7b93804c4a21f125afa353e037b1a2a8fc11e5b2fc817d3a",
+      "dataset_id": "659b21c1c6eb1074eeec7acdbfa9bd010965595a4669338690cf3ae38a4448d5",
+      "split": "chunk061 development",
+      "rows": 4096,
+      "row_seed": 20261106,
+      "row_ids_sha256": "e72547c65ba2f4d26131988027abd9004af0a350e3bd404242b0f843779eb8ed",
+      "precision": "fp32 TF32 off",
+      "measurements": {
+        "intact": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.9995101094245911,
+            "caption_mean_record_mass": 0.9996374544863245,
+            "median_record_mass": 0.9998422861099243,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 2.5728611490194453e-06,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.9995501041412354,
+            "caption_mean_record_mass": 0.9996627638814369,
+            "median_record_mass": 0.9998492002487183,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 2.58109707829135e-06,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9989388585090637,
+            "caption_mean_record_mass": 0.9989243283319633,
+            "median_record_mass": 0.9996836185455322,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 2.4550568014092278e-06,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9993511438369751,
+            "caption_mean_record_mass": 0.9993502210613876,
+            "median_record_mass": 0.9997895359992981,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 1.0532260148465866e-06,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.9993064999580383,
+            "caption_mean_record_mass": 0.99934764040841,
+            "median_record_mass": 0.9997236728668213,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 2.088266455757548e-06,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "binding_off": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.0187994372099638,
+            "caption_mean_record_mass": 0.03314675576401302,
+            "median_record_mass": 0.00632082624360919,
+            "exact_record_top1": 0.003942440370589394,
+            "wrong_adjacent_mass": 0.009233081713318825,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.019122665748000145,
+            "caption_mean_record_mass": 0.03336212873902263,
+            "median_record_mass": 0.006439572665840387,
+            "exact_record_top1": 0.004112622587788674,
+            "wrong_adjacent_mass": 0.009400686249136925,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.014176249504089355,
+            "caption_mean_record_mass": 0.017900144132808812,
+            "median_record_mass": 0.004306409507989883,
+            "exact_record_top1": 0.0015082956259426848,
+            "wrong_adjacent_mass": 0.006835810374468565,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.01804082840681076,
+            "caption_mean_record_mass": 0.02354236408823256,
+            "median_record_mass": 0.005290548782795668,
+            "exact_record_top1": 0.0030165912518853697,
+            "wrong_adjacent_mass": 0.007835605181753635,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.007849707268178463,
+            "caption_mean_record_mass": 0.008328353189715436,
+            "median_record_mass": 0.003576860297471285,
+            "exact_record_top1": 0.0009380863039399625,
+            "wrong_adjacent_mass": 0.0031636778730899096,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "norm_off": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.3496224284172058,
+            "caption_mean_record_mass": 0.40512801681955657,
+            "median_record_mass": 0.3498893976211548,
+            "exact_record_top1": 0.4017346737630593,
+            "wrong_adjacent_mass": 0.0011234241537749767,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.36405158042907715,
+            "caption_mean_record_mass": 0.41084029503956015,
+            "median_record_mass": 0.37689709663391113,
+            "exact_record_top1": 0.4201202151217969,
+            "wrong_adjacent_mass": 0.001194673590362072,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.14323991537094116,
+            "caption_mean_record_mass": 0.17400463561007262,
+            "median_record_mass": 0.12608996033668518,
+            "exact_record_top1": 0.138763197586727,
+            "wrong_adjacent_mass": 0.0001043306037900038,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.17553435266017914,
+            "caption_mean_record_mass": 0.21634751296038413,
+            "median_record_mass": 0.14776641130447388,
+            "exact_record_top1": 0.19155354449472098,
+            "wrong_adjacent_mass": 9.306184074375778e-05,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.32258230447769165,
+            "caption_mean_record_mass": 0.3409365349937053,
+            "median_record_mass": 0.31903529167175293,
+            "exact_record_top1": 0.3764853033145716,
+            "wrong_adjacent_mass": 0.00042290796409361064,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "phase_redraw": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.999477744102478,
+            "caption_mean_record_mass": 0.9996038787432727,
+            "median_record_mass": 0.9998233914375305,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 4.8032438826339785e-06,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.9995207190513611,
+            "caption_mean_record_mass": 0.9996307606844939,
+            "median_record_mass": 0.9998306035995483,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 4.326007911004126e-06,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.998862087726593,
+            "caption_mean_record_mass": 0.998774478866105,
+            "median_record_mass": 0.9996943473815918,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 1.1629228538367897e-05,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9993669390678406,
+            "caption_mean_record_mass": 0.9993413692732719,
+            "median_record_mass": 0.9997736811637878,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 2.7384230634197593e-06,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.9992506504058838,
+            "caption_mean_record_mass": 0.9992642946659572,
+            "median_record_mass": 0.9997066855430603,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 4.8940923988993745e-06,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "phase_constant": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.11369077116250992,
+            "caption_mean_record_mass": 0.16619080153897944,
+            "median_record_mass": 0.06701581180095673,
+            "exact_record_top1": 0.33343189434259807,
+            "wrong_adjacent_mass": 0.013728410005569458,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.11622979491949081,
+            "caption_mean_record_mass": 0.1676733015916125,
+            "median_record_mass": 0.06804138422012329,
+            "exact_record_top1": 0.34282400084361486,
+            "wrong_adjacent_mass": 0.013602565973997116,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.07737474143505096,
+            "caption_mean_record_mass": 0.07663633533516731,
+            "median_record_mass": 0.0503498911857605,
+            "exact_record_top1": 0.19909502262443438,
+            "wrong_adjacent_mass": 0.01552837248891592,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.0965983048081398,
+            "caption_mean_record_mass": 0.0990181110860051,
+            "median_record_mass": 0.0706278383731842,
+            "exact_record_top1": 0.28054298642533937,
+            "wrong_adjacent_mass": 0.015272222459316254,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.053152699023485184,
+            "caption_mean_record_mass": 0.0541802396266056,
+            "median_record_mass": 0.03980260342359543,
+            "exact_record_top1": 0.2607879924953096,
+            "wrong_adjacent_mass": 0.005689086392521858,
+            "uniform_mass": 0.006118615623563528
+          }
+        }
+      },
+      "sentence_measurements": {
+        "intact": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 79.79517641354452,
+              "self_cos": 0.004734748013822296,
+              "cos_to_target": 0.7664218544960022
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 60.8426064026275,
+              "self_cos": 0.014027573271179952,
+              "cos_to_target": 0.7058472037315369
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.665892852778199,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        },
+        "binding_off": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 80.10888349389404,
+              "self_cos": 0.0033085485419908044,
+              "cos_to_target": 0.7655468583106995
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 61.16122830046404,
+              "self_cos": 0.012158514741696934,
+              "cos_to_target": 0.7042571306228638
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6724262689167196,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        },
+        "norm_off": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 79.84037591344537,
+              "self_cos": 0.004387557899306849,
+              "cos_to_target": 0.766346275806427
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 60.95650799433401,
+              "self_cos": 0.013465500698014169,
+              "cos_to_target": 0.7055100798606873
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6672964462735241,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        },
+        "phase_redraw": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 79.80887858580238,
+              "self_cos": 0.004845133885655795,
+              "cos_to_target": 0.7663679122924805
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 60.81784201934651,
+              "self_cos": 0.014180638140296945,
+              "cos_to_target": 0.7058426141738892
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6661635661906183,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        },
+        "phase_constant": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 80.02660330633002,
+              "self_cos": 0.003528809231293087,
+              "cos_to_target": 0.7655825018882751
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 61.08356599143945,
+              "self_cos": 0.012483398097361887,
+              "cos_to_target": 0.7042396068572998
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6709838562915548,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        }
+      },
+      "independent_checkpoint_auto_parity": {
+        "reference": "independent final state.pt model tensors",
+        "format": "model.safetensors",
+        "metadata_format": "pt",
+        "dtype": "fp32",
+        "state_tensors_equal": true,
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "cases": [
+          {
+            "case": "real_captions",
+            "input_shape": [
+              2,
+              106
+            ],
+            "embedding_shape": [
+              2,
+              768
+            ],
+            "hidden_shape": [
+              2,
+              106,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.24260038600186817
+          },
+          {
+            "case": "all_padding",
+            "input_shape": [
+              2,
+              8
+            ],
+            "embedding_shape": [
+              2,
+              768
+            ],
+            "hidden_shape": [
+              2,
+              8,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.05255258000033791
+          }
+        ]
+      },
+      "initialization_control": {
+        "seed": 1,
+        "training_steps": 0,
+        "measurements": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.014869946986436844,
+            "caption_mean_record_mass": 0.021699121364155298,
+            "median_record_mass": 0.007420739158987999,
+            "exact_record_top1": 0.02069781194559432,
+            "wrong_adjacent_mass": 0.01470130030065775,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.014669938012957573,
+            "caption_mean_record_mass": 0.02144571270613789,
+            "median_record_mass": 0.007345136255025864,
+            "exact_record_top1": 0.02045766107771802,
+            "wrong_adjacent_mass": 0.01473377738147974,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.017730752006173134,
+            "caption_mean_record_mass": 0.02114127871574971,
+            "median_record_mass": 0.00839659757912159,
+            "exact_record_top1": 0.024132730015082957,
+            "wrong_adjacent_mass": 0.014236769638955593,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.018586257472634315,
+            "caption_mean_record_mass": 0.02028272370652087,
+            "median_record_mass": 0.009158948436379433,
+            "exact_record_top1": 0.02262443438914027,
+            "wrong_adjacent_mass": 0.014780930243432522,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.007198059465736151,
+            "caption_mean_record_mass": 0.0075114676391609785,
+            "median_record_mass": 0.004436132498085499,
+            "exact_record_top1": 0.008130081300813009,
+            "wrong_adjacent_mass": 0.006656487472355366,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "reference": "reconstructed fresh initialization in the same frozen runtime; not a saved original step-zero file"
+      },
+      "probe_source_sha256": "c778258cabc69e1985c03304af0ebf2e8e4be3ad64aba680d9ccaec4bdd5d03a",
+      "environment": {
+        "python": "3.13.16",
+        "torch": "2.15.0+cu132",
+        "cuda": "13.2",
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition"
+      },
+      "memory": {
+        "peak_allocated_gb": 0.949353984,
+        "peak_reserved_gb": 1.33169152,
+        "max_observed_device_gb": 2.085617664,
+        "total_device_limit_gb": 92.0
+      },
+      "selection_use": false,
+      "training_performed": false,
+      "isolated_phase_source_sha256": "1cf1ba909939b1b9f95f100fc87cfe9c21e7698c689658fb125ac522ca2985b9"
+    },
+    {
+      "arm": "KALLP",
+      "seed": 2,
+      "config_id": "dc37215529c188be7b93804c4a21f125afa353e037b1a2a8fc11e5b2fc817d3a",
+      "dataset_id": "659b21c1c6eb1074eeec7acdbfa9bd010965595a4669338690cf3ae38a4448d5",
+      "split": "chunk061 development",
+      "rows": 4096,
+      "row_seed": 20261106,
+      "row_ids_sha256": "e72547c65ba2f4d26131988027abd9004af0a350e3bd404242b0f843779eb8ed",
+      "precision": "fp32 TF32 off",
+      "measurements": {
+        "intact": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.9995156526565552,
+            "caption_mean_record_mass": 0.9996639028076053,
+            "median_record_mass": 0.9998456239700317,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 1.8013324734056368e-06,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.99957674741745,
+            "caption_mean_record_mass": 0.9996939892916716,
+            "median_record_mass": 0.9998509883880615,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 1.8618209196574753e-06,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9986433982849121,
+            "caption_mean_record_mass": 0.9988771832507589,
+            "median_record_mass": 0.9996861219406128,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 9.361531851936888e-07,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9995196461677551,
+            "caption_mean_record_mass": 0.9995732722075089,
+            "median_record_mass": 0.9998263716697693,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 4.174129344391986e-07,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.9992398619651794,
+            "caption_mean_record_mass": 0.9992921014153768,
+            "median_record_mass": 0.9997345209121704,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 1.5269587265720475e-06,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "binding_off": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.017014160752296448,
+            "caption_mean_record_mass": 0.0296730948072733,
+            "median_record_mass": 0.005436249077320099,
+            "exact_record_top1": 0.00404100137985413,
+            "wrong_adjacent_mass": 0.009322076104581356,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.017286304384469986,
+            "caption_mean_record_mass": 0.02987751208194014,
+            "median_record_mass": 0.005534596741199493,
+            "exact_record_top1": 0.004007170726563324,
+            "wrong_adjacent_mass": 0.009481375105679035,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.013121649622917175,
+            "caption_mean_record_mass": 0.01694716300513988,
+            "median_record_mass": 0.004091386217623949,
+            "exact_record_top1": 0.004524886877828055,
+            "wrong_adjacent_mass": 0.007043578661978245,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.016746696084737778,
+            "caption_mean_record_mass": 0.02224807227051324,
+            "median_record_mass": 0.00492252130061388,
+            "exact_record_top1": 0.006033182503770739,
+            "wrong_adjacent_mass": 0.007339831441640854,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.007690324913710356,
+            "caption_mean_record_mass": 0.008007172518686968,
+            "median_record_mass": 0.0031683463603258133,
+            "exact_record_top1": 0.00031269543464665416,
+            "wrong_adjacent_mass": 0.002830512123182416,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "norm_off": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.35216641426086426,
+            "caption_mean_record_mass": 0.40784295787336905,
+            "median_record_mass": 0.3554476201534271,
+            "exact_record_top1": 0.3965109402720284,
+            "wrong_adjacent_mass": 0.0010759920114651322,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.36608344316482544,
+            "caption_mean_record_mass": 0.41350508422352544,
+            "median_record_mass": 0.37545615434646606,
+            "exact_record_top1": 0.41105135505641677,
+            "wrong_adjacent_mass": 0.0011452360777184367,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.15310846269130707,
+            "caption_mean_record_mass": 0.1842173005011942,
+            "median_record_mass": 0.1300055980682373,
+            "exact_record_top1": 0.1885369532428356,
+            "wrong_adjacent_mass": 8.55828620842658e-05,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.18475520610809326,
+            "caption_mean_record_mass": 0.2259427581113268,
+            "median_record_mass": 0.16587813198566437,
+            "exact_record_top1": 0.23227752639517346,
+            "wrong_adjacent_mass": 8.24612652650103e-05,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.32727769017219543,
+            "caption_mean_record_mass": 0.34452927272234646,
+            "median_record_mass": 0.3244841694831848,
+            "exact_record_top1": 0.36554096310193873,
+            "wrong_adjacent_mass": 0.00037503716885112226,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "phase_redraw": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.9994074106216431,
+            "caption_mean_record_mass": 0.9995601052769703,
+            "median_record_mass": 0.9998338222503662,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 6.098437552282121e-06,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.9994638562202454,
+            "caption_mean_record_mass": 0.9995893200546581,
+            "median_record_mass": 0.999839186668396,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 5.536027856578585e-06,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9985989332199097,
+            "caption_mean_record_mass": 0.9987579444579058,
+            "median_record_mass": 0.9996777772903442,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 1.4142674444883596e-05,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9994860291481018,
+            "caption_mean_record_mass": 0.9994898697604304,
+            "median_record_mass": 0.9998250603675842,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 5.604554758065206e-07,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.9991313815116882,
+            "caption_mean_record_mass": 0.9991895253696139,
+            "median_record_mass": 0.9997134208679199,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 8.653370969113894e-06,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "phase_constant": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.0965317040681839,
+            "caption_mean_record_mass": 0.14569690794484252,
+            "median_record_mass": 0.06158467009663582,
+            "exact_record_top1": 0.34131677508377684,
+            "wrong_adjacent_mass": 0.01376841589808464,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.09836108237504959,
+            "caption_mean_record_mass": 0.14723616505056158,
+            "median_record_mass": 0.06314440071582794,
+            "exact_record_top1": 0.3534746388273753,
+            "wrong_adjacent_mass": 0.013675509952008724,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.07036581635475159,
+            "caption_mean_record_mass": 0.06514541684579023,
+            "median_record_mass": 0.041065264493227005,
+            "exact_record_top1": 0.167420814479638,
+            "wrong_adjacent_mass": 0.015097277238965034,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.09113398939371109,
+            "caption_mean_record_mass": 0.09189729233362702,
+            "median_record_mass": 0.058898452669382095,
+            "exact_record_top1": 0.2895927601809955,
+            "wrong_adjacent_mass": 0.014761113561689854,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.0454973541200161,
+            "caption_mean_record_mass": 0.0471360515396569,
+            "median_record_mass": 0.035579562187194824,
+            "exact_record_top1": 0.2761100687929956,
+            "wrong_adjacent_mass": 0.005715395323932171,
+            "uniform_mass": 0.006118615623563528
+          }
+        }
+      },
+      "sentence_measurements": {
+        "intact": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 79.04200272569783,
+              "self_cos": 0.004560547461659847,
+              "cos_to_target": 0.7668309211730957
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 60.24114986186824,
+              "self_cos": 0.013372006044127109,
+              "cos_to_target": 0.7084013223648071
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6669821204338287,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        },
+        "binding_off": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 79.37973375999336,
+              "self_cos": 0.003153141874152374,
+              "cos_to_target": 0.7658101320266724
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 60.73128504691567,
+              "self_cos": 0.0115173326886966,
+              "cos_to_target": 0.7067139744758606
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6730854983113154,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        },
+        "norm_off": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 79.08879960776949,
+              "self_cos": 0.004183922586931313,
+              "cos_to_target": 0.7667433619499207
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 60.401530029294584,
+              "self_cos": 0.01300676430850344,
+              "cos_to_target": 0.7079647779464722
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6690740151159017,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        },
+        "phase_redraw": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 79.04878576098307,
+              "self_cos": 0.00456438535914975,
+              "cos_to_target": 0.7667981386184692
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 60.23396176055188,
+              "self_cos": 0.013387721950178363,
+              "cos_to_target": 0.7083966732025146
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6670241026692068,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        },
+        "phase_constant": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 79.33233652719497,
+              "self_cos": 0.0035207391288226758,
+              "cos_to_target": 0.7657710909843445
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 60.70284102430367,
+              "self_cos": 0.011925528330081241,
+              "cos_to_target": 0.7064456343650818
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6710692709412477,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        }
+      },
+      "independent_checkpoint_auto_parity": {
+        "reference": "independent final state.pt model tensors",
+        "format": "model.safetensors",
+        "metadata_format": "pt",
+        "dtype": "fp32",
+        "state_tensors_equal": true,
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "cases": [
+          {
+            "case": "real_captions",
+            "input_shape": [
+              2,
+              106
+            ],
+            "embedding_shape": [
+              2,
+              768
+            ],
+            "hidden_shape": [
+              2,
+              106,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.2430282890018134
+          },
+          {
+            "case": "all_padding",
+            "input_shape": [
+              2,
+              8
+            ],
+            "embedding_shape": [
+              2,
+              768
+            ],
+            "hidden_shape": [
+              2,
+              8,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.05191273000309593
+          }
+        ]
+      },
+      "initialization_control": {
+        "seed": 2,
+        "training_steps": 0,
+        "measurements": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.014196262694895267,
+            "caption_mean_record_mass": 0.020847948152633283,
+            "median_record_mass": 0.006982738152146339,
+            "exact_record_top1": 0.01961364084368224,
+            "wrong_adjacent_mass": 0.014583383686840534,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.014149987138807774,
+            "caption_mean_record_mass": 0.020985765959640353,
+            "median_record_mass": 0.006889060605317354,
+            "exact_record_top1": 0.019508594326689867,
+            "wrong_adjacent_mass": 0.014515174552798271,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.014858165755867958,
+            "caption_mean_record_mass": 0.016494049321853065,
+            "median_record_mass": 0.008182392455637455,
+            "exact_record_top1": 0.021116138763197588,
+            "wrong_adjacent_mass": 0.015559009276330471,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.016067979857325554,
+            "caption_mean_record_mass": 0.018088238715991554,
+            "median_record_mass": 0.008339589461684227,
+            "exact_record_top1": 0.024132730015082957,
+            "wrong_adjacent_mass": 0.014613285660743713,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.0069241770543158054,
+            "caption_mean_record_mass": 0.007013520068352273,
+            "median_record_mass": 0.004041918553411961,
+            "exact_record_top1": 0.013133208255159476,
+            "wrong_adjacent_mass": 0.006834650877863169,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "reference": "reconstructed fresh initialization in the same frozen runtime; not a saved original step-zero file"
+      },
+      "probe_source_sha256": "c778258cabc69e1985c03304af0ebf2e8e4be3ad64aba680d9ccaec4bdd5d03a",
+      "environment": {
+        "python": "3.13.16",
+        "torch": "2.15.0+cu132",
+        "cuda": "13.2",
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition"
+      },
+      "memory": {
+        "peak_allocated_gb": 0.949353984,
+        "peak_reserved_gb": 1.33169152,
+        "max_observed_device_gb": 2.085617664,
+        "total_device_limit_gb": 92.0
+      },
+      "selection_use": false,
+      "training_performed": false,
+      "isolated_phase_source_sha256": "1cf1ba909939b1b9f95f100fc87cfe9c21e7698c689658fb125ac522ca2985b9"
+    }
+  ],
+  "hierarchical": {
+    "full4m/H16-seed1": {
+      "arm": "H16",
+      "seed": 1,
+      "config_id": "aafe9c59b9d696107cb4393f3a26815e84714daddb7d6eb028b5d6137b88418e",
+      "dataset_id": "7adb10f8833fab44e3ebb44315b53cb65bd8010b038115d15350b18536b57e86",
+      "split": "chunk061 development",
+      "rows": 4096,
+      "row_seed": 20261106,
+      "row_ids_sha256": "e72547c65ba2f4d26131988027abd9004af0a350e3bd404242b0f843779eb8ed",
+      "precision": "fp32 TF32 off",
+      "measurements": {
+        "intact": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.029139135032892227,
+            "caption_mean_record_mass": 0.044541652260519066,
+            "median_record_mass": 0.012191790156066418,
+            "exact_record_top1": 0.022767593140153756,
+            "wrong_adjacent_mass": 0.012048224918544292,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.030085375532507896,
+            "caption_mean_record_mass": 0.04535285333657002,
+            "median_record_mass": 0.012771758250892162,
+            "exact_record_top1": 0.023621216914478542,
+            "wrong_adjacent_mass": 0.012253159657120705,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.015604917891323566,
+            "caption_mean_record_mass": 0.017948049519003216,
+            "median_record_mass": 0.006342306267470121,
+            "exact_record_top1": 0.010558069381598794,
+            "wrong_adjacent_mass": 0.009116998873651028,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.02512751705944538,
+            "caption_mean_record_mass": 0.031186693567096607,
+            "median_record_mass": 0.007648000027984381,
+            "exact_record_top1": 0.00904977375565611,
+            "wrong_adjacent_mass": 0.00912225991487503,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.014212772250175476,
+            "caption_mean_record_mass": 0.014805651146046345,
+            "median_record_mass": 0.0065167732536792755,
+            "exact_record_top1": 0.008755472170106316,
+            "wrong_adjacent_mass": 0.005645790137350559,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "anchor_angles_off": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.03802145645022392,
+            "caption_mean_record_mass": 0.05176482892370222,
+            "median_record_mass": 0.015529334545135498,
+            "exact_record_top1": 0.0364675734279519,
+            "wrong_adjacent_mass": 0.012914784252643585,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.039440542459487915,
+            "caption_mean_record_mass": 0.05285561968502047,
+            "median_record_mass": 0.01638677529990673,
+            "exact_record_top1": 0.037962670041126224,
+            "wrong_adjacent_mass": 0.013265712186694145,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.017723990604281425,
+            "caption_mean_record_mass": 0.020203775121332233,
+            "median_record_mass": 0.006991350091993809,
+            "exact_record_top1": 0.015082956259426848,
+            "wrong_adjacent_mass": 0.00789538212120533,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.032754551619291306,
+            "caption_mean_record_mass": 0.03922466050645019,
+            "median_record_mass": 0.011011170223355293,
+            "exact_record_top1": 0.024132730015082957,
+            "wrong_adjacent_mass": 0.0086832819506526,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.023121489211916924,
+            "caption_mean_record_mass": 0.024008410140162424,
+            "median_record_mass": 0.008211364969611168,
+            "exact_record_top1": 0.0225140712945591,
+            "wrong_adjacent_mass": 0.006838769186288118,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "value_addresses_constant": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.02917315624654293,
+            "caption_mean_record_mass": 0.04457607214665161,
+            "median_record_mass": 0.012228323146700859,
+            "exact_record_top1": 0.02286615414941849,
+            "wrong_adjacent_mass": 0.012063841335475445,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.03012111596763134,
+            "caption_mean_record_mass": 0.04538838135765009,
+            "median_record_mass": 0.012810662388801575,
+            "exact_record_top1": 0.023621216914478542,
+            "wrong_adjacent_mass": 0.01227005384862423,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.015614346601068974,
+            "caption_mean_record_mass": 0.017960222619307915,
+            "median_record_mass": 0.0063478839583694935,
+            "exact_record_top1": 0.012066365007541479,
+            "wrong_adjacent_mass": 0.009114349260926247,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.02517073042690754,
+            "caption_mean_record_mass": 0.031207283342064025,
+            "median_record_mass": 0.007648000027984381,
+            "exact_record_top1": 0.00904977375565611,
+            "wrong_adjacent_mass": 0.009151507169008255,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.014222100377082825,
+            "caption_mean_record_mass": 0.014813527770687842,
+            "median_record_mass": 0.006549208424985409,
+            "exact_record_top1": 0.00906816760475297,
+            "wrong_adjacent_mass": 0.0056660291738808155,
+            "uniform_mass": 0.006118615623563528
+          }
+        }
+      },
+      "sentence_measurements": {
+        "intact": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 96.59952448279853,
+              "self_cos": 0.00315490716365182,
+              "cos_to_target": 0.8101658821105957
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 74.59796235630861,
+              "self_cos": 0.008614043141573617,
+              "cos_to_target": 0.734870433807373
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6829491634813253,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        },
+        "anchor_angles_off": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 88.51301788027946,
+              "self_cos": 0.010391685285466606,
+              "cos_to_target": 0.8131220936775208
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 62.55250328603556,
+              "self_cos": 0.16798354986262412,
+              "cos_to_target": 0.7201476693153381
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.686754516641248,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        },
+        "value_addresses_constant": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 96.58914158476105,
+              "self_cos": 0.0030945622315380486,
+              "cos_to_target": 0.8101024031639099
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 74.48357740467245,
+              "self_cos": 0.00842123075598974,
+              "cos_to_target": 0.7348272800445557
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6829354624042543,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        }
+      },
+      "independent_checkpoint_auto_parity": {
+        "reference": "independent final state.pt model tensors",
+        "format": "model.safetensors",
+        "metadata_format": "pt",
+        "dtype": "fp32",
+        "state_tensors_equal": true,
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "cases": [
+          {
+            "case": "real_captions",
+            "input_shape": [
+              2,
+              106
+            ],
+            "embedding_shape": [
+              2,
+              768
+            ],
+            "hidden_shape": [
+              2,
+              106,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.2586776559983264
+          },
+          {
+            "case": "all_padding",
+            "input_shape": [
+              2,
+              8
+            ],
+            "embedding_shape": [
+              2,
+              768
+            ],
+            "hidden_shape": [
+              2,
+              8,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.0564107399986824
+          },
+          {
+            "case": "synthetic_length_1",
+            "input_shape": [
+              1,
+              1
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              1,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.023824038999009645
+          },
+          {
+            "case": "synthetic_length_17",
+            "input_shape": [
+              1,
+              17
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              17,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.009051680000993656
+          },
+          {
+            "case": "synthetic_length_128",
+            "input_shape": [
+              1,
+              128
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              128,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.008414769999944838
+          },
+          {
+            "case": "synthetic_length_512",
+            "input_shape": [
+              1,
+              512
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              512,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.00927660999877844
+          },
+          {
+            "case": "synthetic_length_8192",
+            "input_shape": [
+              1,
+              8192
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              8192,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.17472988800000167
+          }
+        ]
+      },
+      "initialization_control": null,
+      "probe_source_sha256": "c778258cabc69e1985c03304af0ebf2e8e4be3ad64aba680d9ccaec4bdd5d03a",
+      "environment": {
+        "python": "3.13.16",
+        "torch": "2.15.0+cu132",
+        "cuda": "13.2",
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition"
+      },
+      "memory": {
+        "peak_allocated_gb": 0.761546752,
+        "peak_reserved_gb": 1.088421888,
+        "max_observed_device_gb": 1.842348032,
+        "total_device_limit_gb": 92.0
+      },
+      "selection_use": false,
+      "training_performed": false
+    },
+    "full4m/H16-seed2": {
+      "arm": "H16",
+      "seed": 2,
+      "config_id": "aafe9c59b9d696107cb4393f3a26815e84714daddb7d6eb028b5d6137b88418e",
+      "dataset_id": "7adb10f8833fab44e3ebb44315b53cb65bd8010b038115d15350b18536b57e86",
+      "split": "chunk061 development",
+      "rows": 4096,
+      "row_seed": 20261106,
+      "row_ids_sha256": "e72547c65ba2f4d26131988027abd9004af0a350e3bd404242b0f843779eb8ed",
+      "precision": "fp32 TF32 off",
+      "measurements": {
+        "intact": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.029020847752690315,
+            "caption_mean_record_mass": 0.04590195735792936,
+            "median_record_mass": 0.01228198129683733,
+            "exact_record_top1": 0.025133057362507392,
+            "wrong_adjacent_mass": 0.012539837509393692,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.029821082949638367,
+            "caption_mean_record_mass": 0.0470336474084215,
+            "median_record_mass": 0.012702219188213348,
+            "exact_record_top1": 0.026257513445112308,
+            "wrong_adjacent_mass": 0.012696831487119198,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.017574958503246307,
+            "caption_mean_record_mass": 0.02134122733372789,
+            "median_record_mass": 0.008252899162471294,
+            "exact_record_top1": 0.00904977375565611,
+            "wrong_adjacent_mass": 0.010294333100318909,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.034096211194992065,
+            "caption_mean_record_mass": 0.04778644702435905,
+            "median_record_mass": 0.013528979383409023,
+            "exact_record_top1": 0.0196078431372549,
+            "wrong_adjacent_mass": 0.009638866409659386,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.014697689563035965,
+            "caption_mean_record_mass": 0.015695296917184597,
+            "median_record_mass": 0.006753573194146156,
+            "exact_record_top1": 0.009380863039399626,
+            "wrong_adjacent_mass": 0.0065929098054766655,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "anchor_angles_off": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.040618058294057846,
+            "caption_mean_record_mass": 0.05562539464561419,
+            "median_record_mass": 0.017066866159439087,
+            "exact_record_top1": 0.04169130691898285,
+            "wrong_adjacent_mass": 0.014786304906010628,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.0420055128633976,
+            "caption_mean_record_mass": 0.057506116707058734,
+            "median_record_mass": 0.017697837203741074,
+            "exact_record_top1": 0.04386797426974586,
+            "wrong_adjacent_mass": 0.014878646470606327,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.020773058757185936,
+            "caption_mean_record_mass": 0.024552406080284073,
+            "median_record_mass": 0.008924960158765316,
+            "exact_record_top1": 0.010558069381598794,
+            "wrong_adjacent_mass": 0.013465527445077896,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.04999097064137459,
+            "caption_mean_record_mass": 0.06877338309352984,
+            "median_record_mass": 0.017507046461105347,
+            "exact_record_top1": 0.04524886877828054,
+            "wrong_adjacent_mass": 0.014861050993204117,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.026287425309419632,
+            "caption_mean_record_mass": 0.027927832350888776,
+            "median_record_mass": 0.00980321504175663,
+            "exact_record_top1": 0.029706066291432145,
+            "wrong_adjacent_mass": 0.008305687457323074,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "value_addresses_constant": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.029072357341647148,
+            "caption_mean_record_mass": 0.04596341758403847,
+            "median_record_mass": 0.01235143281519413,
+            "exact_record_top1": 0.025330179381036863,
+            "wrong_adjacent_mass": 0.012550750747323036,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.029874682426452637,
+            "caption_mean_record_mass": 0.04709890170336219,
+            "median_record_mass": 0.012748301029205322,
+            "exact_record_top1": 0.026468417167563006,
+            "wrong_adjacent_mass": 0.012710819020867348,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.017596576362848282,
+            "caption_mean_record_mass": 0.021333974644796496,
+            "median_record_mass": 0.008182010613381863,
+            "exact_record_top1": 0.00904977375565611,
+            "wrong_adjacent_mass": 0.010261252522468567,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.03414946421980858,
+            "caption_mean_record_mass": 0.047813065399624675,
+            "median_record_mass": 0.013469286262989044,
+            "exact_record_top1": 0.0196078431372549,
+            "wrong_adjacent_mass": 0.009592575021088123,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.014746877364814281,
+            "caption_mean_record_mass": 0.015756138725139732,
+            "median_record_mass": 0.006796726956963539,
+            "exact_record_top1": 0.010006253908692933,
+            "wrong_adjacent_mass": 0.006605978589504957,
+            "uniform_mass": 0.006118615623563528
+          }
+        }
+      },
+      "sentence_measurements": {
+        "intact": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 96.51036445687024,
+              "self_cos": 0.0029618497491374594,
+              "cos_to_target": 0.8106553554534912
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 74.48723927612151,
+              "self_cos": 0.008280316834414462,
+              "cos_to_target": 0.7340208292007446
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6885429858470199,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        },
+        "anchor_angles_off": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 90.70549084698925,
+              "self_cos": 0.01197867949020572,
+              "cos_to_target": 0.8050788044929504
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 63.572360119159775,
+              "self_cos": 0.14110587531288282,
+              "cos_to_target": 0.712859570980072
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.694457626939453,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        },
+        "value_addresses_constant": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 96.49923672736824,
+              "self_cos": 0.002893613956919214,
+              "cos_to_target": 0.8106769919395447
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 74.36795228487833,
+              "self_cos": 0.008173406775188888,
+              "cos_to_target": 0.7344036102294922
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6886416282638486,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        }
+      },
+      "independent_checkpoint_auto_parity": {
+        "reference": "independent final state.pt model tensors",
+        "format": "model.safetensors",
+        "metadata_format": "pt",
+        "dtype": "fp32",
+        "state_tensors_equal": true,
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "cases": [
+          {
+            "case": "real_captions",
+            "input_shape": [
+              2,
+              106
+            ],
+            "embedding_shape": [
+              2,
+              768
+            ],
+            "hidden_shape": [
+              2,
+              106,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.24821383900052751
+          },
+          {
+            "case": "all_padding",
+            "input_shape": [
+              2,
+              8
+            ],
+            "embedding_shape": [
+              2,
+              768
+            ],
+            "hidden_shape": [
+              2,
+              8,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.05643240900099045
+          },
+          {
+            "case": "synthetic_length_1",
+            "input_shape": [
+              1,
+              1
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              1,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.023405839998304145
+          },
+          {
+            "case": "synthetic_length_17",
+            "input_shape": [
+              1,
+              17
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              17,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.008704690000740811
+          },
+          {
+            "case": "synthetic_length_128",
+            "input_shape": [
+              1,
+              128
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              128,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.008185020000382792
+          },
+          {
+            "case": "synthetic_length_512",
+            "input_shape": [
+              1,
+              512
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              512,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.008978360001492547
+          },
+          {
+            "case": "synthetic_length_8192",
+            "input_shape": [
+              1,
+              8192
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              8192,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.17163946900109295
+          }
+        ]
+      },
+      "initialization_control": null,
+      "probe_source_sha256": "c778258cabc69e1985c03304af0ebf2e8e4be3ad64aba680d9ccaec4bdd5d03a",
+      "environment": {
+        "python": "3.13.16",
+        "torch": "2.15.0+cu132",
+        "cuda": "13.2",
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition"
+      },
+      "memory": {
+        "peak_allocated_gb": 0.761546752,
+        "peak_reserved_gb": 1.088421888,
+        "max_observed_device_gb": 1.842348032,
+        "total_device_limit_gb": 92.0
+      },
+      "selection_use": false,
+      "training_performed": false
+    },
+    "exposure1m/H16-seed1": {
+      "arm": "H16",
+      "seed": 1,
+      "config_id": "fad07b2a05857a7abef278004986cacc1e3b8eb89b70943668505ea90498525e",
+      "dataset_id": "659b21c1c6eb1074eeec7acdbfa9bd010965595a4669338690cf3ae38a4448d5",
+      "split": "chunk061 development",
+      "rows": 4096,
+      "row_seed": 20261106,
+      "row_ids_sha256": "e72547c65ba2f4d26131988027abd9004af0a350e3bd404242b0f843779eb8ed",
+      "precision": "fp32 TF32 off",
+      "measurements": {
+        "intact": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.02546592243015766,
+            "caption_mean_record_mass": 0.03954405295704696,
+            "median_record_mass": 0.010414542630314827,
+            "exact_record_top1": 0.015572639463828109,
+            "wrong_adjacent_mass": 0.011977557092905045,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.02607988379895687,
+            "caption_mean_record_mass": 0.040105033063934994,
+            "median_record_mass": 0.010789166204631329,
+            "exact_record_top1": 0.015712327322577244,
+            "wrong_adjacent_mass": 0.012126941233873367,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.01668434403836727,
+            "caption_mean_record_mass": 0.018355159964207314,
+            "median_record_mass": 0.006087308283895254,
+            "exact_record_top1": 0.013574660633484163,
+            "wrong_adjacent_mass": 0.009840885177254677,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.021683087572455406,
+            "caption_mean_record_mass": 0.025753207746851314,
+            "median_record_mass": 0.0068626850843429565,
+            "exact_record_top1": 0.013574660633484163,
+            "wrong_adjacent_mass": 0.013456040062010288,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.012743870727717876,
+            "caption_mean_record_mass": 0.012710957753745514,
+            "median_record_mass": 0.005444246344268322,
+            "exact_record_top1": 0.007817385866166354,
+            "wrong_adjacent_mass": 0.0054250722751021385,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "anchor_angles_off": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.03424637019634247,
+            "caption_mean_record_mass": 0.04698193805513047,
+            "median_record_mass": 0.013876909390091896,
+            "exact_record_top1": 0.026808594520007886,
+            "wrong_adjacent_mass": 0.013267986476421356,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.035177428275346756,
+            "caption_mean_record_mass": 0.04776747371852205,
+            "median_record_mass": 0.014343569055199623,
+            "exact_record_top1": 0.027628387641041863,
+            "wrong_adjacent_mass": 0.013516614213585854,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.020929310470819473,
+            "caption_mean_record_mass": 0.022358726953910852,
+            "median_record_mass": 0.008146652951836586,
+            "exact_record_top1": 0.015082956259426848,
+            "wrong_adjacent_mass": 0.009711815044283867,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.03242213651537895,
+            "caption_mean_record_mass": 0.03743410519207244,
+            "median_record_mass": 0.011551249772310257,
+            "exact_record_top1": 0.027149321266968326,
+            "wrong_adjacent_mass": 0.01300971582531929,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.021344158798456192,
+            "caption_mean_record_mass": 0.021484570800870035,
+            "median_record_mass": 0.00797557458281517,
+            "exact_record_top1": 0.01876172607879925,
+            "wrong_adjacent_mass": 0.0067310393787920475,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "value_addresses_constant": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.025496799498796463,
+            "caption_mean_record_mass": 0.039553816642194685,
+            "median_record_mass": 0.01042714063078165,
+            "exact_record_top1": 0.01537551744529864,
+            "wrong_adjacent_mass": 0.011988874524831772,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.026106538251042366,
+            "caption_mean_record_mass": 0.0401140916401891,
+            "median_record_mass": 0.010775180533528328,
+            "exact_record_top1": 0.015501423600126542,
+            "wrong_adjacent_mass": 0.012142317369580269,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.01677563413977623,
+            "caption_mean_record_mass": 0.01844043998930996,
+            "median_record_mass": 0.006101549603044987,
+            "exact_record_top1": 0.013574660633484163,
+            "wrong_adjacent_mass": 0.009794158861041069,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.02177565172314644,
+            "caption_mean_record_mass": 0.025867332676380802,
+            "median_record_mass": 0.0068817432038486,
+            "exact_record_top1": 0.013574660633484163,
+            "wrong_adjacent_mass": 0.013361276127398014,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.01276535727083683,
+            "caption_mean_record_mass": 0.012722745237480258,
+            "median_record_mass": 0.00551917590200901,
+            "exact_record_top1": 0.007191994996873046,
+            "wrong_adjacent_mass": 0.0054713888093829155,
+            "uniform_mass": 0.006118615623563528
+          }
+        }
+      },
+      "sentence_measurements": {
+        "intact": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 95.62741489359365,
+              "self_cos": 0.003444665011627598,
+              "cos_to_target": 0.8080115914344788
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 73.03811752294244,
+              "self_cos": 0.011567466648996574,
+              "cos_to_target": 0.7362988591194153
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6833117099948678,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        },
+        "anchor_angles_off": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 88.9532024089657,
+              "self_cos": 0.009525986861605953,
+              "cos_to_target": 0.8086338043212891
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 60.776641035969774,
+              "self_cos": 0.1497647591973433,
+              "cos_to_target": 0.7148573994636536
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6920672228800693,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        },
+        "value_addresses_constant": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 95.62237220707621,
+              "self_cos": 0.003417102724543398,
+              "cos_to_target": 0.8079468607902527
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 72.97626574191753,
+              "self_cos": 0.011692005125623916,
+              "cos_to_target": 0.7362787127494812
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6832543985674162,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        }
+      },
+      "independent_checkpoint_auto_parity": {
+        "reference": "independent final state.pt model tensors",
+        "format": "model.safetensors",
+        "metadata_format": "pt",
+        "dtype": "fp32",
+        "state_tensors_equal": true,
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "cases": [
+          {
+            "case": "real_captions",
+            "input_shape": [
+              2,
+              106
+            ],
+            "embedding_shape": [
+              2,
+              768
+            ],
+            "hidden_shape": [
+              2,
+              106,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.18057174799832865
+          },
+          {
+            "case": "all_padding",
+            "input_shape": [
+              2,
+              8
+            ],
+            "embedding_shape": [
+              2,
+              768
+            ],
+            "hidden_shape": [
+              2,
+              8,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.05103075899751275
+          },
+          {
+            "case": "synthetic_length_1",
+            "input_shape": [
+              1,
+              1
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              1,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.01124924000032479
+          },
+          {
+            "case": "synthetic_length_17",
+            "input_shape": [
+              1,
+              17
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              17,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.008814799999527168
+          },
+          {
+            "case": "synthetic_length_128",
+            "input_shape": [
+              1,
+              128
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              128,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.008224659999541473
+          },
+          {
+            "case": "synthetic_length_512",
+            "input_shape": [
+              1,
+              512
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              512,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.009231739997630939
+          },
+          {
+            "case": "synthetic_length_8192",
+            "input_shape": [
+              1,
+              8192
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              8192,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.17464379699958954
+          }
+        ]
+      },
+      "initialization_control": null,
+      "probe_source_sha256": "c778258cabc69e1985c03304af0ebf2e8e4be3ad64aba680d9ccaec4bdd5d03a",
+      "environment": {
+        "python": "3.13.16",
+        "torch": "2.15.0+cu132",
+        "cuda": "13.2",
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition"
+      },
+      "memory": {
+        "peak_allocated_gb": 0.761546752,
+        "peak_reserved_gb": 1.088421888,
+        "max_observed_device_gb": 1.842348032,
+        "total_device_limit_gb": 92.0
+      },
+      "selection_use": false,
+      "training_performed": false
+    },
+    "exposure1m/H16-seed2": {
+      "arm": "H16",
+      "seed": 2,
+      "config_id": "fad07b2a05857a7abef278004986cacc1e3b8eb89b70943668505ea90498525e",
+      "dataset_id": "659b21c1c6eb1074eeec7acdbfa9bd010965595a4669338690cf3ae38a4448d5",
+      "split": "chunk061 development",
+      "rows": 4096,
+      "row_seed": 20261106,
+      "row_ids_sha256": "e72547c65ba2f4d26131988027abd9004af0a350e3bd404242b0f843779eb8ed",
+      "precision": "fp32 TF32 off",
+      "measurements": {
+        "intact": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.02965228445827961,
+            "caption_mean_record_mass": 0.04702958070111427,
+            "median_record_mass": 0.012045261450111866,
+            "exact_record_top1": 0.02631578947368421,
+            "wrong_adjacent_mass": 0.011979831382632256,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.030587082728743553,
+            "caption_mean_record_mass": 0.04809493020500865,
+            "median_record_mass": 0.01251615583896637,
+            "exact_record_top1": 0.027733839502267214,
+            "wrong_adjacent_mass": 0.012246888130903244,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.016281720250844955,
+            "caption_mean_record_mass": 0.020235390155334772,
+            "median_record_mass": 0.007416955195367336,
+            "exact_record_top1": 0.006033182503770739,
+            "wrong_adjacent_mass": 0.008160093799233437,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.030545484274625778,
+            "caption_mean_record_mass": 0.041679410146355206,
+            "median_record_mass": 0.009412250481545925,
+            "exact_record_top1": 0.024132730015082957,
+            "wrong_adjacent_mass": 0.008057053200900555,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.015053325332701206,
+            "caption_mean_record_mass": 0.016593556554104747,
+            "median_record_mass": 0.006649416871368885,
+            "exact_record_top1": 0.015322076297686053,
+            "wrong_adjacent_mass": 0.0059643997810781,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "anchor_angles_off": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.041755806654691696,
+            "caption_mean_record_mass": 0.05740321993825037,
+            "median_record_mass": 0.016575248911976814,
+            "exact_record_top1": 0.046126552335895916,
+            "wrong_adjacent_mass": 0.014202669262886047,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.043283600360155106,
+            "caption_mean_record_mass": 0.05904267626057318,
+            "median_record_mass": 0.017509903758764267,
+            "exact_record_top1": 0.048296952441210586,
+            "wrong_adjacent_mass": 0.014504934661090374,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.019903497770428658,
+            "caption_mean_record_mass": 0.02451199220412305,
+            "median_record_mass": 0.008114638738334179,
+            "exact_record_top1": 0.015082956259426848,
+            "wrong_adjacent_mass": 0.009879302233457565,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.042379144579172134,
+            "caption_mean_record_mass": 0.05782842871713153,
+            "median_record_mass": 0.012932970188558102,
+            "exact_record_top1": 0.043740573152337855,
+            "wrong_adjacent_mass": 0.010530037805438042,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.025092529132962227,
+            "caption_mean_record_mass": 0.0261361559849262,
+            "median_record_mass": 0.009283541701734066,
+            "exact_record_top1": 0.028142589118198873,
+            "wrong_adjacent_mass": 0.007972917519509792,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        "value_addresses_constant": {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.02975713461637497,
+            "caption_mean_record_mass": 0.04713516838708186,
+            "median_record_mass": 0.012142522260546684,
+            "exact_record_top1": 0.026611472501478415,
+            "wrong_adjacent_mass": 0.012002685107290745,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.030698874965310097,
+            "caption_mean_record_mass": 0.04820526218540303,
+            "median_record_mass": 0.012660173699259758,
+            "exact_record_top1": 0.028155646947168617,
+            "wrong_adjacent_mass": 0.012268652208149433,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.01628723181784153,
+            "caption_mean_record_mass": 0.020221587450572145,
+            "median_record_mass": 0.0074852886609733105,
+            "exact_record_top1": 0.004524886877828055,
+            "wrong_adjacent_mass": 0.008198528550565243,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.03054923005402088,
+            "caption_mean_record_mass": 0.04167086044635105,
+            "median_record_mass": 0.009498982690274715,
+            "exact_record_top1": 0.024132730015082957,
+            "wrong_adjacent_mass": 0.00809331052005291,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.015148989856243134,
+            "caption_mean_record_mass": 0.016697385700859338,
+            "median_record_mass": 0.006703054532408714,
+            "exact_record_top1": 0.016260162601626018,
+            "wrong_adjacent_mass": 0.005992254242300987,
+            "uniform_mass": 0.006118615623563528
+          }
+        }
+      },
+      "sentence_measurements": {
+        "intact": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 95.50727497662709,
+              "self_cos": 0.0030667782245060783,
+              "cos_to_target": 0.8087887763977051
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 72.9843563121176,
+              "self_cos": 0.010629052369949836,
+              "cos_to_target": 0.7368416786193848
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.677747780888237,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        },
+        "anchor_angles_off": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 88.92032085608324,
+              "self_cos": 0.011872693687834033,
+              "cos_to_target": 0.805154025554657
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 63.41990026426847,
+              "self_cos": 0.14678713517387582,
+              "cos_to_target": 0.7108682990074158
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6898467800646055,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        },
+        "value_addresses_constant": {
+          "evaluation": {
+            "heldout": {
+              "n": 5000,
+              "erank": 95.52085405474901,
+              "self_cos": 0.0030377370064403773,
+              "cos_to_target": 0.8087712526321411
+            },
+            "above_128_tokens": {
+              "n": 5000,
+              "erank": 72.97632356930495,
+              "self_cos": 0.010845299146724148,
+              "cos_to_target": 0.7371192574501038
+            },
+            "heldout_total_rows": 500000,
+            "above_128_total_rows": 29240
+          },
+          "development": {
+            "spearman": 0.6777601118576008,
+            "n": 1500,
+            "split": "validation",
+            "revision": "96943a16ea6a35129e253c659081cb59daf81b30",
+            "max_tokens": 64,
+            "used_for_selection": true
+          },
+          "precision": "legacy FP16 autocast evaluation; FP32 parameters; TF32 off"
+        }
+      },
+      "independent_checkpoint_auto_parity": {
+        "reference": "independent final state.pt model tensors",
+        "format": "model.safetensors",
+        "metadata_format": "pt",
+        "dtype": "fp32",
+        "state_tensors_equal": true,
+        "loading_info": {
+          "missing_keys": [],
+          "unexpected_keys": [],
+          "mismatched_keys": [],
+          "error_msgs": []
+        },
+        "cases": [
+          {
+            "case": "real_captions",
+            "input_shape": [
+              2,
+              106
+            ],
+            "embedding_shape": [
+              2,
+              768
+            ],
+            "hidden_shape": [
+              2,
+              106,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.18060375999993994
+          },
+          {
+            "case": "all_padding",
+            "input_shape": [
+              2,
+              8
+            ],
+            "embedding_shape": [
+              2,
+              768
+            ],
+            "hidden_shape": [
+              2,
+              8,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.05083154999738326
+          },
+          {
+            "case": "synthetic_length_1",
+            "input_shape": [
+              1,
+              1
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              1,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.011205779999727383
+          },
+          {
+            "case": "synthetic_length_17",
+            "input_shape": [
+              1,
+              17
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              17,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.008672150001075352
+          },
+          {
+            "case": "synthetic_length_128",
+            "input_shape": [
+              1,
+              128
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              128,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.008182120000128634
+          },
+          {
+            "case": "synthetic_length_512",
+            "input_shape": [
+              1,
+              512
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              512,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.00900551000086125
+          },
+          {
+            "case": "synthetic_length_8192",
+            "input_shape": [
+              1,
+              8192
+            ],
+            "embedding_shape": [
+              1,
+              768
+            ],
+            "hidden_shape": [
+              1,
+              8192,
+              512
+            ],
+            "max_embedding_delta": 0.0,
+            "max_hidden_delta": 0.0,
+            "seconds": 0.17187896900213673
+          }
+        ]
+      },
+      "initialization_control": null,
+      "probe_source_sha256": "c778258cabc69e1985c03304af0ebf2e8e4be3ad64aba680d9ccaec4bdd5d03a",
+      "environment": {
+        "python": "3.13.16",
+        "torch": "2.15.0+cu132",
+        "cuda": "13.2",
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition"
+      },
+      "memory": {
+        "peak_allocated_gb": 0.761546752,
+        "peak_reserved_gb": 1.088421888,
+        "max_observed_device_gb": 1.842348032,
+        "total_device_limit_gb": 92.0
+      },
+      "selection_use": false,
+      "training_performed": false
+    }
+  },
+  "source_artifact_revision": "161db5761ca44d66ef084ea880b64b79eccb8758",
+  "frozen_development_only": true,
+  "new_training_performed": false
+}

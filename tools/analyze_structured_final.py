@@ -1,5 +1,6 @@
 """Choose the default four-million-row pair using development values only."""
 import argparse
+from datetime import datetime, timezone
 import json
 import math
 from pathlib import Path
@@ -81,6 +82,7 @@ def main():
     lock = json.loads(Path(args.selection).read_text(encoding="utf8"))
     collected = json.loads(Path(args.results).read_text(encoding="utf8"))
     chosen = choose_deployment(lock, collected["results"])
+    chosen["locked_at_utc"] = datetime.now(timezone.utc).isoformat()
     chosen["results_source_revision"] = collected["source_revision"]
     output = Path(args.output)
     if output.exists():

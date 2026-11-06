@@ -1,0 +1,10 @@
+{
+  "repo": "AbstractPhil/captionbert-8192-rotary",
+  "revision": "161db5761ca44d66ef084ea880b64b79eccb8758",
+  "event_files": 34,
+  "bytes": 52871434,
+  "notebook_worker_sha256": "f3730c1f88ecfb3116aa5b9f7720632229919bbabcf55c5c823c222eb1c28300",
+  "cpu_only": true,
+  "server_started": false,
+  "training_performed": false
+}

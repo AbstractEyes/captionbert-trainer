@@ -1,0 +1,14 @@
+{
+  "repo": "AbstractPhil/captionbert-8192-rotary",
+  "revision": "7f95d39bd0d9efd9e6b3c2a620a73b3a8a52b113",
+  "files": {
+    "report.json": {
+      "hub_path": "campaigns/structured-20261106/validation/deployment-colab/20261106T204053Z/report.json",
+      "sha256": "e9c50c81182e1c0ffb42ed64ccaead0d74616f0213c267a0929d22045cc9e4e5"
+    },
+    "console.log": {
+      "hub_path": "campaigns/structured-20261106/validation/deployment-colab/20261106T204053Z/console.log",
+      "sha256": "1a5a3fe9b1ed16146d7c8f7adf71841b1276bb7322634e66c286c2ba44c883dd"
+    }
+  }
+}

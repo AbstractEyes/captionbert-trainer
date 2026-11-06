@@ -1,0 +1,297 @@
+{
+  "target": "AbstractPhil/captionbert-8192-rotary",
+  "revision": "ad14b77f4cc9017d513173f3b340e735af02ef14",
+  "remote": true,
+  "native_reference": "independent training state.pt; exact v0.3.0 source",
+  "source_arm": "N16",
+  "source_seed": 1,
+  "source_config_id": "aafe9c59b9d696107cb4393f3a26815e84714daddb7d6eb028b5d6137b88418e",
+  "state_tensors_equal": true,
+  "safetensors_metadata": {
+    "format": "pt"
+  },
+  "loading_info": {
+    "missing_keys": [],
+    "unexpected_keys": [],
+    "mismatched_keys": [],
+    "error_msgs": []
+  },
+  "native_training_source_sha256": "094bf61ef954c61a2b200e5e8760348160b76a5fbfd186602dd992e4b62ccfa6",
+  "tf32": false,
+  "cases": [
+    {
+      "case": "natural",
+      "precision": "fp32",
+      "input_shape": [
+        2,
+        11
+      ],
+      "embedding_shape": [
+        2,
+        768
+      ],
+      "hidden_shape": [
+        2,
+        11,
+        512
+      ],
+      "max_embedding_delta": 0.0,
+      "max_hidden_delta": 0.0,
+      "seconds": 0.3440000000409782
+    },
+    {
+      "case": "all_padding",
+      "precision": "fp32",
+      "input_shape": [
+        2,
+        17
+      ],
+      "embedding_shape": [
+        2,
+        768
+      ],
+      "hidden_shape": [
+        2,
+        17,
+        512
+      ],
+      "max_embedding_delta": 0.0,
+      "max_hidden_delta": 0.0,
+      "seconds": 0.125
+    },
+    {
+      "case": "synthetic_1x1",
+      "precision": "fp32",
+      "input_shape": [
+        1,
+        1
+      ],
+      "embedding_shape": [
+        1,
+        768
+      ],
+      "hidden_shape": [
+        1,
+        1,
+        512
+      ],
+      "max_embedding_delta": 0.0,
+      "max_hidden_delta": 0.0,
+      "seconds": 0.14099999994505197
+    },
+    {
+      "case": "synthetic_2x17",
+      "precision": "fp32",
+      "input_shape": [
+        2,
+        17
+      ],
+      "embedding_shape": [
+        2,
+        768
+      ],
+      "hidden_shape": [
+        2,
+        17,
+        512
+      ],
+      "max_embedding_delta": 0.0,
+      "max_hidden_delta": 0.0,
+      "seconds": 0.125
+    },
+    {
+      "case": "synthetic_3x128",
+      "precision": "fp32",
+      "input_shape": [
+        3,
+        128
+      ],
+      "embedding_shape": [
+        3,
+        768
+      ],
+      "hidden_shape": [
+        3,
+        128,
+        512
+      ],
+      "max_embedding_delta": 0.0,
+      "max_hidden_delta": 0.0,
+      "seconds": 0.0940000000409782
+    },
+    {
+      "case": "synthetic_1x512",
+      "precision": "fp32",
+      "input_shape": [
+        1,
+        512
+      ],
+      "embedding_shape": [
+        1,
+        768
+      ],
+      "hidden_shape": [
+        1,
+        512,
+        512
+      ],
+      "max_embedding_delta": 0.0,
+      "max_hidden_delta": 0.0,
+      "seconds": 0.125
+    },
+    {
+      "case": "boundary_shape_1025",
+      "precision": "fp32",
+      "input_shape": [
+        1,
+        1025
+      ],
+      "embedding_shape": [
+        1,
+        768
+      ],
+      "hidden_shape": [
+        1,
+        1025,
+        512
+      ],
+      "max_embedding_delta": 0.0,
+      "max_hidden_delta": 0.0,
+      "seconds": 0.18700000003445894
+    },
+    {
+      "case": "boundary_shape_8192",
+      "precision": "fp32",
+      "input_shape": [
+        1,
+        8192
+      ],
+      "embedding_shape": [
+        1,
+        768
+      ],
+      "hidden_shape": [
+        1,
+        8192,
+        512
+      ],
+      "max_embedding_delta": 0.0,
+      "max_hidden_delta": 0.0,
+      "seconds": 0.6089999999385327
+    },
+    {
+      "case": "natural",
+      "precision": "fp16_autocast",
+      "input_shape": [
+        2,
+        11
+      ],
+      "embedding_shape": [
+        2,
+        768
+      ],
+      "hidden_shape": [
+        2,
+        11,
+        512
+      ],
+      "max_embedding_delta": 0.0,
+      "max_hidden_delta": 0.0,
+      "seconds": 0.25
+    },
+    {
+      "case": "all_padding",
+      "precision": "fp16_autocast",
+      "input_shape": [
+        2,
+        17
+      ],
+      "embedding_shape": [
+        2,
+        768
+      ],
+      "hidden_shape": [
+        2,
+        17,
+        512
+      ],
+      "max_embedding_delta": 0.0,
+      "max_hidden_delta": 0.0,
+      "seconds": 0.125
+    },
+    {
+      "case": "natural",
+      "precision": "bf16_autocast",
+      "input_shape": [
+        2,
+        11
+      ],
+      "embedding_shape": [
+        2,
+        768
+      ],
+      "hidden_shape": [
+        2,
+        11,
+        512
+      ],
+      "max_embedding_delta": 0.0,
+      "max_hidden_delta": 0.0,
+      "seconds": 0.23499999998603016
+    },
+    {
+      "case": "all_padding",
+      "precision": "bf16_autocast",
+      "input_shape": [
+        2,
+        17
+      ],
+      "embedding_shape": [
+        2,
+        768
+      ],
+      "hidden_shape": [
+        2,
+        17,
+        512
+      ],
+      "max_embedding_delta": 0.0,
+      "max_hidden_delta": 0.0,
+      "seconds": 0.14000000001396984
+    },
+    {
+      "case": "left_padding",
+      "invariance_required": false,
+      "max_unpadded_embedding_delta": 2.9802322387695312e-08,
+      "max_native_auto_embedding_delta": 0.0
+    },
+    {
+      "case": "right_padding",
+      "invariance_required": true,
+      "max_unpadded_embedding_delta": 2.9802322387695312e-08,
+      "max_native_auto_embedding_delta": 0.0
+    }
+  ],
+  "source_checkpoint_sha256": "f3f5442c5a0ff08a02c0a3d9cc46b94f57e5a69204bb98ba99b0dc6d407fd6d9",
+  "serving_safetensors_sha256": "982569dba04fa0e40d8f53b7d40ccfbef5355d502bb3cd23f4951fab79c10af9",
+  "environment": {
+    "python": "3.12.10",
+    "torch": "2.11.0+cu128",
+    "transformers": "4.57.6",
+    "safetensors": "0.6.2",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "hidden_states_count": 13,
+  "attention_layers": 12,
+  "attention_head_count": 16,
+  "memory": {
+    "peak_allocated_gb": 0.770734592,
+    "peak_reserved_gb": 0.887095296,
+    "max_observed_device_gb": 4.384096256,
+    "total_device_limit_gb": 18.0
+  },
+  "training_performed": false,
+  "padding_contract": "Right padding matches training. Left padding is measured against the native model, not assumed invariant.",
+  "long_shapes_are_engineering_only": true
+}
