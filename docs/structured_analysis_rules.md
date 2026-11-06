@@ -1,0 +1,13 @@
+# Analysis details fixed before screen selection
+
+These details make the registered protocol executable. They do not change training, the eight options, seed pairing, development splits or final tests.
+
+Pairs are ranked by mean STS-B **validation** Spearman. A near tie with the raw mean leader means its gap is no larger than the maximum of the relevant two seed spreads and the measured hardware repeat. Within that set prefer fewer enabled additions: NTK scaling, hierarchy, value addresses, whole-key binding, record norm and pointer supervision each count once. Then prefer fewer parameters, then lower mean measured optimizer-step time. Keep the raw mean leaders in the report so the conservative choice remains visible. The result is descriptive when inside the variation bar.
+
+The existing N16 repeat measures the sixteen-head relative reference. If R8 is selected as the relative reference, also repeat R8 under seeds1 and2 before locking promotion. Those runs use the same screen configuration, data identity and schedule, with distinct `R8-repeat-seed1/2` names. Use the larger measured repeat floor when reporting comparisons involving both head counts. This conditional addition avoids assigning N16's measured repeat to an unmeasured eight-head reference. Both original seeds remain in every larger comparison.
+
+Reject mixed data/configuration identities, missing seed members, nonfinite development values, altered exposure or test-derived scores. An incomplete collection produces an incomplete status, not a winner. If no structured pair passes the registered teacher/rank criteria, any larger structured run is explicitly an exploratory rescue.
+
+Natural-caption mechanism measurements use4096 deterministic development rows from chunk061, sampled with seed20261106. Exact WordPiece tuples label the earlier first-occurrence ending. At the registered lookup layer/head, collect attention probability on that record, exact-record top-one rate, uniform probability and an incorrect adjacent-token control. Report counts and split results for ending queries, continuation pieces and captions above128 tokens. Record row IDs and per-query observations; do not fit a map on these rows.
+
+After architecture selection, frozen development probes remove binding, remove the record norm or redraw the fixed phase seed. Disabling the norm must update both the serialized setting and the layer's runtime setting. Redrawing phases preserves equal-word equality. These interventions test dependence of an already-trained model, and cannot establish a better training recipe. Test datasets remain reserved for the locked larger experiments. Long-context shape checks remain separate from semantic-quality measurements.
