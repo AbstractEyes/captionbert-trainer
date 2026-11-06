@@ -12,6 +12,8 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 FOLLOWUP = "frozen-followup-59ec95344958"
+SCREEN_PROBE_SHA = "6bbf7f7cbaca8ce712cf21ca9cd70c25fabdf2af43b05d44fe652665512e5bb3"
+FOLLOWUP_PROBE_SHA = "c778258cabc69e1985c03304af0ebf2e8e4be3ad64aba680d9ccaec4bdd5d03a"
 
 
 def reject_nonfinite(value):
@@ -53,6 +55,8 @@ def main():
         cached = hf_hub_download(repo, path, revision=revision, cache_dir=args.cache)
         raw = Path(cached).read_bytes()
         value = json.loads(raw, parse_constant=reject_nonfinite)
+        if value["probe_source_sha256"] != (FOLLOWUP_PROBE_SHA if folder == FOLLOWUP else SCREEN_PROBE_SHA):
+            raise ValueError("Frozen probe source differs from its pinned measurement revision: " + path)
         if any(value.get(k) != result[k] for k in ("arm", "seed", "config_id", "dataset_id")):
             raise ValueError("Frozen report identity differs: " + path)
         if value.get("training_performed") or value.get("selection_use"):
@@ -134,6 +138,25 @@ def main():
         raise ValueError("Frozen probes do not share identical sampled caption rows")
     operations = {path: metadata for path, metadata in entries.items()
                   if path.startswith("campaigns/structured-20261106/")}
+    provenance_paths = sorted(path for path in operations
+        if "/data-provenance/lane-A/" in path and path.endswith("/provenance.json"))
+    data_provenance = None
+    if not provenance_paths:
+        missing.append("campaign prepared-data provenance.json")
+    else:
+        path = provenance_paths[-1]
+        cached = hf_hub_download(repo, path, revision=revision, cache_dir=args.cache)
+        raw = Path(cached).read_bytes()
+        provenance = json.loads(raw, parse_constant=reject_nonfinite)
+        expected_full = {item["dataset_id"] for key, item in final["results"].items() if key.startswith("full4m/")}
+        if (provenance["data_identities"]["screen"] != screen["analysis"]["dataset_id"]
+                or expected_full != {provenance["data_identities"]["full4m"]}
+                or provenance["full4m_training"]["rows"] != 4000000
+                or provenance["training_performed"] or provenance["gpu_used"]):
+            raise ValueError("Prepared-data provenance differs from the actual training census")
+        (ROOT / "docs/results/structured_data_provenance.json").write_bytes(raw)
+        data_provenance = dict(path=path, file_sha256=hashlib.sha256(raw).hexdigest(),
+            data_identities=provenance["data_identities"], full4m_training=provenance["full4m_training"])
     for lane in ("A", "B"):
         for category in ("lane-", "frozen-final-"):
             if not any(("/operations/" + category + lane + "/") in x and x.endswith("/console.log") for x in operations):
@@ -141,6 +164,7 @@ def main():
     census = dict(repo=repo, source_revision=revision, status="complete" if not missing else "incomplete",
         trained_models=len(runs), screen_models=18, larger_models=6, frozen_output_cases=report_cases,
         common_frozen_row_ids_sha256=next(iter(common_rows)), runs=runs, operations=operations,
+        data_provenance=data_provenance,
         missing=missing, scope="This campaign's24 models; earlier experiments remain at their original paths",
         large_file_verification="Revision-pinned Hub LFS SHA256/size metadata; native state loading in frozen reports",
         training_performed=False, gpu_used=False)

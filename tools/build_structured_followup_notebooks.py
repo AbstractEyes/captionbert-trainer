@@ -31,6 +31,9 @@ Training stays pinned to **v0.3.0**. The helper and probe source revisions are
 explicit inside their cells. Interrupted sessions repeat setup/gate/TensorBoard
 and these cells; they do not rerun the original screen queue.
 
+Seed1 also preserves the prepared-data manifests and runs a bounded CPU-only
+corpus/address census after the frozen probes. It changes no training recipe.
+
 [Protocol](https://github.com/AbstractEyes/captionbert-trainer/blob/codex/structured-rotary-overnight/docs/structured_campaign_protocol.md)
 · [Results and artifacts](https://huggingface.co/AbstractPhil/captionbert-8192-rotary)
 """
@@ -42,6 +45,8 @@ and these cells; they do not rerun the original screen queue.
             ("code", (ROOT / f"notebooks/cells/larger_{lane}.py").read_text(encoding="utf8")),
             ("code", (ROOT / f"notebooks/cells/frozen_final_{lane}.py").read_text(encoding="utf8")),
         ]
+        if lane == "A":
+            sources.append(("code", (ROOT / "notebooks/cells/ship_provenance_A.py").read_text(encoding="utf8")))
         cells = []
         for index, (kind, source) in enumerate(sources):
             if kind == "code":
