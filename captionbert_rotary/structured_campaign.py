@@ -70,7 +70,7 @@ class CampaignConfig:
     memory_limit_gb: float = 92.0
     max_steps: int | None = None
     final_test: bool = False
-    code_revision: str = "v0.3.0"
+    code_revision: str = "v0.3.1"
 
     @property
     def selected_names(self):

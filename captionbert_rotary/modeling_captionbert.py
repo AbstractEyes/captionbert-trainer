@@ -134,7 +134,7 @@ class CaptionBertLayer(nn.TransformerEncoderLayer):
         if pointer_targets is not None:
             logits = qr[:, self.lookup_head].float() @ kr[:, self.lookup_head].float().transpose(1, 2)
             logits = logits / math.sqrt(width // heads)
-            logits = logits.masked_fill(~valid[:, None, :], -1e9)
+            logits = logits.masked_fill(~valid[:, None, :], torch.finfo(logits.dtype).min)
             selected = pointer_targets >= 0
             nll = -logits.log_softmax(-1).gather(-1, pointer_targets.clamp_min(0)[..., None]).squeeze(-1)
             pointer_loss = (nll * selected).sum() / selected.sum().clamp_min(1)
@@ -144,7 +144,7 @@ class CaptionBertLayer(nn.TransformerEncoderLayer):
         x = x + self._ff_block(self.norm2(x))
         if output_attentions:
             logits = qr.float() @ kr.float().transpose(-1, -2) / math.sqrt(width // heads)
-            attention = logits.masked_fill(~valid[:, None, None, :], -1e9).softmax(-1)
+            attention = logits.masked_fill(~valid[:, None, None, :], torch.finfo(logits.dtype).min).softmax(-1)
             return x, pointer_loss, attention
         return x, pointer_loss
 

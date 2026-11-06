@@ -14,6 +14,15 @@ checkpoints and remote continuation. Releases use `model.safetensors` and
 self-contained AutoConfig/AutoModel code; paired training-state replay and
 AutoModel round-trip tests are part of the suite.
 
+Package **v0.3.1** adds the [selection rules](docs/structured_analysis_rules.md)
+and a standalone frozen-development probe in `tools/probe_structured_campaign.py`.
+It also makes optional attention/pointer diagnostics work in FP16 by using a
+representable finite mask. The checked BF16 engineering loss and gradients
+match the training release exactly. Deployment checks compare an independent
+final training checkpoint against its safetensors AutoModel export. Run frozen
+probes after the lane's optimizer finishes. Continue this campaign through the
+**v0.3.0 notebooks**, which preserve its training code and experiment identity.
+
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AbstractEyes/captionbert-trainer/blob/v0.2.0/notebooks/captionbert_rotary_screen.ipynb)
 
 Controlled stage-3 screen from `captionbert_8192_plan_doc.md`: learned absolute

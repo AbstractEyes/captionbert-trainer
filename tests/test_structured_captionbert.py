@@ -84,6 +84,18 @@ def test_exact_targets_are_not_self_or_suffix_targets():
     assert targets.tolist() == [-1, -1, -1, -1, -1, 2, 2, -1]
 
 
+def test_address_digits_and_capacity_do_not_wrap_or_clamp_to_twenty_four():
+    model = CaptionBertModel(config()).eval()
+    ids = torch.tensor([[13, 5] * 514])
+    addresses = model.addresses(ids, ids != 0)
+    for sentence, expected in ((7, [0, 0, 7]), (8, [0, 1, 0]), (63, [0, 7, 7]),
+                               (64, [1, 0, 0]), (511, [7, 7, 7]), (512, [8, 8, 8])):
+        assert addresses[0, 2*sentence].tolist() == expected
+        assert addresses[0, 2*sentence+1].tolist() == expected
+    with pytest.raises(ValueError, match="configured range"):
+        model(torch.zeros(1, 8193, dtype=torch.long))
+
+
 @pytest.mark.parametrize("mode", ["rope", "ntk", "hierarchical", "key_end", "key_all"])
 def test_safetensors_auto_model_round_trip(tmp_path, mode):
     torch.manual_seed(11)
@@ -107,3 +119,27 @@ def test_safetensors_auto_model_round_trip(tmp_path, mode):
         assert torch.equal(expected_buffer, dict(loaded.named_buffers())[name]), name
     expected, actual = model(inputs()).pooler_output, loaded(inputs()).pooler_output
     torch.testing.assert_close(expected, actual, atol=2e-6, rtol=1e-5)
+
+
+@pytest.mark.cuda
+@pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA engineering check")
+@pytest.mark.parametrize("dtype", [torch.float16, torch.bfloat16])
+def test_autocast_attention_pointer_and_padding(dtype):
+    from captionbert_rotary.memory import MemoryGuard
+    guard = MemoryGuard(20.0, "cuda")
+    torch.manual_seed(17)
+    model = CaptionBertModel(config()).cuda().eval()
+    ids = torch.cat((inputs(), torch.zeros(1, 8, dtype=torch.long))).cuda()
+    targets = torch.full_like(ids, -1)
+    targets[0, 4:6] = 2
+    with torch.autocast("cuda", dtype=dtype):
+        expected = model(ids).pooler_output
+        out = model(ids, output_attentions=True, pointer_targets=targets)
+    assert torch.equal(expected, out.pooler_output)
+    assert out.attentions[0].shape == (3, 4, 8, 8)
+    assert torch.isfinite(out.pointer_loss)
+    assert all(torch.isfinite(a).all() for a in out.attentions)
+    assert torch.equal(out.pooler_output[-1], torch.zeros(768, device="cuda"))
+    out.pointer_loss.backward()
+    assert all(p.grad is None or torch.isfinite(p.grad).all() for p in model.parameters())
+    guard.check()

@@ -31,7 +31,8 @@ def main():
             continue
         run = output / name
         run.mkdir(exist_ok=True)
-        for file in ("result.json", "train.jsonl", "eval.jsonl", "run.json", "dev-sts-predictions.npz"):
+        for file in ("result.json", "train.jsonl", "eval.jsonl", "run.json", "dev-sts-predictions.npz",
+                     "environment.json", "pip_freeze.txt", "experiment.json"):
             path = prefix + name + "/" + file
             if path in available:
                 cached = hf_hub_download(args.repo, path, revision=revision, cache_dir=str(output / "hub-cache"))
