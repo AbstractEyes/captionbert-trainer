@@ -10,6 +10,7 @@ import json
 from pathlib import Path
 import sys
 import time
+from types import SimpleNamespace
 
 LOCAL_ROOT = Path(__file__).resolve().parents[1]
 if (LOCAL_ROOT / "captionbert_rotary").is_dir():
@@ -158,6 +159,8 @@ def main():
     p.add_argument("--batch", type=int, default=8)
     p.add_argument("--arms", nargs="+")
     p.add_argument("--ablations", action="store_true")
+    p.add_argument("--sentence-ablations", action="store_true",
+                   help="Also score each frozen intervention on development teacher/STSB measurements")
     p.add_argument("--long-shapes", action="store_true")
     p.add_argument("--device", default="cuda")
     p.add_argument("--memory-limit-gb", type=float, default=92.)
@@ -197,18 +200,32 @@ def main():
         print(f"Frozen development: {directory.name}, {len(ix):,} rows; FP32, no optimizer", flush=True)
         parity = independent_parity(directory, model, store, ix, args.device, args.long_shapes)
         measurements = {}
+        sentence_measurements = {}
         names = ["intact"]
         if args.ablations and model.config.rotary_mode in ("key_end", "key_all"):
             names += ["binding_off", "norm_off", "phase_redraw"]
         for name in names:
             with intervention(model, name):
                 summary, arrays = lookup_probe(model, store, ix, vocabulary, special, args.batch, args.device)
+                if args.sentence_ablations:
+                    from captionbert_rotary.metrics import evaluate
+                    from captionbert_rotary.structured_campaign import dev_sts
+                    cfg = SimpleNamespace(device=args.device, eval_batch=64, eval_rows=5000, data_dir=str(data))
+                    condition = output / name
+                    condition.mkdir(exist_ok=True)
+                    sentence_measurements[name] = dict(
+                        evaluation=evaluate(model, store, cfg),
+                        development=dev_sts(model, tokenizer, cfg, condition),
+                        precision="legacy FP16 autocast evaluation; FP32 parameters; TF32 off",
+                    )
             measurements[name] = summary
             np.savez_compressed(output / f"{name}-queries.npz", **arrays)
         row_hash = hashlib.sha256(ix.astype("<i8").tobytes()).hexdigest()
         report = dict(arm=result["arm"], seed=result["seed"], config_id=result["config_id"], dataset_id=result["dataset_id"],
             split="chunk061 development", rows=len(ix), row_seed=20261106, row_ids_sha256=row_hash,
-            precision="fp32 TF32 off", measurements=measurements, independent_checkpoint_auto_parity=parity,
+            precision="fp32 TF32 off", measurements=measurements,
+            sentence_measurements=sentence_measurements, independent_checkpoint_auto_parity=parity,
+            probe_source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             memory=guard.report(), selection_use=False, training_performed=False)
         np.save(output / "row-ids.npy", ix)
         (output / "report.json").write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
