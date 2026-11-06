@@ -14,6 +14,7 @@ def main():
     p.add_argument("--output", default=str(ROOT / ".cache/structured-final-results"))
     p.add_argument("--repo", default="AbstractPhil/captionbert-8192-rotary")
     p.add_argument("--frozen-name", default="frozen-followup-59ec95344958")
+    p.add_argument("--expected-full-data", default="7adb10f8833fab44e3ebb44315b53cb65bd8010b038115d15350b18536b57e86")
     args = p.parse_args()
     lock = json.loads(Path(args.selection).read_text(encoding="utf8"))
     if lock["analysis"]["status"] != "selected":
@@ -65,6 +66,9 @@ def main():
                     raise ValueError(f"Wrong larger-stage identity/exposure: {key}")
                 if result["benchmark"]["dataset_revisions"] != lock["final_benchmark_revisions"]:
                     raise ValueError(f"Benchmark revisions differ from the pre-test lock: {key}")
+                expected_data = args.expected_full_data if stage == "full4m" else lock["analysis"]["dataset_id"]
+                if result["dataset_id"] != expected_data:
+                    raise ValueError(f"Prepared data differ from the recorded stage identity: {key}")
                 results[key] = result
     report = dict(repo=args.repo, source_revision=revision, locked_selection=chosen,
                   stage_identities=identities, complete_runs=len(results), missing=missing, results=results)

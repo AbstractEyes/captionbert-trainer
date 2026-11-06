@@ -68,6 +68,8 @@ def main():
         report_cases += len(parity["cases"])
         common_rows.add(value["row_ids_sha256"])
         expected = [folder + "/row-ids.npy"] + [folder + "/" + name + "-queries.npz" for name in value["measurements"]]
+        expected += [folder + "/" + name + "/dev-sts-predictions.npz"
+                     for name in value["sentence_measurements"]]
         if value.get("initialization_control") is not None:
             expected.append(folder + "/initialization-queries.npz")
         if folder == FOLLOWUP and not any(x.startswith(prefix + folder + "/tensorboard/events.out.tfevents.") for x in entries):
@@ -91,6 +93,12 @@ def main():
             max_embedding_delta=max(x["max_embedding_delta"] for x in parity["cases"]),
             max_hidden_delta=max(x["max_hidden_delta"] for x in parity["cases"]),
             measured_conditions=list(value["measurements"]),
+            lookup_endpoints={name: {key: metrics["all"][key]
+                for key in ("record_mass", "exact_record_top1")}
+                for name, metrics in value["measurements"].items()},
+            initialization_lookup_endpoints=({key: value["initialization_control"]["measurements"]["all"][key]
+                for key in ("record_mass", "exact_record_top1")}
+                if value.get("initialization_control") is not None else None),
             reconstructed_initialization=value.get("initialization_control") is not None)
 
     combined = [(f"screen/{key}", value, False) for key, value in screen["results"].items()]
@@ -119,6 +127,7 @@ def main():
         runs[key] = dict(prefix=prefix, arm=result["arm"], seed=result["seed"],
             config_id=result["config_id"], dataset_id=result["dataset_id"], steps=result["steps"],
             training_rows=result["training_rows"], final_model_sha256=result["checkpoint_sha256"],
+            development_spearman=result["development"]["spearman"],
             files=files, frozen_reports=reports,
             resume_note="state.pt is authoritative; resume.json may describe an earlier transport snapshot")
     if len(common_rows) != 1:

@@ -5,6 +5,7 @@ from tools.analyze_structured_final import choose_deployment
 
 def fixture():
     lock = {"analysis": {"status": "selected", "hardware_repeat_floor": .0001,
+            "dataset_id": "exposure1m",
             "selection": {"structured": "H16", "relative": "N16"}}}
     results = {}
     for stage, arm in (("full4m", "H16"), ("full4m", "N16"), ("exposure1m", "H16")):
@@ -63,3 +64,11 @@ def test_incomplete_or_mixed_final_artifacts_are_rejected():
     mixed["full4m/N16-seed2"]["config_id"] = "other"
     with pytest.raises(ValueError, match="identity"):
         choose_deployment(lock, mixed)
+
+
+def test_exposure_control_must_use_the_original_screen_rows():
+    lock, results = fixture()
+    for seed in (1, 2):
+        results[f"exposure1m/H16-seed{seed}"]["dataset_id"] = "different-million-rows"
+    with pytest.raises(ValueError, match="original screen"):
+        choose_deployment(lock, results)

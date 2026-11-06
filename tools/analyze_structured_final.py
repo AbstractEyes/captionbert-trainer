@@ -29,6 +29,14 @@ def choose_deployment(lock, results):
             raise ValueError("Incomplete or altered larger-stage exposure")
         if item["development"]["split"] != "validation":
             raise ValueError("Deployment selection requires the development split")
+        name = key.split("/", 1)[1]
+        if name != f"{item['arm']}-seed{item['seed']}":
+            raise ValueError("Larger-stage artifact arm/seed differs from its run identity")
+        if key.startswith("exposure1m/") and item["dataset_id"] != screen["dataset_id"]:
+            raise ValueError("Matched-exposure dataset differs from the original screen")
+    if len({(results[key]["config_id"], results[key]["dataset_id"])
+            for key in required if key.startswith("exposure1m/")}) != 1:
+        raise ValueError("Matched-exposure pair disagrees on configuration/data identity")
     pairs = {}
     identities = set()
     for arm in (structured, relative):
