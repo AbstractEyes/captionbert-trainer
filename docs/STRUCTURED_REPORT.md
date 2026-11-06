@@ -314,7 +314,7 @@ corpus.
 Removing address rotations raises development similarity in all four hierarchical
 checkpoints. The full-data changes are about 0.00381 and 0.00591; the
 matched-exposure changes are about 0.00876 and 0.01210. At the same time,
-participation rank drops by roughly seven to eight dimensions. Teacher cosine
+participation rank drops by roughly six to eight dimensions. Teacher cosine
 moves in different directions between seeds. Improving one score through this
 intervention therefore does not improve every measured property.
 

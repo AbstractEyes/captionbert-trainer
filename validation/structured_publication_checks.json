@@ -21,12 +21,12 @@
   "root_parity_cases_per_environment": 14,
   "tested_hub_revision": "ad14b77f4cc9017d513173f3b340e735af02ef14",
   "package_sha256": {
-    "captionbert_rotary-0.3.1-py3-none-any.whl": "0e1e58d9ba8cb2423d39a7e06e18cc45bf29c524ba74b585c401853871b6fe9c",
-    "captionbert_rotary-0.3.1.tar.gz": "be0380e3e421b1f5fdc61296a63c0cc96ca7b59d4b2bbcafd014976f24e3c0af"
+    "captionbert_rotary-0.3.1-py3-none-any.whl": "f64d7d953c9b9a346f0b68cd4d6a84cfb874ca01aa1d2a80cc418af73380c07b",
+    "captionbert_rotary-0.3.1.tar.gz": "79afd95346f3af69f495badbebb19d5647c574269578239ccc7250995d8ec3f8"
   },
   "documentation_sha256": {
     "README.md": "32184c95ed3c8bc21fdedf2b2add506c2b6479496d1256639d13a60d1e344026",
-    "docs/STRUCTURED_REPORT.md": "9e3d281182feba707c367975d339e58b4163e77f87e91282cd107b59137fa6d3",
+    "docs/STRUCTURED_REPORT.md": "1ff34d0d14f96baa694cfbaaa3f8ad9ef985c04e3dd49d528e519622e8c7b1cc",
     "docs/TECHNICAL_STRUCTURED.md": "031319133c97eb044b4ecd6e6f67884fccc4252f4545abae33d53e5ca6a72275",
     "docs/HF_MODEL_CARD.md": "32f91bbb8c949d6af9d2cb68360c453767d7d531bd8f2c2f6c6d838919313b40",
     "THIRD_PARTY.md": "edee0c0ab2fd73e8d18b9076d878cb60d3cd6af16bdb83c28cac23f7ba9485e0"
