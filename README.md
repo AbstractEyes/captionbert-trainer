@@ -1,6 +1,6 @@
 # CaptionBERT rotary trainer
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AbstractEyes/captionbert-trainer/blob/v0.1.0/notebooks/captionbert_rotary_screen.ipynb)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AbstractEyes/captionbert-trainer/blob/v0.1.1/notebooks/captionbert_rotary_screen.ipynb)
 
 Controlled stage-3 screen from `captionbert_8192_plan_doc.md`: learned absolute
 positions (A0), plain token RoPE (A1), sentence-address rotary (A2), its anchor
@@ -34,6 +34,31 @@ Each subsequent cell is self-contained and invokes that environment directly.
 This supports Colab's current Python 3.13 without downgrading the host kernel's
 PyTorch, NumPy, Transformers, Hugging Face Hub, or other preinstalled libraries.
 No runtime restart, argparse, or `__file__` is used by notebook cells.
+
+Child stdout and stderr are streamed through the notebook kernel immediately,
+with unbuffered Python output and a saved console copy for each cell in
+`/content/captionbert-logs/`. Training shows the first step and every 25th step:
+arm/seed, epoch/batch, step/total and percentage, total loss, InfoNCE, MSE, actual
+step learning rate, gradient norm, seconds/step, rows/second, elapsed time,
+remaining training compute time, and CUDA allocated/reserved memory. Validation,
+checkpoint writes, eight-task benchmarks, and upload attempts/retries print their
+own stage updates. The JSONL record still includes **every** training step.
+
+For a v0.1.0 job already training, keep it running and open a **separate Colab
+terminal**. This standard-library monitor reads that job's existing logs without
+upgrading its environment, allocating GPU memory, or changing its files:
+
+```bash
+curl -fLsS https://raw.githubusercontent.com/AbstractEyes/captionbert-trainer/v0.1.1/tools/watch_run.py -o /content/captionbert-watch.py
+python -u /content/captionbert-watch.py /content/captionbert-screen
+```
+
+It displays losses, LR, gradient norm, step counts, speed, estimated remaining
+training compute, saved validation metrics, checkpoints, and upload queue counts.
+Its ETA excludes validation, checkpoint, and upload overhead. A heartbeat indicates
+when no new step has been logged; it does not diagnose the training process.
+Ctrl+C stops only the monitor. Another notebook cell queues behind a busy training
+cell, so use the separate terminal for this existing session.
 
 Compatibility checked against the [Colab runtime FAQ](https://research.google.com/colaboratory/runtime-version-faq.html)
 and [published GPU package inventory](https://github.com/googlecolab/backend-info/blob/main/pip-freeze.gpu.txt)

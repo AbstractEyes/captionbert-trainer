@@ -27,6 +27,8 @@ class Uploader:
         job = json.loads((entry / "job.json").read_text())
         for attempt in range(5):
             try:
+                print(f"Upload {job['name']}: attempt {attempt + 1}/5 -> "
+                      f"https://huggingface.co/{self.cfg.hub_repo}/tree/main/{job['remote']}", flush=True)
                 self.api.upload_folder(repo_id=self.cfg.hub_repo, repo_type="model",
                                        folder_path=entry / "payload", path_in_repo=job["remote"],
                                        commit_message=f"Ship {job['name']} (all arms retained)")
@@ -36,10 +38,14 @@ class Uploader:
                 shutil.rmtree(entry)
                 print(f"Uploaded {job['name']}", flush=True)
                 return
-            except Exception:
+            except Exception as error:
                 if attempt == 4:
+                    print(f"Upload {job['name']} failed after 5 attempts ({type(error).__name__}); "
+                          f"retry snapshot retained at {entry}", flush=True)
                     raise
-                self.sleep(min(2 ** attempt, 30))
+                delay = min(2 ** attempt, 30)
+                print(f"Upload {job['name']}: {type(error).__name__}; retrying in {delay}s", flush=True)
+                self.sleep(delay)
 
     def submit(self, name):
         if not self.cfg.push:
@@ -47,6 +53,7 @@ class Uploader:
         # Bound outstanding work to one arm: a lost runtime can lose at most the active arm.
         self.flush()
         entry = self.queue / f"{name}-{time.time_ns()}"
+        print(f"Upload {name}: preparing immutable local snapshot...", flush=True)
         shutil.copytree(self.root / name, entry / "payload")
         for manifest in ("experiment.json", "predictions.json", "summary.json", "environment.json",
                          "benchmark_revisions.json"):
@@ -55,9 +62,12 @@ class Uploader:
         atomic_json(entry / "job.json", {"name": name,
                     "remote": f"experiments/{self.cfg.fingerprint()}/{name}"})
         self.jobs.append(self.executor.submit(self._upload, entry))
+        print(f"Upload {name}: queued in background", flush=True)
 
     def flush(self):
         jobs, self.jobs = self.jobs, []
+        if jobs:
+            print(f"Waiting for {len(jobs)} queued upload(s)...", flush=True)
         for future in jobs:
             future.result()  # Failed pushes remain local and stop the next arm.
 

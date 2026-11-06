@@ -91,6 +91,7 @@ def vram_probe(model, cfg, guard):
     state = {k: v.cpu().clone() for k, v in model.state_dict().items()}
     rng = capture_rng()
     batch = cfg.batch_size
+    print(f"Starting worst-case forward/backward/Adam probe: batch {batch} x {cfg.max_tokens}", flush=True)
     ids = torch.randint(1, cfg.model.vocab_size, (batch, cfg.max_tokens))
     mask = torch.ones_like(ids)
     pos = torch.zeros(batch, cfg.max_tokens, 2, dtype=torch.long)
@@ -125,6 +126,7 @@ def train_arm(cfg, arm, seed, train, val, dataset_id, guard, probe=True, on_step
         result = json.loads((directory / "result.json").read_text())
         if any(result.get(k) != v for k, v in identity.items()):
             raise ValueError(f"Refusing incompatible completed run: {name}")
+        print(f"{name}: completed result verified; skipping training", flush=True)
         return result
     seed_all(seed)
     model = build_model(arm, cfg.model).to(cfg.device)
@@ -160,18 +162,23 @@ def train_arm(cfg, arm, seed, train, val, dataset_id, guard, probe=True, on_step
         print(f"Resumed {name} at step {step}/{total}", flush=True)
     start = time.monotonic()
     log_path = directory / "train.jsonl"
+    print(f"{name} | step log: {log_path} (one JSON record per step); "
+          f"display every {cfg.log_every} steps; validation every {cfg.eval_every}; "
+          f"checkpoint every {cfg.checkpoint_every}", flush=True)
     # Drop log entries beyond the last committed checkpoint after a crash.
     if log_path.exists():
         kept = [line for line in log_path.read_text().splitlines() if json.loads(line)["step"] <= step]
         log_path.write_text("".join(line + "\n" for line in kept))
 
     def save():
+        print(f"{name} | saving checkpoint at step {step}/{total}: {state_path}", flush=True)
         atomic_save(state_path, {"identity": identity, "model": model.state_dict(),
                     "optimizer": opt.state_dict(), "scheduler": scheduler.state_dict(),
                     "scaler": scaler.state_dict(), "rng": capture_rng(), "step": step,
                     "next_epoch": next_epoch, "next_batch": next_batch,
                     "elapsed_seconds": elapsed + time.monotonic() - start, "best_cosine": best,
                     "step_seconds": step_seconds, "step_count": step_count})
+        print(f"{name} | checkpoint saved", flush=True)
 
     try:
         for epoch in range(next_epoch, cfg.epochs):
@@ -183,12 +190,14 @@ def train_arm(cfg, arm, seed, train, val, dataset_id, guard, probe=True, on_step
                 guard.check()
                 if guard.enabled:
                     torch.cuda.synchronize()
-                t = time.monotonic()
-                row = optimization_step(model, opt, scaler, train.batch(plan[batch_index]), cfg)
+                t = time.perf_counter()
+                batch = train.batch(plan[batch_index])
+                lr_used = opt.param_groups[0]["lr"]
+                row = optimization_step(model, opt, scaler, batch, cfg)
                 scheduler.step()
                 if guard.enabled:
                     torch.cuda.synchronize()
-                duration = time.monotonic() - t
+                duration = max(time.perf_counter() - t, 1e-9)
                 step_seconds += duration
                 step_count += 1
                 step += 1
@@ -196,13 +205,29 @@ def train_arm(cfg, arm, seed, train, val, dataset_id, guard, probe=True, on_step
                 if next_batch == len(plan):
                     next_epoch, next_batch = epoch + 1, 0
                 row.update(step=step, epoch=epoch, lr=opt.param_groups[0]["lr"], seconds=duration,
+                           lr_used=lr_used, total_steps=total, total_epochs=cfg.epochs,
+                           epoch_batch=batch_index + 1, epoch_batches=len(plan),
+                           rows_seen=step * cfg.batch_size, sequence_length=batch[0].shape[1],
+                           rows_per_second=cfg.batch_size / duration,
+                           tokens_per_second=int(batch[1].sum()) / duration,
+                           elapsed_seconds=elapsed + time.monotonic() - start,
+                           eta_train_seconds=(total - step) * step_seconds / step_count,
                            batch_sha256=hashlib.sha256(plan[batch_index].tobytes()).hexdigest())
+                if guard.enabled:
+                    row.update(memory_allocated_gb=torch.cuda.memory_allocated() / 1e9,
+                               memory_reserved_gb=torch.cuda.memory_reserved() / 1e9)
                 with log_path.open("a", encoding="utf-8") as f:
                     f.write(json.dumps(row, allow_nan=False) + "\n")
-                if step % cfg.log_every == 0 or step == total:
+                if step == 1 or step % cfg.log_every == 0 or step == total:
                     spent = elapsed + time.monotonic() - start
-                    print(f"{name} {step:,}/{total:,}; loss {row['loss']:.4f}; "
-                          f"elapsed {spent / 60:.1f}m; ETA {(total - step) * step_seconds / step_count / 60:.1f}m",
+                    memory = (f"; CUDA alloc/res {row['memory_allocated_gb']:.2f}/"
+                              f"{row['memory_reserved_gb']:.2f} GB") if guard.enabled else ""
+                    print(f"{name} | epoch {epoch + 1}/{cfg.epochs} batch {batch_index + 1}/{len(plan)} "
+                          f"| step {step:,}/{total:,} ({100 * step / total:.1f}%) "
+                          f"| loss {row['loss']:.5f} NCE {row['nce']:.5f} MSE {row['mse']:.6f} "
+                          f"| lr {lr_used:.3e} grad {row['grad_norm']:.3f} "
+                          f"| {duration:.3f}s/step {row['rows_per_second']:,.0f} rows/s "
+                          f"| elapsed {spent / 60:.1f}m; ETA train {row['eta_train_seconds'] / 60:.1f}m{memory}",
                           flush=True)
                 if step % cfg.eval_every == 0:
                     scores = evaluate(model, val, cfg)
@@ -240,6 +265,8 @@ def train_arm(cfg, arm, seed, train, val, dataset_id, guard, probe=True, on_step
                   "model_config": asdict(cfg.model), "batch_size": cfg.batch_size,
                   "max_tokens": cfg.max_tokens, "status": "complete"}
         atomic_json(directory / "result.json", result)
+        print(f"{name} | completed {step}/{total} steps; {step_seconds / max(step_count, 1):.3f}s/step; "
+              f"result: {directory / 'result.json'}", flush=True)
         return result
     finally:
         del model, opt, scheduler, scaler
@@ -304,6 +331,9 @@ def run_screen(cfg=None):
     cfg = cfg or ScreenConfig()
     root = Path(cfg.output_dir)
     root.mkdir(parents=True, exist_ok=True)
+    print(f"Screen: {len(cfg.arms) * len(cfg.seeds)} runs; arms {cfg.arms}; seeds {cfg.seeds}; "
+          f"train chunks {cfg.train_chunks}; heldout {cfg.val_chunk}; output {root}", flush=True)
+    print("Verifying prepared data and opening training/validation stores...", flush=True)
     if (root / "experiment.json").exists():
         old = json.loads((root / "experiment.json").read_text())
         if old["config_id"] != cfg.fingerprint():
@@ -324,10 +354,15 @@ def run_screen(cfg=None):
     try:
         for arm in cfg.arms:
             for seed in cfg.seeds:
+                number = cfg.arms.index(arm) * len(cfg.seeds) + cfg.seeds.index(seed) + 1
+                print(f"Screen run {number}/{len(cfg.arms) * len(cfg.seeds)}: {arm}-seed{seed}", flush=True)
                 guard = MemoryGuard(cfg.memory_limit_gb, cfg.device)
                 train_arm(cfg, arm, seed, train, val, dataset_id, guard)
                 grade_results(root, cfg.arms, cfg.seeds)
                 uploader.submit(f"{arm}-seed{seed}")
     finally:
         uploader.close()
-    return grade_results(root, cfg.arms, cfg.seeds)
+    report = grade_results(root, cfg.arms, cfg.seeds)
+    print(f"Screen complete: {report['completed_runs']}/{report['expected_runs']} runs; "
+          f"summary: {root / 'summary.json'}", flush=True)
+    return report

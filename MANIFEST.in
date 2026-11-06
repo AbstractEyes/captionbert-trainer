@@ -3,3 +3,4 @@ recursive-include reference *.py *.json *.txt
 recursive-include tests *.py
 recursive-include configs *.json
 recursive-include notebooks *.ipynb
+recursive-include tools *.py

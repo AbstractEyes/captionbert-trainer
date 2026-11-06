@@ -1,4 +1,5 @@
 import numpy as np
+import time
 import torch
 from torch.nn import functional as F
 from .model import embed
@@ -38,6 +39,7 @@ def target_metrics(embeddings, targets):
 
 @torch.no_grad()
 def evaluate(model, store, cfg):
+    started = time.monotonic()
     was_training = model.training
     model.eval()
     # Sample once deterministically, then ensure a separate >128-token gauge is populated.
@@ -47,18 +49,32 @@ def evaluate(model, store, cfg):
     long_indices = np.flatnonzero(store.lengths > 128)
     long_indices = rng.choice(long_indices, size=min(len(long_indices), cfg.eval_rows), replace=False)
 
-    def collect(ix):
+    def collect(ix, label):
         embeddings, targets = [], []
+        print(f"Validation {label}: {len(ix):,} rows, batch {cfg.eval_batch}", flush=True)
         for i in range(0, len(ix), cfg.eval_batch):
             ids, mask, pos, tg = store.batch(ix[i:i + cfg.eval_batch])
             with torch.autocast("cuda", dtype=torch.float16, enabled=cfg.device.startswith("cuda")):
                 value = embed(model, ids.to(cfg.device), mask.to(cfg.device), pos.to(cfg.device))
             embeddings.append(value.float().cpu())
             targets.append(tg.float())
-        return target_metrics(torch.cat(embeddings), torch.cat(targets)) if embeddings else {"n": 0}
+            done = min(i + cfg.eval_batch, len(ix))
+            if (i // cfg.eval_batch + 1) % 25 == 0 or done == len(ix):
+                print(f"Validation {label}: {done:,}/{len(ix):,} rows", flush=True)
+        if not embeddings:
+            return {"n": 0}
+        print(f"Validation {label}: computing cosine, effective rank and self-cosine...", flush=True)
+        result = target_metrics(torch.cat(embeddings), torch.cat(targets))
+        print(f"Validation {label}: n={result['n']:,} cosine={result['cos_to_target']:.5f} "
+              f"erank={result['erank']} self_cos={result['self_cos']}", flush=True)
+        return result
 
     try:
-        return {"heldout": collect(indices), "above_128_tokens": collect(long_indices),
-                "heldout_total_rows": len(store), "above_128_total_rows": len(np.flatnonzero(store.lengths > 128))}
+        result = {"heldout": collect(indices, "heldout"),
+                  "above_128_tokens": collect(long_indices, ">128 tokens"),
+                  "heldout_total_rows": len(store),
+                  "above_128_total_rows": len(np.flatnonzero(store.lengths > 128))}
+        print(f"Validation complete in {time.monotonic() - started:.1f}s", flush=True)
+        return result
     finally:
         model.train(was_training)

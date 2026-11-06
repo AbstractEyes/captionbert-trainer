@@ -75,10 +75,13 @@ def prepare(data_dir="data", chunks=(0, 1, 2, 3, 61), max_tokens=256):
             print(f"Prepared chunk {chunk:03d} already verified", flush=True)
             continue
         print(f"Preparing {number}/{len(chunks)}: chunk {chunk:03d}; ~0.8 GB targets + captions", flush=True)
+        print(f"  Fetching captions_{chunk:03d}.json (download or cache)...", flush=True)
         cap = hf_hub_download(CAPTION_REPO, f"captions_{chunk:03d}.json", repo_type="dataset",
                               revision=CAPTION_REVISION, local_dir=root / "source-captions")
+        print(f"  Captions ready; fetching consensus_{chunk:03d}.pt (download or cache)...", flush=True)
         target = hf_hub_download(TARGET_REPO, f"consensus_{chunk:03d}.pt", repo_type="dataset",
                                  revision=TARGET_REVISION, local_dir=root / "source-targets")
+        print(f"  Targets ready; validating row counts and tokenizing...", flush=True)
         captions = read_captions(cap)
         targets = torch.load(target, map_location="cpu", weights_only=True, mmap=True)
         if not isinstance(targets, torch.Tensor) or targets.shape != (len(captions), 768):
@@ -100,6 +103,7 @@ def prepare(data_dir="data", chunks=(0, 1, 2, 3, 61), max_tokens=256):
             done = min(i + 20000, len(captions))
             print(f"  {done:,}/{len(captions):,} rows; elapsed {elapsed:.0f}s; "
                   f"ETA {elapsed * (len(captions) - done) / done:.0f}s", flush=True)
+        print(f"  Saving token cache and verifying file hashes: {out}", flush=True)
         np.save(out / "tokens.npy", np.concatenate(flat))
         np.save(out / "positions.npy", np.concatenate(addresses))
         np.save(out / "offsets.npy", np.asarray(offsets, dtype=np.int64))
@@ -110,6 +114,9 @@ def prepare(data_dir="data", chunks=(0, 1, 2, 3, 61), max_tokens=256):
                         prepared_sha256={name: sha256_file(out / name) for name in
                                          ("tokens.npy", "positions.npy", "offsets.npy")})
         atomic_json(manifest, expected)
+        print(f"Chunk {chunk:03d} prepared: {len(captions):,} rows; "
+              f"anchor 24 reached by {reaches:,}, exceeded by {overflows:,}; "
+              f"elapsed {time.monotonic() - start:.1f}s", flush=True)
 
 
 class Store:
