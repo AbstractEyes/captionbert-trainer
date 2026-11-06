@@ -36,6 +36,8 @@ def intervention(model, name):
     original = cfg.rotary_mode, cfg.key_rho, layer.rho, cfg.phase_seed
     frequencies = model.frequencies.detach().clone()
     values = model.value_address.detach().clone() if model.value_address is not None else None
+    module = sys.modules[type(model).__module__]
+    original_word_features = module.word_features
     try:
         if name == "binding_off" and cfg.rotary_mode in ("key_end", "key_all"):
             cfg.rotary_mode = "hierarchical"
@@ -43,6 +45,11 @@ def intervention(model, name):
             cfg.key_rho = layer.rho = 0.0
         elif name == "phase_redraw":
             cfg.phase_seed = 981243653
+        elif name == "phase_constant" and cfg.rotary_mode in ("key_end", "key_all"):
+            def constant_phase(*args, **kwargs):
+                phase, active, ends, records = original_word_features(*args, **kwargs)
+                return torch.zeros_like(phase), active, ends, records
+            module.word_features = constant_phase
         elif name == "anchor_angles_off" and model.structured:
             with torch.no_grad():
                 model.frequencies[model.kinds >= 2] = 0
@@ -54,6 +61,7 @@ def intervention(model, name):
             raise ValueError(f"Unknown or inapplicable intervention {name}")
         yield
     finally:
+        module.word_features = original_word_features
         cfg.rotary_mode, cfg.key_rho, layer.rho, cfg.phase_seed = original
         with torch.no_grad():
             model.frequencies.copy_(frequencies)
@@ -172,6 +180,7 @@ def main():
     p.add_argument("--rows", type=int, default=4096)
     p.add_argument("--batch", type=int, default=8)
     p.add_argument("--arms", nargs="+")
+    p.add_argument("--seeds", nargs="+", type=int, help="Filter completed seed directories")
     p.add_argument("--ablations", action="store_true")
     p.add_argument("--sentence-ablations", action="store_true",
                    help="Also score each frozen intervention on development teacher/STSB measurements")
@@ -179,6 +188,8 @@ def main():
                    help="Exploratory anchor-angle and value-address interventions on structured models")
     p.add_argument("--initialization-control", action="store_true",
                    help="Probe a reconstructed zero-step model under the registered weight seed")
+    p.add_argument("--phase-constant", action="store_true",
+                   help="Remove lexical phase variation while preserving records and record normalization")
     p.add_argument("--long-shapes", action="store_true")
     p.add_argument("--device", default="cuda")
     p.add_argument("--memory-limit-gb", type=float, default=92.)
@@ -204,6 +215,8 @@ def main():
         result = json.loads(result_path.read_text())
         if args.arms and result["arm"] not in args.arms:
             continue
+        if args.seeds and result["seed"] not in args.seeds:
+            continue
         if result.get("status") != "complete":
             continue
         if args.push and result.get("engineering_only"):
@@ -226,6 +239,8 @@ def main():
         names = ["intact"]
         if args.ablations and model.config.rotary_mode in ("key_end", "key_all"):
             names += ["binding_off", "norm_off", "phase_redraw"]
+        if args.phase_constant and model.config.rotary_mode in ("key_end", "key_all"):
+            names.append("phase_constant")
         if args.structural_ablations and model.structured:
             names.append("anchor_angles_off")
             if model.value_address is not None:
@@ -258,6 +273,7 @@ def main():
             del initial
         row_hash = hashlib.sha256(ix.astype("<i8").tobytes()).hexdigest()
         report = dict(arm=result["arm"], seed=result["seed"], config_id=result["config_id"], dataset_id=result["dataset_id"],
+            checkpoint_sha256=result["checkpoint_sha256"],
             split="chunk061 development", rows=len(ix), row_seed=20261106, row_ids_sha256=row_hash,
             precision="fp32 TF32 off", measurements=measurements,
             sentence_measurements=sentence_measurements, independent_checkpoint_auto_parity=parity,

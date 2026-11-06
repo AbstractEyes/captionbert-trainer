@@ -14,6 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 FOLLOWUP = "frozen-followup-59ec95344958"
 SCREEN_PROBE_SHA = "6bbf7f7cbaca8ce712cf21ca9cd70c25fabdf2af43b05d44fe652665512e5bb3"
 FOLLOWUP_PROBE_SHA = "c778258cabc69e1985c03304af0ebf2e8e4be3ad64aba680d9ccaec4bdd5d03a"
+PHASE_FOLDER = "frozen-phase-constant-20261106"
+PHASE_PROBE_SHA = "1cf1ba909939b1b9f95f100fc87cfe9c21e7698c689658fb125ac522ca2985b9"
 
 
 def reject_nonfinite(value):
@@ -55,7 +57,8 @@ def main():
         cached = hf_hub_download(repo, path, revision=revision, cache_dir=args.cache)
         raw = Path(cached).read_bytes()
         value = json.loads(raw, parse_constant=reject_nonfinite)
-        if value["probe_source_sha256"] != (FOLLOWUP_PROBE_SHA if folder == FOLLOWUP else SCREEN_PROBE_SHA):
+        expected_probe = PHASE_PROBE_SHA if folder == PHASE_FOLDER else (FOLLOWUP_PROBE_SHA if folder == FOLLOWUP else SCREEN_PROBE_SHA)
+        if value["probe_source_sha256"] != expected_probe:
             raise ValueError("Frozen probe source differs from its pinned measurement revision: " + path)
         if any(value.get(k) != result[k] for k in ("arm", "seed", "config_id", "dataset_id")):
             raise ValueError("Frozen report identity differs: " + path)
@@ -76,12 +79,12 @@ def main():
                      for name in value["sentence_measurements"]]
         if value.get("initialization_control") is not None:
             expected.append(folder + "/initialization-queries.npz")
-        if folder == FOLLOWUP and not any(x.startswith(prefix + folder + "/tensorboard/events.out.tfevents.") for x in entries):
+        if folder in (FOLLOWUP, PHASE_FOLDER) and not any(x.startswith(prefix + folder + "/tensorboard/events.out.tfevents.") for x in entries):
             missing.append(prefix + folder + "/tensorboard/events.out.tfevents.*")
         for name in expected:
             if prefix + name not in entries:
                 missing.append(prefix + name)
-        if folder == FOLLOWUP:
+        if folder in (FOLLOWUP, PHASE_FOLDER):
             destination = ROOT / ".cache" / ("structured-results" if result["config_id"] == screen["config_id"] else "structured-final-results")
             if result["config_id"] == screen["config_id"]:
                 destination /= f"{result['arm']}-seed{result['seed']}"
@@ -126,7 +129,7 @@ def main():
             missing.append(prefix + "eval-*.json")
         folders = [FOLLOWUP] if larger else ["frozen-development"]
         if not larger and result["arm"] == "KALLP":
-            folders.append(FOLLOWUP)
+            folders.extend((FOLLOWUP, PHASE_FOLDER))
         reports = [x for folder in folders if (x := report(prefix, folder, result)) is not None]
         runs[key] = dict(prefix=prefix, arm=result["arm"], seed=result["seed"],
             config_id=result["config_id"], dataset_id=result["dataset_id"], steps=result["steps"],
