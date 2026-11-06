@@ -14,6 +14,8 @@ def main():
     p.add_argument("--repo", default="AbstractPhil/captionbert-8192-rotary")
     p.add_argument("--config-id", default="dc37215529c188be7b93804c4a21f125afa353e037b1a2a8fc11e5b2fc817d3a")
     p.add_argument("--output", default=str(ROOT / ".cache/structured-results"))
+    p.add_argument("--results-only", action="store_true", help="Read just final JSON for a timely selection census")
+    p.add_argument("--include-frozen", action="store_true", help="Also collect small frozen reports and query arrays")
     args = p.parse_args()
     from huggingface_hub import HfApi, hf_hub_download
     output = Path(args.output).resolve()
@@ -31,12 +33,19 @@ def main():
             continue
         run = output / name
         run.mkdir(exist_ok=True)
-        for file in ("result.json", "train.jsonl", "eval.jsonl", "run.json", "dev-sts-predictions.npz",
-                     "environment.json", "pip_freeze.txt", "experiment.json"):
+        files = ("result.json",) if args.results_only else (
+            "result.json", "train.jsonl", "eval.jsonl", "run.json", "dev-sts-predictions.npz",
+            "environment.json", "pip_freeze.txt", "experiment.json")
+        if args.include_frozen:
+            files += ("frozen-development/report.json", "frozen-development/intact-queries.npz",
+                      "frozen-development/row-ids.npy")
+        for file in files:
             path = prefix + name + "/" + file
             if path in available:
                 cached = hf_hub_download(args.repo, path, revision=revision, cache_dir=str(output / "hub-cache"))
-                (run / file).write_bytes(Path(cached).read_bytes())
+                destination = run / file
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_bytes(Path(cached).read_bytes())
         value = json.loads((run / "result.json").read_text(encoding="utf8"))
         if value.get("config_id") != args.config_id:
             raise ValueError(f"Wrong artifact identity for {name}")
