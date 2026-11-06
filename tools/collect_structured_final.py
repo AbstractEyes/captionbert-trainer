@@ -13,6 +13,7 @@ def main():
     p.add_argument("--selection", required=True)
     p.add_argument("--output", default=str(ROOT / ".cache/structured-final-results"))
     p.add_argument("--repo", default="AbstractPhil/captionbert-8192-rotary")
+    p.add_argument("--frozen-name", default="frozen-followup-59ec95344958")
     args = p.parse_args()
     lock = json.loads(Path(args.selection).read_text(encoding="utf8"))
     if lock["analysis"]["status"] != "selected":
@@ -48,7 +49,7 @@ def main():
                 small = ("result.json", "run.json", "train.jsonl", "eval.jsonl",
                          "dev-sts-predictions.npz", "environment.json", "pip_freeze.txt",
                          "experiment.json", "benchmark_revisions.json",
-                         "frozen-development/report.json")
+                         f"{args.frozen_name}/report.json")
                 for filename in small:
                     remote = prefix + filename
                     if remote in available:

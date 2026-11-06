@@ -1,0 +1,1145 @@
+{
+  "source_revision": "becdda8590d138a92e947976005357fd6ccb9de2",
+  "screen_config_id": "dc37215529c188be7b93804c4a21f125afa353e037b1a2a8fc11e5b2fc817d3a",
+  "hardware_repeat_floor": 0.006177472234669801,
+  "row_ids_sha256": "e72547c65ba2f4d26131988027abd9004af0a350e3bd404242b0f843779eb8ed",
+  "rows": [
+    {
+      "arm": "R8",
+      "label": "Relative, 8 heads",
+      "development": [
+        0.6665315756389172,
+        0.6683412548237391
+      ],
+      "mean_development": 0.6674364152313281,
+      "teacher": [
+        0.7752357125282288,
+        0.7751325964927673
+      ],
+      "ranks": [
+        80.5457293579258,
+        80.16112810888943
+      ],
+      "lookup": [
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.013839484192430973,
+            "caption_mean_record_mass": 0.022050358712102126,
+            "median_record_mass": 0.0045249927788972855,
+            "exact_record_top1": 0.004435245416913069,
+            "wrong_adjacent_mass": 0.008558654226362705,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.01419856771826744,
+            "caption_mean_record_mass": 0.022257262236435194,
+            "median_record_mass": 0.004600606393069029,
+            "exact_record_top1": 0.004745333755140778,
+            "wrong_adjacent_mass": 0.008714822120964527,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.008703445084393024,
+            "caption_mean_record_mass": 0.010452187540627135,
+            "median_record_mass": 0.002999153221026063,
+            "exact_record_top1": 0.0,
+            "wrong_adjacent_mass": 0.006324971094727516,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.01060387771576643,
+            "caption_mean_record_mass": 0.012581860388829903,
+            "median_record_mass": 0.0029899422079324722,
+            "exact_record_top1": 0.0015082956259426848,
+            "wrong_adjacent_mass": 0.005717168096452951,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.0070254020392894745,
+            "caption_mean_record_mass": 0.00764301880438339,
+            "median_record_mass": 0.0028820668812841177,
+            "exact_record_top1": 0.0012507817385866166,
+            "wrong_adjacent_mass": 0.004064589738845825,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.017438355833292007,
+            "caption_mean_record_mass": 0.025906905361224433,
+            "median_record_mass": 0.006950341165065765,
+            "exact_record_top1": 0.003942440370589394,
+            "wrong_adjacent_mass": 0.008909109979867935,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.018021374940872192,
+            "caption_mean_record_mass": 0.026379688996911323,
+            "median_record_mass": 0.00725423963740468,
+            "exact_record_top1": 0.004007170726563324,
+            "wrong_adjacent_mass": 0.008787643164396286,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.009099341928958893,
+            "caption_mean_record_mass": 0.010207738320926953,
+            "median_record_mass": 0.003902881871908903,
+            "exact_record_top1": 0.0030165912518853697,
+            "wrong_adjacent_mass": 0.01064648199826479,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.01386119332164526,
+            "caption_mean_record_mass": 0.01665435814875218,
+            "median_record_mass": 0.004825155716389418,
+            "exact_record_top1": 0.007541478129713424,
+            "wrong_adjacent_mass": 0.011137708090245724,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.008637792430818081,
+            "caption_mean_record_mass": 0.009431718424792283,
+            "median_record_mass": 0.003931140992790461,
+            "exact_record_top1": 0.00031269543464665416,
+            "wrong_adjacent_mass": 0.003979067783802748,
+            "uniform_mass": 0.006118615623563528
+          }
+        }
+      ]
+    },
+    {
+      "arm": "N16",
+      "label": "Relative, 16 heads (4M follow-up)",
+      "development": [
+        0.6711943724510692,
+        0.6768529617653746
+      ],
+      "mean_development": 0.6740236671082218,
+      "teacher": [
+        0.7724723815917969,
+        0.7725024223327637
+      ],
+      "ranks": [
+        80.29164563122416,
+        79.48654201855301
+      ],
+      "lookup": [
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.014162692241370678,
+            "caption_mean_record_mass": 0.021406555146945568,
+            "median_record_mass": 0.005323121324181557,
+            "exact_record_top1": 0.004139562389118865,
+            "wrong_adjacent_mass": 0.00857478566467762,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.014697068370878696,
+            "caption_mean_record_mass": 0.02167746140659322,
+            "median_record_mass": 0.005620464216917753,
+            "exact_record_top1": 0.004323526310239376,
+            "wrong_adjacent_mass": 0.008640719577670097,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.006519408896565437,
+            "caption_mean_record_mass": 0.007435817591273999,
+            "median_record_mass": 0.0023779189214110374,
+            "exact_record_top1": 0.0015082956259426848,
+            "wrong_adjacent_mass": 0.00763171911239624,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.008367713540792465,
+            "caption_mean_record_mass": 0.009883887403658724,
+            "median_record_mass": 0.003227709326893091,
+            "exact_record_top1": 0.0015082956259426848,
+            "wrong_adjacent_mass": 0.007211328949779272,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.007234395015984774,
+            "caption_mean_record_mass": 0.007862029727899454,
+            "median_record_mass": 0.002868429757654667,
+            "exact_record_top1": 0.001876172607879925,
+            "wrong_adjacent_mass": 0.0035065864212810993,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.020719680935144424,
+            "caption_mean_record_mass": 0.030326123671649313,
+            "median_record_mass": 0.007529833819717169,
+            "exact_record_top1": 0.009067612852355609,
+            "wrong_adjacent_mass": 0.011053526774048805,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.021141987293958664,
+            "caption_mean_record_mass": 0.030929095039639712,
+            "median_record_mass": 0.007741022855043411,
+            "exact_record_top1": 0.009174311926605505,
+            "wrong_adjacent_mass": 0.011060732416808605,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.014679338783025742,
+            "caption_mean_record_mass": 0.017702482458284628,
+            "median_record_mass": 0.00500615406781435,
+            "exact_record_top1": 0.007541478129713424,
+            "wrong_adjacent_mass": 0.010950475931167603,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.02236214466392994,
+            "caption_mean_record_mass": 0.02758038133072243,
+            "median_record_mass": 0.007192685268819332,
+            "exact_record_top1": 0.006033182503770739,
+            "wrong_adjacent_mass": 0.00834742747247219,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.010119440965354443,
+            "caption_mean_record_mass": 0.01085815299671912,
+            "median_record_mass": 0.0038063395768404007,
+            "exact_record_top1": 0.004690431519699813,
+            "wrong_adjacent_mass": 0.0050179921090602875,
+            "uniform_mass": 0.006118615623563528
+          }
+        }
+      ]
+    },
+    {
+      "arm": "N16-repeat",
+      "label": "16-head reference repeat",
+      "development": [
+        0.6650169002163994,
+        0.6768294564110751
+      ],
+      "mean_development": 0.6709231783137373,
+      "teacher": [
+        0.7727280259132385,
+        0.7725427746772766
+      ],
+      "ranks": [
+        80.56147642080161,
+        79.50055161474465
+      ],
+      "lookup": [
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.01575528085231781,
+            "caption_mean_record_mass": 0.023478921241942275,
+            "median_record_mass": 0.006000456400215626,
+            "exact_record_top1": 0.006702148630001971,
+            "wrong_adjacent_mass": 0.008204641751945019,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.016334470361471176,
+            "caption_mean_record_mass": 0.0237159177357937,
+            "median_record_mass": 0.006272385828197002,
+            "exact_record_top1": 0.007065274702098492,
+            "wrong_adjacent_mass": 0.008214971981942654,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.007471051998436451,
+            "caption_mean_record_mass": 0.008334053314111986,
+            "median_record_mass": 0.0028201923705637455,
+            "exact_record_top1": 0.0015082956259426848,
+            "wrong_adjacent_mass": 0.008056876249611378,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.009071319364011288,
+            "caption_mean_record_mass": 0.010142700312102546,
+            "median_record_mass": 0.0039719087071716785,
+            "exact_record_top1": 0.0,
+            "wrong_adjacent_mass": 0.007543798536062241,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.008197097107768059,
+            "caption_mean_record_mass": 0.008645691588638343,
+            "median_record_mass": 0.0031599081121385098,
+            "exact_record_top1": 0.001876172607879925,
+            "wrong_adjacent_mass": 0.00357262440957129,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.02057340182363987,
+            "caption_mean_record_mass": 0.030008884015158926,
+            "median_record_mass": 0.007442545145750046,
+            "exact_record_top1": 0.008377685787502464,
+            "wrong_adjacent_mass": 0.010977369733154774,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.02098197489976883,
+            "caption_mean_record_mass": 0.030600767291783036,
+            "median_record_mass": 0.007655746303498745,
+            "exact_record_top1": 0.008541600759253401,
+            "wrong_adjacent_mass": 0.010982227511703968,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.014729475602507591,
+            "caption_mean_record_mass": 0.01779259568885577,
+            "median_record_mass": 0.005070230923593044,
+            "exact_record_top1": 0.006033182503770739,
+            "wrong_adjacent_mass": 0.010907897725701332,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.02234005182981491,
+            "caption_mean_record_mass": 0.027584540662845814,
+            "median_record_mass": 0.007328768726438284,
+            "exact_record_top1": 0.0030165912518853697,
+            "wrong_adjacent_mass": 0.008263041265308857,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.01005679089576006,
+            "caption_mean_record_mass": 0.010772058783221013,
+            "median_record_mass": 0.0038549802266061306,
+            "exact_record_top1": 0.004377736085053158,
+            "wrong_adjacent_mass": 0.00498780095949769,
+            "uniform_mass": 0.006118615623563528
+          }
+        }
+      ]
+    },
+    {
+      "arm": "H16",
+      "label": "Hierarchical (4M follow-up)",
+      "development": [
+        0.6685458314773752,
+        0.6695900563972942
+      ],
+      "mean_development": 0.6690679439373347,
+      "teacher": [
+        0.768038272857666,
+        0.7683576941490173
+      ],
+      "ranks": [
+        80.16586518869799,
+        79.26482445931474
+      ],
+      "lookup": [
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.02247440442442894,
+            "caption_mean_record_mass": 0.03449523180181874,
+            "median_record_mass": 0.007611657027155161,
+            "exact_record_top1": 0.013601419278533412,
+            "wrong_adjacent_mass": 0.011840077117085457,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.023304060101509094,
+            "caption_mean_record_mass": 0.03490267796069502,
+            "median_record_mass": 0.008145324885845184,
+            "exact_record_top1": 0.013919645681746282,
+            "wrong_adjacent_mass": 0.01190588902682066,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.010607684962451458,
+            "caption_mean_record_mass": 0.01246911868016152,
+            "median_record_mass": 0.0028097028844058514,
+            "exact_record_top1": 0.00904977375565611,
+            "wrong_adjacent_mass": 0.01089876051992178,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.014191072434186935,
+            "caption_mean_record_mass": 0.01769512893956151,
+            "median_record_mass": 0.003469673916697502,
+            "exact_record_top1": 0.0030165912518853697,
+            "wrong_adjacent_mass": 0.011691981926560402,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.011070460081100464,
+            "caption_mean_record_mass": 0.01146930780045555,
+            "median_record_mass": 0.00432396586984396,
+            "exact_record_top1": 0.0031269543464665416,
+            "wrong_adjacent_mass": 0.005731691140681505,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.021602677181363106,
+            "caption_mean_record_mass": 0.031657412957395346,
+            "median_record_mass": 0.008772596716880798,
+            "exact_record_top1": 0.012418687167356593,
+            "wrong_adjacent_mass": 0.011641496792435646,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.022267619147896767,
+            "caption_mean_record_mass": 0.0321343647930832,
+            "median_record_mass": 0.009125225245952606,
+            "exact_record_top1": 0.012759675208267426,
+            "wrong_adjacent_mass": 0.011677395552396774,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.012091916985809803,
+            "caption_mean_record_mass": 0.0159066563336269,
+            "median_record_mass": 0.004223761148750782,
+            "exact_record_top1": 0.007541478129713424,
+            "wrong_adjacent_mass": 0.011128033511340618,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.017439251765608788,
+            "caption_mean_record_mass": 0.022255469180313,
+            "median_record_mass": 0.007413159590214491,
+            "exact_record_top1": 0.004524886877828055,
+            "wrong_adjacent_mass": 0.014581822790205479,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.01191825233399868,
+            "caption_mean_record_mass": 0.012790557600387801,
+            "median_record_mass": 0.005230635870248079,
+            "exact_record_top1": 0.0050031269543464665,
+            "wrong_adjacent_mass": 0.0060594999231398106,
+            "uniform_mass": 0.006118615623563528
+          }
+        }
+      ]
+    },
+    {
+      "arm": "KEND",
+      "label": "Key phase at word endings",
+      "development": [
+        0.6703329697213746,
+        0.6703845765185548
+      ],
+      "mean_development": 0.6703587731199647,
+      "teacher": [
+        0.7681273221969604,
+        0.7685947418212891
+      ],
+      "ranks": [
+        80.00765906340648,
+        79.21415687735599
+      ],
+      "lookup": [
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.15595978498458862,
+            "caption_mean_record_mass": 0.18912369764958345,
+            "median_record_mass": 0.05375134199857712,
+            "exact_record_top1": 0.3232801103883304,
+            "wrong_adjacent_mass": 0.011657013557851315,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.16676998138427734,
+            "caption_mean_record_mass": 0.2005816461569395,
+            "median_record_mass": 0.06429104506969452,
+            "exact_record_top1": 0.34588210481915005,
+            "wrong_adjacent_mass": 0.011405966244637966,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.0013397338334470987,
+            "caption_mean_record_mass": 0.0019083450607555459,
+            "median_record_mass": 9.698665962787345e-05,
+            "exact_record_top1": 0.0,
+            "wrong_adjacent_mass": 0.015247766859829426,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.17746783792972565,
+            "caption_mean_record_mass": 0.20881716160311592,
+            "median_record_mass": 0.06846914440393448,
+            "exact_record_top1": 0.3453996983408748,
+            "wrong_adjacent_mass": 0.00932258926331997,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.11283304542303085,
+            "caption_mean_record_mass": 0.11719082151391795,
+            "median_record_mass": 0.03324952349066734,
+            "exact_record_top1": 0.27235772357723576,
+            "wrong_adjacent_mass": 0.006572154816240072,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.10403589904308319,
+            "caption_mean_record_mass": 0.1329496676676536,
+            "median_record_mass": 0.03535684198141098,
+            "exact_record_top1": 0.23950325251330573,
+            "wrong_adjacent_mass": 0.010868479497730732,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.11110217124223709,
+            "caption_mean_record_mass": 0.13984003103087303,
+            "median_record_mass": 0.0411999449133873,
+            "exact_record_top1": 0.256248022777602,
+            "wrong_adjacent_mass": 0.01147573534399271,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.0029659525025635958,
+            "caption_mean_record_mass": 0.003825663993848319,
+            "median_record_mass": 0.00020631150982808322,
+            "exact_record_top1": 0.0,
+            "wrong_adjacent_mass": 0.002182799857109785,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.11692586541175842,
+            "caption_mean_record_mass": 0.1478214848994505,
+            "median_record_mass": 0.038579992949962616,
+            "exact_record_top1": 0.2669683257918552,
+            "wrong_adjacent_mass": 0.008711524307727814,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.07074231654405594,
+            "caption_mean_record_mass": 0.07289565540665376,
+            "median_record_mass": 0.021203570067882538,
+            "exact_record_top1": 0.19199499687304566,
+            "wrong_adjacent_mass": 0.006158553995192051,
+            "uniform_mass": 0.006118615623563528
+          }
+        }
+      ]
+    },
+    {
+      "arm": "KALL",
+      "label": "Key phase at all pieces",
+      "development": [
+        0.6674102684161309,
+        0.6680309574565747
+      ],
+      "mean_development": 0.6677206129363529,
+      "teacher": [
+        0.7674988508224487,
+        0.7686079144477844
+      ],
+      "ranks": [
+        79.9143460256363,
+        79.182052457981
+      ],
+      "lookup": [
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.0568401962518692,
+            "caption_mean_record_mass": 0.07506596271335157,
+            "median_record_mass": 0.012837452813982964,
+            "exact_record_top1": 0.11482357579341612,
+            "wrong_adjacent_mass": 0.014181988313794136,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.0598885603249073,
+            "caption_mean_record_mass": 0.0763414125263375,
+            "median_record_mass": 0.014220856130123138,
+            "exact_record_top1": 0.12169144785405463,
+            "wrong_adjacent_mass": 0.014252261258661747,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.013238977640867233,
+            "caption_mean_record_mass": 0.016021508047356522,
+            "median_record_mass": 0.0030012771021574736,
+            "exact_record_top1": 0.016591251885369532,
+            "wrong_adjacent_mass": 0.013176873326301575,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.022325674071907997,
+            "caption_mean_record_mass": 0.029951050898662866,
+            "median_record_mass": 0.00404528109356761,
+            "exact_record_top1": 0.033182503770739065,
+            "wrong_adjacent_mass": 0.014972842298448086,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.03760826215147972,
+            "caption_mean_record_mass": 0.044326498096028996,
+            "median_record_mass": 0.006659302860498428,
+            "exact_record_top1": 0.08818011257035648,
+            "wrong_adjacent_mass": 0.007938685826957226,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.053740810602903366,
+            "caption_mean_record_mass": 0.06599327231524889,
+            "median_record_mass": 0.012705618515610695,
+            "exact_record_top1": 0.12054011433077075,
+            "wrong_adjacent_mass": 0.013363419100642204,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.05657482147216797,
+            "caption_mean_record_mass": 0.06716859281573036,
+            "median_record_mass": 0.013822229579091072,
+            "exact_record_top1": 0.12749130022144892,
+            "wrong_adjacent_mass": 0.013337654061615467,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.013205372728407383,
+            "caption_mean_record_mass": 0.017020176537400622,
+            "median_record_mass": 0.0030555122066289186,
+            "exact_record_top1": 0.021116138763197588,
+            "wrong_adjacent_mass": 0.013731946237385273,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.019883064553141594,
+            "caption_mean_record_mass": 0.024651856649362165,
+            "median_record_mass": 0.005528926383703947,
+            "exact_record_top1": 0.030165912518853696,
+            "wrong_adjacent_mass": 0.016057856380939484,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.04093414917588234,
+            "caption_mean_record_mass": 0.04206956394981327,
+            "median_record_mass": 0.007394172251224518,
+            "exact_record_top1": 0.10881801125703565,
+            "wrong_adjacent_mass": 0.007126081269234419,
+            "uniform_mass": 0.006118615623563528
+          }
+        }
+      ]
+    },
+    {
+      "arm": "KALLP",
+      "label": "Whole key + lookup training",
+      "development": [
+        0.665892852778199,
+        0.6669821204338287
+      ],
+      "mean_development": 0.6664374866060139,
+      "teacher": [
+        0.7664218544960022,
+        0.7668309211730957
+      ],
+      "ranks": [
+        79.79517641354452,
+        79.04200272569783
+      ],
+      "lookup": [
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.9995101094245911,
+            "caption_mean_record_mass": 0.9996374544863245,
+            "median_record_mass": 0.9998422861099243,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 2.5728611490194453e-06,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.9995501041412354,
+            "caption_mean_record_mass": 0.9996627638814369,
+            "median_record_mass": 0.9998492002487183,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 2.58109707829135e-06,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9989388585090637,
+            "caption_mean_record_mass": 0.9989243283319633,
+            "median_record_mass": 0.9996836185455322,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 2.4550568014092278e-06,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9993511438369751,
+            "caption_mean_record_mass": 0.9993502210613876,
+            "median_record_mass": 0.9997895359992981,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 1.0532260148465866e-06,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.9993064999580383,
+            "caption_mean_record_mass": 0.99934764040841,
+            "median_record_mass": 0.9997236728668213,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 2.088266455757548e-06,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.9995156526565552,
+            "caption_mean_record_mass": 0.9996639028076053,
+            "median_record_mass": 0.9998456239700317,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 1.8013324734056368e-06,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.99957674741745,
+            "caption_mean_record_mass": 0.9996939892916716,
+            "median_record_mass": 0.9998509883880615,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 1.8618209196574753e-06,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9986433982849121,
+            "caption_mean_record_mass": 0.9988771832507589,
+            "median_record_mass": 0.9996861219406128,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 9.361531851936888e-07,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9995196461677551,
+            "caption_mean_record_mass": 0.9995732722075089,
+            "median_record_mass": 0.9998263716697693,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 4.174129344391986e-07,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.9992398619651794,
+            "caption_mean_record_mass": 0.9992921014153768,
+            "median_record_mass": 0.9997345209121704,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 1.5269587265720475e-06,
+            "uniform_mass": 0.006118615623563528
+          }
+        }
+      ]
+    },
+    {
+      "arm": "KALLP_N0",
+      "label": "Lookup, record norm disabled",
+      "development": [
+        0.6659499186538795,
+        0.6645301276384794
+      ],
+      "mean_development": 0.6652400231461795,
+      "teacher": [
+        0.7654985189437866,
+        0.7656773328781128
+      ],
+      "ranks": [
+        79.31565715849845,
+        78.75462500737756
+      ],
+      "lookup": [
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.9750207662582397,
+            "caption_mean_record_mass": 0.9849431673223659,
+            "median_record_mass": 0.9999871253967285,
+            "exact_record_top1": 0.9909323871476444,
+            "wrong_adjacent_mass": 0.00028514396399259567,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.9775829315185547,
+            "caption_mean_record_mass": 0.9858731611138475,
+            "median_record_mass": 0.9999920129776001,
+            "exact_record_top1": 0.9931456290203522,
+            "wrong_adjacent_mass": 0.00030507968040183187,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9383719563484192,
+            "caption_mean_record_mass": 0.9454266280211955,
+            "median_record_mass": 0.9983717799186707,
+            "exact_record_top1": 0.9592760180995475,
+            "wrong_adjacent_mass": 5.3059505573938015e-12,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9305935502052307,
+            "caption_mean_record_mass": 0.9340665496726894,
+            "median_record_mass": 0.9984293580055237,
+            "exact_record_top1": 0.9532428355957768,
+            "wrong_adjacent_mass": 4.02160320019454e-13,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.9623993039131165,
+            "caption_mean_record_mass": 0.9683722139350952,
+            "median_record_mass": 0.9999415278434753,
+            "exact_record_top1": 0.9859287054409006,
+            "wrong_adjacent_mass": 7.349441610848828e-10,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.9785325527191162,
+            "caption_mean_record_mass": 0.9867700397044189,
+            "median_record_mass": 0.9999886751174927,
+            "exact_record_top1": 0.9902424600827913,
+            "wrong_adjacent_mass": 0.00028027070220559835,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.981462299823761,
+            "caption_mean_record_mass": 0.987774942179983,
+            "median_record_mass": 0.9999935626983643,
+            "exact_record_top1": 0.9928292734366762,
+            "wrong_adjacent_mass": 0.0002998656709678471,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9366285800933838,
+            "caption_mean_record_mass": 0.9464023864258043,
+            "median_record_mass": 0.9980474710464478,
+            "exact_record_top1": 0.9532428355957768,
+            "wrong_adjacent_mass": 2.46532100289798e-10,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9312355518341064,
+            "caption_mean_record_mass": 0.9365980563292834,
+            "median_record_mass": 0.9981056451797485,
+            "exact_record_top1": 0.9457013574660633,
+            "wrong_adjacent_mass": 1.7630200684765063e-12,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.9702778458595276,
+            "caption_mean_record_mass": 0.9754979262749354,
+            "median_record_mass": 0.9999671578407288,
+            "exact_record_top1": 0.9840525328330206,
+            "wrong_adjacent_mass": 4.76511996527762e-10,
+            "uniform_mass": 0.006118615623563528
+          }
+        }
+      ]
+    },
+    {
+      "arm": "KALLP_L8",
+      "label": "Lookup at later layer",
+      "development": [
+        0.6634628347870476,
+        0.6709915555851244
+      ],
+      "mean_development": 0.667227195186086,
+      "teacher": [
+        0.7676079273223877,
+        0.7671509981155396
+      ],
+      "ranks": [
+        80.07381664693982,
+        79.32031389781407
+      ],
+      "lookup": [
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.9997199773788452,
+            "caption_mean_record_mass": 0.9997804252368228,
+            "median_record_mass": 0.9999244213104248,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 1.2221869383211015e-06,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.9997422695159912,
+            "caption_mean_record_mass": 0.9997937760919872,
+            "median_record_mass": 0.9999268054962158,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 1.252714014299272e-06,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.999401867389679,
+            "caption_mean_record_mass": 0.9994532089169608,
+            "median_record_mass": 0.9998855590820312,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 7.855525723243773e-07,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.999674379825592,
+            "caption_mean_record_mass": 0.9996793042855917,
+            "median_record_mass": 0.9998916387557983,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 6.616008931814576e-07,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.9995790719985962,
+            "caption_mean_record_mass": 0.9996178649247639,
+            "median_record_mass": 0.9998666644096375,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 9.400724252373038e-07,
+            "uniform_mass": 0.006118615623563528
+          }
+        },
+        {
+          "all": {
+            "queries": 10146,
+            "captions": 1935,
+            "record_mass": 0.9996961355209351,
+            "caption_mean_record_mass": 0.9997798614415704,
+            "median_record_mass": 0.9999123811721802,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 1.0237589549433324e-06,
+            "uniform_mass": 0.013713696040213108
+          },
+          "ending": {
+            "queries": 9483,
+            "captions": 1935,
+            "record_mass": 0.9997199177742004,
+            "caption_mean_record_mass": 0.9997906596161599,
+            "median_record_mass": 0.9999160766601562,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 1.0787671271828003e-06,
+            "uniform_mass": 0.013700349256396294
+          },
+          "non_ending": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9993556141853333,
+            "caption_mean_record_mass": 0.999456239583899,
+            "median_record_mass": 0.9998492002487183,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 2.3696605921941227e-07,
+            "uniform_mass": 0.013904616236686707
+          },
+          "continuation": {
+            "queries": 663,
+            "captions": 299,
+            "record_mass": 0.9995974898338318,
+            "caption_mean_record_mass": 0.9996549881820296,
+            "median_record_mass": 0.9998719692230225,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 1.4820439275808894e-07,
+            "uniform_mass": 0.013904616236686707
+          },
+          "above128": {
+            "queries": 3198,
+            "captions": 252,
+            "record_mass": 0.9995249509811401,
+            "caption_mean_record_mass": 0.9995553325566034,
+            "median_record_mass": 0.999859094619751,
+            "exact_record_top1": 1.0,
+            "wrong_adjacent_mass": 9.001662988339376e-07,
+            "uniform_mass": 0.006118615623563528
+          }
+        }
+      ]
+    }
+  ],
+  "input_sha256": {
+    "R8-seed1/frozen-development/report.json": "35717dde8c5bdf16a6b77525089c31b6f6eb05f88ee41f087aac1a2ffb304fd0",
+    "R8-seed2/frozen-development/report.json": "391f026f57336f669e0ddc678690e23ae44669c21143eca9b9d9481121213474",
+    "N16-seed1/frozen-development/report.json": "02a87a26b231352912fe39d9b2523c6c7b0ccd4938b9bdc8f6a7be108b1ed685",
+    "N16-seed2/frozen-development/report.json": "1e9b021d90b1b2703a1947cc9cc01e60047c1a5d432bf5d435e5c9a08b6355d6",
+    "N16-repeat-seed1/frozen-development/report.json": "c95f560ab0e1d905b03205bbbe9b3dd4be47cf08e34e883d179f9e32067f3102",
+    "N16-repeat-seed2/frozen-development/report.json": "12cc25930c60a988324854f2786d2c45ec9658496a209dd6107b0b808bf42b0b",
+    "H16-seed1/frozen-development/report.json": "d5eef837b6bd6345be947b92be032f1b2f4b52e0d964bf52fc63e4d31a647aa3",
+    "H16-seed2/frozen-development/report.json": "3883758a1a5cfc055c42e79c9a3e020ce30d75afc874f101c8499f72ee5c4325",
+    "KEND-seed1/frozen-development/report.json": "761f24ce2b009cb2a8f2eb306a264ad6ea8ea70d609a0a7c2cf49f5c174b8201",
+    "KEND-seed2/frozen-development/report.json": "21b0bdda57f5d4dd95ac54f36d0e57900800147a50caadd44d7642105cd9fd7a",
+    "KALL-seed1/frozen-development/report.json": "b73d29f1828474944a55dda46732c07b0b3bbe61b8f56d135dc60841ca20212c",
+    "KALL-seed2/frozen-development/report.json": "429b9f08564b5a75b7eb7815cac4460c1edff912214c70cc249034dc996cda94",
+    "KALLP-seed1/frozen-development/report.json": "f70989b5b82b730d7df3342bc7b7ebe24c459ca87ea60286c6051067f8ed99ed",
+    "KALLP-seed2/frozen-development/report.json": "591b72d1424f22cf1fb63e2ad1e1388b215f8f3dc55796ee4eff9ecad4b42f66",
+    "KALLP_N0-seed1/frozen-development/report.json": "96c9d3a4efc66f0e7038045e5c75c017db32d44d2a1f271c1d4c5abae3ad7e67",
+    "KALLP_N0-seed2/frozen-development/report.json": "1fdf51385f47eb24389f06fa7248bec776b873cc6d0ced42c3b780e5c8a2ea4b",
+    "KALLP_L8-seed1/frozen-development/report.json": "3c8d9fd3d3259badb944b592c0252a36cb1cfa49df9a5c719f4e1de97590dd26",
+    "KALLP_L8-seed2/frozen-development/report.json": "c035dc1ad0736a78794ae09046ff4674599c53fa300ef26dfc88ee3ab079b536"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "numpy": "2.3.4",
+    "matplotlib": "3.11.2"
+  },
+  "figures": {
+    "structured_screen.png": "1dfac2376c080c64fc473cccec307f93209020510ab7084d6eee22fabd4ca785",
+    "structured_screen.svg": "3ddf5ef774e610c5901882d94b532a10c3132fc1f20ebcefe12b4b3a0496669f"
+  },
+  "claim_limit": "Two weight seeds, one fixed phase draw; configured-head lookup and sentence capability are separate"
+}

@@ -28,14 +28,15 @@ jobs = [
     ["--root", str(root / "exposure1m"), "--arms", "H16", "--long-shapes", "--structural-ablations", "--sentence-ablations"],
     ["--root", str(root / "screen"), "--arms", "KALLP", "--ablations", "--sentence-ablations", "--initialization-control"],
 ]
+restore = "import sys\nfrom pathlib import Path\nfrom captionbert_rotary.structured_campaign import CampaignConfig\nfrom captionbert_rotary.hub import pull_completed\ncfg = CampaignConfig(stage=\"screen\", arms=(\"KALLP\",), seeds=(int(sys.argv[2]),), output_dir=str(Path(sys.argv[1]) / \"screen\"), data_dir=sys.argv[3])\nif cfg.fingerprint() != \"dc37215529c188be7b93804c4a21f125afa353e037b1a2a8fc11e5b2fc817d3a\":\n    raise RuntimeError(\"Restore the original v0.3.0 training environment before recovering the screen checkpoint\")\npull_completed(cfg, \"659b21c1c6eb1074eeec7acdbfa9bd010965595a4669338690cf3ae38a4448d5\")\nif not (Path(cfg.output_dir) / f\"KALLP-seed{sys.argv[2]}\" / \"result.json\").is_file():\n    raise RuntimeError(\"The completed KALLP screen checkpoint is missing; restore it before running the frozen follow-up\")\nprint(\"Earlier completed binding checkpoint restored or already present; no training\", flush=True)\n"
+commands = [[python, "-c", restore, str(root), str(seed), CONFIG["data"]]] + [base + options for options in jobs]
 stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 console = root / ("frozen-final-" + CONFIG["lane"] + "-" + stamp + ".log")
 print("Frozen follow-up after all optimizer work; preserving original intact reports.", flush=True)
 print("Console:", console, flush=True)
 returncode = 0
 with console.open("a", encoding="utf-8", buffering=1) as log:
-    for options in jobs:
-        command = base + options
+    for command in commands:
         print("Frozen command:", command, flush=True)
         process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding="utf-8", errors="replace", bufsize=1, env=env)
         try:

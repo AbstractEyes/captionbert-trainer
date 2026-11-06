@@ -6,6 +6,12 @@ defines eight options, two seeds each, a hardware repeat, development-only
 selection, and matched-exposure experiments at four million caption rows.
 Scientific results are pending; the earlier screen below remains unchanged.
 
+The larger-stage recovery notebooks own [seed 1](notebooks/captionbert_structured_followup_seed1.ipynb)
+and [seed 2](notebooks/captionbert_structured_followup_seed2.ipynb). They restore
+the locked campaign and earlier binding checkpoints, resume partial work and
+skip verified completed models. After setup, gate and TensorBoard, use their
+larger/frozen cells directly; do not start the original screen queues.
+
 Colab lanes: [1](https://colab.research.google.com/github/AbstractEyes/captionbert-trainer/blob/v0.3.0/notebooks/captionbert_structured_lane1.ipynb),
 [2](https://colab.research.google.com/github/AbstractEyes/captionbert-trainer/blob/v0.3.0/notebooks/captionbert_structured_lane2.ipynb),
 [3](https://colab.research.google.com/github/AbstractEyes/captionbert-trainer/blob/v0.3.0/notebooks/captionbert_structured_lane3.ipynb).
@@ -182,8 +188,9 @@ encoder = SentenceEncoder.from_pretrained(
 )
 ```
 
-Code, tests, notebook, and build metadata live on GitHub. The Hub receives weights,
-tokenizer assets, logs, configuration, predictions, and results, never Python code.
+Code, tests, notebooks, and build metadata live on GitHub. The Hub receives weights,
+tokenizer assets, logs, configuration, predictions, results, and the self-contained
+configuration/model source required by AutoModel.
 See `THIRD_PARTY.md` for the upstream revision and attribution.
 
 ## Rotary mechanism measurements

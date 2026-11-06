@@ -1,0 +1,2 @@
+# Optional local rendering of the published scientific result figures.
+matplotlib>=3.10.7

@@ -18,6 +18,14 @@ import time
 TRAIN_SOURCE_SHA256 = "094bf61ef954c61a2b200e5e8760348160b76a5fbfd186602dd992e4b62ccfa6"
 
 
+def file_sha256(path):
+    digest = hashlib.sha256()
+    with Path(path).open("rb") as stream:
+        for block in iter(lambda: stream.read(8 << 20), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--source", required=True, help="Independent completed training run")
@@ -144,8 +152,18 @@ def main():
             padded_ids = torch.nn.functional.pad(ids, padding)
             padded_mask = torch.nn.functional.pad(mask, padding)
             got = auto(padded_ids, padded_mask).pooler_output
-            torch.testing.assert_close(base, got, atol=2e-6, rtol=1e-5)
-            cases.append(dict(case=side+"_padding_invariance", max_embedding_delta=float((base-got).abs().max())))
+            reference = native(padded_ids, padded_mask).pooler_output
+            torch.testing.assert_close(got, reference, atol=2e-6, rtol=1e-5)
+            # Right padding is the training/tokenizer convention. In binding
+            # modes, shifting special tokens relative to whole-word phases can
+            # change the native model under left padding; do not mistake that
+            # architectural behavior for an export mismatch.
+            if side == "right":
+                torch.testing.assert_close(base, got, atol=2e-6, rtol=1e-5)
+            cases.append(dict(case=side+"_padding",
+                invariance_required=side == "right",
+                max_unpadded_embedding_delta=float((base-got).abs().max()),
+                max_native_auto_embedding_delta=float((reference-got).abs().max())))
         interface = auto(ids, mask, output_hidden_states=True, output_attentions=True,
                          pointer_targets=torch.full_like(ids, -1))
         assert len(interface.hidden_states) == 13 and len(interface.attentions) == 12
@@ -166,10 +184,13 @@ def main():
         state_tensors_equal=True, safetensors_metadata=metadata,
         loading_info={key: sorted(value) if isinstance(value, set) else value for key, value in info.items()},
         native_training_source_sha256=TRAIN_SOURCE_SHA256, tf32=False, cases=cases,
+        source_checkpoint_sha256=file_sha256(source / "state.pt"),
+        serving_safetensors_sha256=file_sha256(weights),
         environment=dict(python=platform.python_version(), torch=torch.__version__,
             cuda=torch.version.cuda, gpu=torch.cuda.get_device_name() if guard.enabled else None),
         hidden_states_count=13, attention_layers=12, attention_head_count=native.config.num_attention_heads,
         memory=guard.report(), training_performed=False,
+        padding_contract="Right padding matches training. Left padding is measured against the native model, not assumed invariant.",
         long_shapes_are_engineering_only=True)
     Path(args.output).parent.mkdir(parents=True, exist_ok=True)
     Path(args.output).write_text(json.dumps(report, indent=2, allow_nan=False) + "\n", encoding="utf8")
