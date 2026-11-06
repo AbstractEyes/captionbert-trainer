@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools==78.1.0", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "captionbert-rotary"
+version = "0.1.0"
+description = "Controlled CaptionBERT sentence-address rotary screen"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "torch==2.11.0", "numpy==2.3.4", "scipy==1.16.3",
+  "transformers==4.57.6", "huggingface_hub==0.36.0",
+  "datasets==4.3.0", "safetensors==0.6.2",
+]
+
+[project.scripts]
+captionbert-rotary = "captionbert_rotary.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["captionbert_rotary*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["cuda: requires a CUDA GPU"]

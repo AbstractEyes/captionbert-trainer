@@ -1,0 +1,22 @@
+{
+  "architectures": [
+    "CaptionBertV2Model"
+  ],
+  "model_type": "captionbert_v2",
+  "auto_map": {
+    "AutoConfig": "modeling_captionbert.CaptionBertV2Config",
+    "AutoModel": "modeling_captionbert.CaptionBertV2Model"
+  },
+  "vocab_size": 30522,
+  "hidden_size": 512,
+  "num_hidden_layers": 12,
+  "num_attention_heads": 8,
+  "intermediate_size": 2048,
+  "output_dim": 768,
+  "max_position_embeddings": 8192,
+  "hidden_dropout_prob": 0.1,
+  "pad_token_id": 0,
+  "pooling": "mean",
+  "torch_dtype": "float32",
+  "tokenizer_class": "BertTokenizerFast"
+}

@@ -1,0 +1,12 @@
+{
+  "arms": ["A0", "A1", "A2", "A3"],
+  "seeds": [1, 2],
+  "train_chunks": [0, 1, 2, 3],
+  "val_chunk": 61,
+  "epochs": 2,
+  "batch_size": 2048,
+  "max_tokens": 256,
+  "memory_limit_gb": 20.0,
+  "push": false,
+  "benchmark": true
+}

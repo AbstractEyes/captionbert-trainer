@@ -1,0 +1,163 @@
+{
+  "batch_size": 8,
+  "comparable_to_v2": false,
+  "cuda": "12.8",
+  "kind": "synthetic_training_gate",
+  "model_config": {
+    "d_ff": 2048,
+    "d_model": 512,
+    "dropout": 0.1,
+    "grad_checkpointing": true,
+    "max_len": 8192,
+    "n_heads": 8,
+    "n_layers": 12,
+    "output_dim": 768,
+    "pad_token_id": 0,
+    "vocab_size": 30522
+  },
+  "runs": [
+    {
+      "arm": "A0",
+      "losses": [
+        2.086838722229004,
+        2.091305732727051
+      ],
+      "max_observed_device_gb": 4.436525056,
+      "parameters": 58308864,
+      "peak_allocated_gb": 1.212911616,
+      "peak_reserved_gb": 1.264582656,
+      "seconds": 0.8120000000344589,
+      "seed": 1,
+      "total_device_limit_gb": 20.0
+    },
+    {
+      "arm": "A0",
+      "losses": [
+        2.1489858627319336,
+        2.332817316055298
+      ],
+      "max_observed_device_gb": 4.431282176,
+      "parameters": 58308864,
+      "peak_allocated_gb": 1.209765888,
+      "peak_reserved_gb": 1.264582656,
+      "seconds": 0.3280000000959262,
+      "seed": 2,
+      "total_device_limit_gb": 20.0
+    },
+    {
+      "arm": "A1",
+      "losses": [
+        2.0824708938598633,
+        2.091479778289795
+      ],
+      "max_observed_device_gb": 4.336910336,
+      "parameters": 54114560,
+      "peak_allocated_gb": 1.125892096,
+      "peak_reserved_gb": 1.170210816,
+      "seconds": 0.40700000000651926,
+      "seed": 1,
+      "total_device_limit_gb": 20.0
+    },
+    {
+      "arm": "A1",
+      "losses": [
+        2.1265437602996826,
+        2.0061728954315186
+      ],
+      "max_observed_device_gb": 4.345298944,
+      "parameters": 54114560,
+      "peak_allocated_gb": 1.125892096,
+      "peak_reserved_gb": 1.170210816,
+      "seconds": 0.375,
+      "seed": 2,
+      "total_device_limit_gb": 20.0
+    },
+    {
+      "arm": "A2",
+      "losses": [
+        2.0804598331451416,
+        2.0961220264434814
+      ],
+      "max_observed_device_gb": 4.342153216,
+      "parameters": 54114560,
+      "peak_allocated_gb": 1.125892096,
+      "peak_reserved_gb": 1.168113664,
+      "seconds": 0.46799999999348074,
+      "seed": 1,
+      "total_device_limit_gb": 20.0
+    },
+    {
+      "arm": "A2",
+      "losses": [
+        2.131981611251831,
+        1.9998034238815308
+      ],
+      "max_observed_device_gb": 4.336910336,
+      "parameters": 54114560,
+      "peak_allocated_gb": 1.125892096,
+      "peak_reserved_gb": 1.168113664,
+      "seconds": 0.7349999999860302,
+      "seed": 2,
+      "total_device_limit_gb": 20.0
+    },
+    {
+      "arm": "A3",
+      "losses": [
+        2.0803756713867188,
+        2.0835037231445312
+      ],
+      "max_observed_device_gb": 4.342153216,
+      "parameters": 54114560,
+      "peak_allocated_gb": 1.125892096,
+      "peak_reserved_gb": 1.168113664,
+      "seconds": 0.625,
+      "seed": 1,
+      "total_device_limit_gb": 20.0
+    },
+    {
+      "arm": "A3",
+      "losses": [
+        2.1346688270568848,
+        1.985335350036621
+      ],
+      "max_observed_device_gb": 4.342153216,
+      "parameters": 54114560,
+      "peak_allocated_gb": 1.125892096,
+      "peak_reserved_gb": 1.168113664,
+      "seconds": 0.5160000000614673,
+      "seed": 2,
+      "total_device_limit_gb": 20.0
+    },
+    {
+      "arm": "A2g",
+      "losses": [
+        2.07912540435791,
+        2.083885431289673
+      ],
+      "max_observed_device_gb": 4.343201792,
+      "parameters": 54114560,
+      "peak_allocated_gb": 1.125892096,
+      "peak_reserved_gb": 1.170210816,
+      "seconds": 0.40700000000651926,
+      "seed": 1,
+      "total_device_limit_gb": 20.0
+    },
+    {
+      "arm": "A2g",
+      "losses": [
+        2.1344618797302246,
+        2.003384590148926
+      ],
+      "max_observed_device_gb": 4.33061888,
+      "parameters": 54114560,
+      "peak_allocated_gb": 1.125892096,
+      "peak_reserved_gb": 1.170210816,
+      "seconds": 0.39000000001396984,
+      "seed": 2,
+      "total_device_limit_gb": 20.0
+    }
+  ],
+  "sequence_length": 256,
+  "steps": 2,
+  "torch": "2.11.0+cu128"
+}

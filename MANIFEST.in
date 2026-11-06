@@ -1,0 +1,5 @@
+include requirements*.txt README.md THIRD_PARTY.md captionbert_8192_plan_doc.md
+recursive-include reference *.py *.json *.txt
+recursive-include tests *.py
+recursive-include configs *.json
+recursive-include notebooks *.ipynb
