@@ -43,7 +43,8 @@ def main():
     from matplotlib.lines import Line2D
     import numpy as np
     plt.rcParams.update({"font.size": 10, "axes.titlesize": 11, "axes.spines.top": False,
-                         "axes.spines.right": False, "svg.fonttype": "none"})
+                         "axes.spines.right": False, "svg.fonttype": "none",
+                         "svg.hashsalt": "captionbert-structured-20261106"})
     rows, inputs, sample_hashes = [], {}, set()
     for arm, label in LABELS:
         measurements = []
@@ -110,7 +111,11 @@ def main():
         fontsize=8.6)
     fig.tight_layout(rect=(0, .09, 1, .9))
     for suffix in ("png", "svg"):
-        fig.savefig(output / f"structured_screen.{suffix}", dpi=200, facecolor="white")
+        path = output / f"structured_screen.{suffix}"
+        options = {"metadata": {"Date": None}} if suffix == "svg" else {}
+        fig.savefig(path, dpi=200, facecolor="white", **options)
+        if suffix == "svg":
+            path.write_bytes(b"\n".join(line.rstrip() for line in path.read_bytes().splitlines()) + b"\n")
     plt.close(fig)
     summary = dict(source_revision=collected["source_revision"], screen_config_id=collected["config_id"],
         hardware_repeat_floor=repeat, row_ids_sha256=next(iter(sample_hashes)), rows=rows,

@@ -1139,7 +1139,7 @@
   },
   "figures": {
     "structured_screen.png": "1dfac2376c080c64fc473cccec307f93209020510ab7084d6eee22fabd4ca785",
-    "structured_screen.svg": "3ddf5ef774e610c5901882d94b532a10c3132fc1f20ebcefe12b4b3a0496669f"
+    "structured_screen.svg": "e1fa0b34d7379083f98d87ae50c3f1160f6570beca3370d23e0b4c1bfdcf3be1"
   },
   "claim_limit": "Two weight seeds, one fixed phase draw; configured-head lookup and sentence capability are separate"
 }

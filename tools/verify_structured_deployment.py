@@ -48,7 +48,9 @@ def main():
     sys.path.insert(0, str(Path(args.training_source)))
     import torch
     from safetensors import safe_open
+    from safetensors import __version__ as safetensors_version
     from transformers import AutoModel, AutoTokenizer
+    from transformers import __version__ as transformers_version
     from captionbert_rotary.configuration_captionbert import CaptionBertConfig
     from captionbert_rotary.modeling_captionbert import CaptionBertModel
     from captionbert_rotary.memory import MemoryGuard
@@ -187,6 +189,7 @@ def main():
         source_checkpoint_sha256=file_sha256(source / "state.pt"),
         serving_safetensors_sha256=file_sha256(weights),
         environment=dict(python=platform.python_version(), torch=torch.__version__,
+            transformers=transformers_version, safetensors=safetensors_version,
             cuda=torch.version.cuda, gpu=torch.cuda.get_device_name() if guard.enabled else None),
         hidden_states_count=13, attention_layers=12, attention_head_count=native.config.num_attention_heads,
         memory=guard.report(), training_performed=False,
