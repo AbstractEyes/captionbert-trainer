@@ -76,6 +76,24 @@ def main():
     p.add_argument("--tiny", action="store_true")
     p = sub.add_parser("grade")
     p.add_argument("directory")
+    p = sub.add_parser("diagnostics")
+    p.add_argument("--repo", default="AbstractPhil/captionbert-8192-rotary")
+    p.add_argument("--experiment", required=True)
+    p.add_argument("--arms", nargs="+", default=["A0", "A1", "A2", "A3"])
+    p.add_argument("--seeds", nargs="+", type=int, default=[1, 2])
+    p.add_argument("--device", default="cpu")
+    p.add_argument("--rows", type=int, default=16)
+    p.add_argument("--batch-size", type=int, default=4)
+    p.add_argument("--data-dir", default="data/diagnostics")
+    p.add_argument("--output-dir", default="runs/diagnostics")
+    p.add_argument("--memory-limit-gb", type=float, default=20.0)
+    p.add_argument("--threads", type=int, default=2)
+    p.add_argument("--push", action="store_true")
+    p = sub.add_parser("model-card")
+    p.add_argument("--repo", default="AbstractPhil/captionbert-8192-rotary")
+    p.add_argument("--experiment", required=True)
+    p.add_argument("--output-dir", default="runs/model-card")
+    p.add_argument("--push", action="store_true")
     args = parser.parse_args()
     if args.command == "prepare":
         prepare(args.data_dir, tuple(args.chunks), args.max_tokens)
@@ -88,6 +106,16 @@ def main():
         options = json.loads(manifest.read_text())["config"] if manifest.exists() else {}
         print(json.dumps(grade_results(args.directory, options.get("arms", ("A0", "A1", "A2", "A3")),
                                        options.get("seeds", (1, 2))), indent=2))
+    elif args.command == "diagnostics":
+        from .analyse import analyse_available
+        options = vars(args)
+        options.pop("command")
+        analyse_available(**options)
+    elif args.command == "model-card":
+        from .model_card import finalize_model_card
+        options = vars(args)
+        options.pop("command")
+        finalize_model_card(**options)
     else:
         from .train import run_screen
         raw = json.loads(Path(args.config).read_text()) if args.config else {}

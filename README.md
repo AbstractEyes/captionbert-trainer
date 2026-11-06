@@ -1,6 +1,6 @@
 # CaptionBERT rotary trainer
 
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AbstractEyes/captionbert-trainer/blob/v0.1.1/notebooks/captionbert_rotary_screen.ipynb)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AbstractEyes/captionbert-trainer/blob/v0.2.0/notebooks/captionbert_rotary_screen.ipynb)
 
 Controlled stage-3 screen from `captionbert_8192_plan_doc.md`: learned absolute
 positions (A0), plain token RoPE (A1), sentence-address rotary (A2), its anchor
@@ -71,8 +71,19 @@ Add a Colab secret named `HF_TOKEN` with write permission to
 `AbstractPhil/captionbert-8192-rotary`. The training cell reads it into the child
 process environment; it is never printed or saved to result files. Every completed
 arm/seed ships from an immutable local snapshot with retries. Failed uploads stay
-in a durable queue and halt progression after at most one further active arm.
-Resume checks the Hub for completed runs and verifies configuration/data identity.
+in a durable queue, retry at startup/session close, and are listed in
+`upload_status.json` and the final summary. A Hub outage does not invalidate a
+completed local run or raise from its background upload worker.
+
+Local checkpoints preserve optimizer, scheduler, scaler, all RNG states, epoch and
+batch cursor. The first saved training checkpoint also ships in the background;
+subsequent remote resume snapshots are throttled to ten minutes. A fresh runtime
+fetches completed **and partial** runs at a pinned Hub revision, verifies their
+configuration/data identity, and keeps a newer surviving local checkpoint. It
+continues from the saved boundary; work after the last durable checkpoint can be
+repeated. The transport/evaluation additions preserve v0.1.x training fingerprints.
+Evaluation-step weights are retained alongside their metrics. Interrupted uploads
+stay local for retry; persistent network failure limits remote durability.
 
 ## Run the screen
 
@@ -128,8 +139,9 @@ fail evaluation instead of inflating a partial-suite mean. Dataset revisions are
 pinned once per experiment; no teacher models need to be downloaded.
 
 Predictions are written to `predictions.json` before training. `summary.json`
-compares paired seeds and leaves findings unsettled if a seed is missing or the
-directions disagree. Final models are evaluated consistently across arms; separate
+compares paired seeds and reports their direction without declaring a settled
+benefit from seed agreement alone; the applicable repeat/uncertainty evidence is
+still required. Final models are evaluated consistently across arms; separate
 best-by-heldout checkpoints are also retained. All arms ship, regardless of score.
 Checkpoint resume restores model, Adam moments, scheduler, scaler, CPU/CUDA/NumPy/
 Python RNG state, and the next batch cursor. Local saves are atomic.
@@ -150,3 +162,50 @@ encoder = SentenceEncoder.from_pretrained(
 Code, tests, notebook, and build metadata live on GitHub. The Hub receives weights,
 tokenizer assets, logs, configuration, predictions, and results, never Python code.
 See `THIRD_PARTY.md` for the upstream revision and attribution.
+
+## Rotary mechanism measurements
+
+[Open the separate CPU diagnostics notebook](https://colab.research.google.com/github/AbstractEyes/captionbert-trainer/blob/v0.2.0/notebooks/captionbert_rotary_diagnostics.ipynb).
+It reads completed frozen checkpoints from the existing campaign without changing
+or restarting its training session. Existing task results and weights stay in
+their original paths; additional measurements ship under each arm's
+`analyses/captionbert-rotary-mechanisms-v1/` directory. Identical published or local
+measurements are reused by checkpoint hash and probe identity. Run it again for
+newly completed arms; it is not a persistent watcher.
+
+The protocol measures address kernels, simplex coherence, the explicit orthogonal
+lift, periodic aliases and clamping collisions; oracle address lookup with
+identical content; frozen address/band interventions; and per-layer/head q/k score,
+energy and attention-mass measurements. It includes an actual repeated frozen
+baseline and controls where a band is absent. See [the measurement scope](docs/rotary_measurements.md).
+
+```bash
+python -m captionbert_rotary diagnostics --experiment 817daa9e66a8119dc6b18a9b63fad32490d1c891e5f26750e91125d9e5e14e6c --device cpu --threads 2
+```
+
+Future screen arms collect the same diagnostics automatically. The CPU notebook
+uses its own environment and `requirements-cpu.txt`; it does not download the
+consensus bank or train a new model. A0's rotary-band fields are inapplicable.
+
+## Model README
+
+The final Hub card follows the pinned
+[CaptionBERT v2 format](https://huggingface.co/AbstractPhil/captionbert-8192-v2/blob/ed468fe5aed64a3d03a56a7f7811131d20f81ddb/README.md):
+loading, the full eight-task table, geometry, rotary measurements, training recipe,
+known limits, output convention and citation. Its numbers come from actual saved
+arm/seed reports. This short screen is distinguished from the original full v2
+training run. Loading uses this package's normalized tensor interface and selects
+an explicit run and Hub revision.
+
+The screen runner and diagnostics notebook finalize the card after shipping.
+Manual finalization is also available:
+
+```bash
+python -m captionbert_rotary model-card --experiment 817daa9e66a8119dc6b18a9b63fad32490d1c891e5f26750e91125d9e5e14e6c --push
+```
+
+Publication requires all four arms and both seeds, finite complete task/geometry
+results, matching data/benchmark identities and frozen reports tied to the actual
+weight hashes. Missing evidence produces a local draft with `readiness.json`,
+without replacing the public README. A parent-revision guard prevents concurrent
+Hub updates from being silently overwritten.

@@ -50,6 +50,9 @@ class ScreenConfig:
     log_every: int = 25
     eval_every: int = 500
     checkpoint_every: int = 100
+    resume_upload_minutes: float = 10.0
+    rotary_diagnostics: bool = True
+    diagnostic_rows: int = 16
     eval_batch: int = 32
     eval_rows: int = 5000
     max_steps: int | None = None
@@ -87,9 +90,12 @@ class ScreenConfig:
             raise ValueError("The screen token ceiling is 256 and must fit the position table")
         if self.temperature <= 0 or self.memory_limit_gb <= 0:
             raise ValueError("Temperature and memory limit must be positive")
+        if self.resume_upload_minutes <= 0 or not 1 <= self.diagnostic_rows <= 16:
+            raise ValueError("Resume upload interval must be positive; diagnostic_rows must be 1..16")
 
     def fingerprint(self):
         raw = asdict(self)
-        for k in ("output_dir", "data_dir", "push", "hub_repo", "memory_limit_gb", "device"):
+        for k in ("output_dir", "data_dir", "push", "hub_repo", "memory_limit_gb", "device",
+                  "resume_upload_minutes", "rotary_diagnostics", "diagnostic_rows"):
             raw.pop(k)
         return hashlib.sha256(json.dumps(raw, sort_keys=True).encode()).hexdigest()

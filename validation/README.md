@@ -19,5 +19,7 @@ versions, keeping current Colab host packages separate. A wheel and source archi
 were built locally. CPU regression tests also exercise exact attention/gradient
 parity, row ordering, resumability, benchmark completeness, and upload retries.
 
-The four-chunk, two-epoch scientific screen has not been run. No model-quality
-comparison or improvement claim follows from these checks.
+The four-chunk, two-epoch scientific screen is reported separately in the
+[Hub experiment artifacts](https://huggingface.co/AbstractPhil/captionbert-8192-rotary).
+Its trained-model results are distinct from these engineering checks; no quality
+comparison or improvement claim follows from the setup checks alone.

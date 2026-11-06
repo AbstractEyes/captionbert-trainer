@@ -11,7 +11,7 @@ def test_colab_cells_are_complete_python_and_tagged():
     for source in code:
         ast.parse(source)
         assert "argparse" not in source and "__file__" not in source
-    assert 'release = "v0.1.1"' in code[0]
+    assert 'release = "v0.2.0"' in code[0]
     assert '"--target"' in code[0] and '"virtualenv==20.38.0"' in code[0]
     assert '"--no-download"' in code[0] and '"--system-site-packages"' not in code[0]
     assert "userdata.get(\"HF_TOKEN\")" in "\n".join(code)

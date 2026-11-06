@@ -8,4 +8,5 @@ dist/
 data/
 runs/
 .cache/
+reference/model-card/
 *.tmp

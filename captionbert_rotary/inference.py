@@ -23,14 +23,16 @@ class SentenceEncoder:
         return result
 
     @classmethod
-    def from_pretrained(cls, path_or_repo, run=None, device="cpu"):
+    def from_pretrained(cls, path_or_repo, run=None, device="cpu", revision=None):
         from transformers import AutoTokenizer
         path = Path(path_or_repo)
         if not path.is_dir():
             from huggingface_hub import snapshot_download
             if not run:
                 raise ValueError("Select an explicit experiments/<config-id>/<arm>-seed<N> Hub run")
-            cache = snapshot_download(path_or_repo, allow_patterns=[run.rstrip("/") + "/*"])
+            prefix = run.rstrip("/")
+            cache = snapshot_download(path_or_repo, revision=revision, allow_patterns=[prefix + "/result.json",
+                prefix + "/model.pt", prefix + "/tokenizer/*"])
             path = Path(cache) / run
         result = json.loads((path / "result.json").read_text())
         model = build_model(result["arm"], ModelConfig(**result["model_config"]))

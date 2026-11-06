@@ -12,7 +12,7 @@ import time
 import numpy as np
 import torch
 from .config import ScreenConfig
-from .data import atomic_json, open_store, plan_batches
+from .data import atomic_json, open_store, plan_batches, sha256_file
 from .hub import Uploader, pull_completed
 from .memory import MemoryGuard
 from .metrics import evaluate, objective
@@ -117,7 +117,7 @@ def vram_probe(model, cfg, guard):
             torch.cuda.empty_cache()
 
 
-def train_arm(cfg, arm, seed, train, val, dataset_id, guard, probe=True, on_step=None):
+def train_arm(cfg, arm, seed, train, val, dataset_id, guard, probe=True, on_step=None, on_checkpoint=None):
     name = f"{arm}-seed{seed}"
     directory = Path(cfg.output_dir) / name
     directory.mkdir(parents=True, exist_ok=True)
@@ -170,7 +170,7 @@ def train_arm(cfg, arm, seed, train, val, dataset_id, guard, probe=True, on_step
         kept = [line for line in log_path.read_text().splitlines() if json.loads(line)["step"] <= step]
         log_path.write_text("".join(line + "\n" for line in kept))
 
-    def save():
+    def save(force=False):
         print(f"{name} | saving checkpoint at step {step}/{total}: {state_path}", flush=True)
         atomic_save(state_path, {"identity": identity, "model": model.state_dict(),
                     "optimizer": opt.state_dict(), "scheduler": scheduler.state_dict(),
@@ -179,8 +179,14 @@ def train_arm(cfg, arm, seed, train, val, dataset_id, guard, probe=True, on_step
                     "elapsed_seconds": elapsed + time.monotonic() - start, "best_cosine": best,
                     "step_seconds": step_seconds, "step_count": step_count})
         print(f"{name} | checkpoint saved", flush=True)
+        atomic_json(directory / "resume.json", {**identity, "step": step})
+        if on_checkpoint is not None:
+            on_checkpoint(name, step, identity, force=force)
 
+    at_boundary = True
     try:
+        if not state_path.exists():
+            save()
         for epoch in range(next_epoch, cfg.epochs):
             plan = plan_batches(train.lengths, cfg.batch_size, seed + epoch, cfg.bucket_window)
             begin = next_batch if epoch == next_epoch else 0
@@ -191,6 +197,7 @@ def train_arm(cfg, arm, seed, train, val, dataset_id, guard, probe=True, on_step
                 if guard.enabled:
                     torch.cuda.synchronize()
                 t = time.perf_counter()
+                at_boundary = False
                 batch = train.batch(plan[batch_index])
                 lr_used = opt.param_groups[0]["lr"]
                 row = optimization_step(model, opt, scaler, batch, cfg)
@@ -218,6 +225,7 @@ def train_arm(cfg, arm, seed, train, val, dataset_id, guard, probe=True, on_step
                                memory_reserved_gb=torch.cuda.memory_reserved() / 1e9)
                 with log_path.open("a", encoding="utf-8") as f:
                     f.write(json.dumps(row, allow_nan=False) + "\n")
+                at_boundary = True
                 if step == 1 or step % cfg.log_every == 0 or step == total:
                     spent = elapsed + time.monotonic() - start
                     memory = (f"; CUDA alloc/res {row['memory_allocated_gb']:.2f}/"
@@ -230,6 +238,7 @@ def train_arm(cfg, arm, seed, train, val, dataset_id, guard, probe=True, on_step
                           f"| elapsed {spent / 60:.1f}m; ETA train {row['eta_train_seconds'] / 60:.1f}m{memory}",
                           flush=True)
                 if step % cfg.eval_every == 0:
+                    atomic_save(directory / f"eval-{step:06d}-model.pt", model.state_dict())
                     scores = evaluate(model, val, cfg)
                     atomic_json(directory / f"eval-{step:06d}.json", scores)
                     if scores["heldout"]["cos_to_target"] > best:
@@ -253,6 +262,25 @@ def train_arm(cfg, arm, seed, train, val, dataset_id, guard, probe=True, on_step
             best = scores["heldout"]["cos_to_target"]
             atomic_save(directory / "best_model.pt", model.state_dict())
         benchmark = None
+        diagnostic = {"status": "disabled"}
+        if cfg.rotary_diagnostics:
+            if tokenizer_dir.exists():
+                from transformers import AutoTokenizer
+                from .diagnostics import run_rotary_diagnostics
+                tokenizer = AutoTokenizer.from_pretrained(tokenizer_dir, local_files_only=True)
+                try:
+                    report = run_rotary_diagnostics(model, tokenizer, arm, cfg,
+                        directory / "rotary_diagnostics.json",
+                        {**identity, "step": step, "checkpoint_sha256": sha256_file(directory / "model.pt")},
+                        rows=cfg.diagnostic_rows)
+                    diagnostic = {"status": report["status"], "protocol": report["protocol"],
+                                  "instrumented_seconds": report["instrumented_seconds"]}
+                except Exception as error:
+                    diagnostic = {"status": "diagnostic_error", "error_type": type(error).__name__}
+                    atomic_json(directory / "rotary_diagnostics.json", diagnostic)
+                    print(f"{name} | diagnostic error ({type(error).__name__}); weights retained; evaluation continues", flush=True)
+            else:
+                diagnostic = {"status": "not_measured", "reason": "Tokenizer assets unavailable"}
         if cfg.benchmark:
             from transformers import AutoTokenizer
             from .benchmark import run_benchmark
@@ -262,12 +290,21 @@ def train_arm(cfg, arm, seed, train, val, dataset_id, guard, probe=True, on_step
                   "seconds_per_step": step_seconds / max(step_count, 1),
                   "elapsed_seconds": elapsed + time.monotonic() - start,
                   "validation": scores, "benchmark": benchmark, "memory": guard.report(),
+                  "rotary_diagnostics": diagnostic,
                   "model_config": asdict(cfg.model), "batch_size": cfg.batch_size,
                   "max_tokens": cfg.max_tokens, "status": "complete"}
         atomic_json(directory / "result.json", result)
         print(f"{name} | completed {step}/{total} steps; {step_seconds / max(step_count, 1):.3f}s/step; "
               f"result: {directory / 'result.json'}", flush=True)
         return result
+    except KeyboardInterrupt:
+        if at_boundary:
+            save(force=True)
+        elif on_checkpoint is not None and state_path.exists():
+            safe = torch.load(state_path, map_location="cpu", weights_only=True, mmap=True)
+            on_checkpoint(name, safe["step"], safe["identity"], force=True)
+        print(f"{name} | interrupted; continue from the last atomic checkpoint: {state_path}", flush=True)
+        raise
     finally:
         del model, opt, scheduler, scaler
         gc.collect()
@@ -312,7 +349,10 @@ def grade_results(root, arms=("A0", "A1", "A2", "A3"), seeds=(1, 2)):
         predicted = gauges.get(predicted_gauge)
         verdict = None if predicted is None else all(
             d * expected_direction > 0 for d in predicted["seed_deltas"].values())
-        comparisons[arm] = {"settled": gauges["cos_to_target"]["same_direction"], "gauges": gauges,
+        comparisons[arm] = {"settled": False,
+                            "paired_seed_direction_consistent": gauges["cos_to_target"]["same_direction"],
+                            "settlement_note": "Paired seed directions alone do not establish the hardware/seed uncertainty bound.",
+                            "gauges": gauges,
                             "prediction": PREDICTIONS[arm], "prediction_gauge": predicted_gauge,
                             "prediction_supported_both_seeds": verdict}
     anchor_test = {}
@@ -349,7 +389,7 @@ def run_screen(cfg=None):
                 "schedule_note": "v2 2000-step warmup retained even for the ~2000-step screen"})
     atomic_json(root / "environment.json", {"packages": {
         d.metadata["Name"]: d.version for d in importlib.metadata.distributions()}})
-    pull_completed(cfg)
+    pull_completed(cfg, dataset_id)
     uploader = Uploader(cfg)
     try:
         for arm in cfg.arms:
@@ -357,12 +397,26 @@ def run_screen(cfg=None):
                 number = cfg.arms.index(arm) * len(cfg.seeds) + cfg.seeds.index(seed) + 1
                 print(f"Screen run {number}/{len(cfg.arms) * len(cfg.seeds)}: {arm}-seed{seed}", flush=True)
                 guard = MemoryGuard(cfg.memory_limit_gb, cfg.device)
-                train_arm(cfg, arm, seed, train, val, dataset_id, guard)
+                train_arm(cfg, arm, seed, train, val, dataset_id, guard,
+                          on_checkpoint=uploader.submit_checkpoint)
                 grade_results(root, cfg.arms, cfg.seeds)
                 uploader.submit(f"{arm}-seed{seed}")
     finally:
         uploader.close()
     report = grade_results(root, cfg.arms, cfg.seeds)
+    if (root / "upload_status.json").exists():
+        report["shipping"] = json.loads((root / "upload_status.json").read_text())
+        atomic_json(root / "summary.json", report)
+        if report["shipping"]["pending_runs"]:
+            print(f"Unshipped runs retained locally for retry: {report['shipping']['pending_runs']}", flush=True)
     print(f"Screen complete: {report['completed_runs']}/{report['expected_runs']} runs; "
           f"summary: {root / 'summary.json'}", flush=True)
+    if cfg.push:
+        try:
+            from .model_card import finalize_model_card
+            report["model_card"] = finalize_model_card(cfg.hub_repo, cfg.fingerprint(), root / "model-card", push=True)
+        except Exception as error:
+            report["model_card"] = {"published": False, "error_type": type(error).__name__}
+            print(f"Model-card finalization deferred ({type(error).__name__}); completed results retained", flush=True)
+        atomic_json(root / "summary.json", report)
     return report
