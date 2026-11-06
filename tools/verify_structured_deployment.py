@@ -8,6 +8,7 @@ import argparse
 from contextlib import nullcontext
 import hashlib
 import json
+import os
 from pathlib import Path
 import platform
 import sys
@@ -32,6 +33,7 @@ def main():
     args = p.parse_args()
     if Path(args.cache).drive.upper() != "E:" and sys.platform == "win32":
         p.error("Keep model caches on E:")
+    os.environ["HF_MODULES_CACHE"] = str(Path(args.cache).parent / "modules")
     package = Path(args.training_source) / "captionbert_rotary"
     if hashlib.sha256((package / "modeling_captionbert.py").read_bytes()).hexdigest() != TRAIN_SOURCE_SHA256:
         raise ValueError("The independent training reference is not the exact frozen source")
