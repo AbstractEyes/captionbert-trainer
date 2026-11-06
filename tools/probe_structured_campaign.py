@@ -33,6 +33,8 @@ def intervention(model, name):
     cfg = model.config
     layer = model.layers[cfg.lookup_layer]
     original = cfg.rotary_mode, cfg.key_rho, layer.rho, cfg.phase_seed
+    frequencies = model.frequencies.detach().clone()
+    values = model.value_address.detach().clone() if model.value_address is not None else None
     try:
         if name == "binding_off" and cfg.rotary_mode in ("key_end", "key_all"):
             cfg.rotary_mode = "hierarchical"
@@ -40,11 +42,22 @@ def intervention(model, name):
             cfg.key_rho = layer.rho = 0.0
         elif name == "phase_redraw":
             cfg.phase_seed = 981243653
+        elif name == "anchor_angles_off" and model.structured:
+            with torch.no_grad():
+                model.frequencies[model.kinds >= 2] = 0
+        elif name == "value_addresses_constant" and values is not None:
+            # Keep each level's learned digit-zero offset, remove digit variation.
+            with torch.no_grad():
+                model.value_address.copy_(values[:, :1].expand_as(values))
         elif name != "intact":
             raise ValueError(f"Unknown or inapplicable intervention {name}")
         yield
     finally:
         cfg.rotary_mode, cfg.key_rho, layer.rho, cfg.phase_seed = original
+        with torch.no_grad():
+            model.frequencies.copy_(frequencies)
+            if values is not None:
+                model.value_address.copy_(values)
 
 
 def summarize(arrays):
@@ -161,6 +174,8 @@ def main():
     p.add_argument("--ablations", action="store_true")
     p.add_argument("--sentence-ablations", action="store_true",
                    help="Also score each frozen intervention on development teacher/STSB measurements")
+    p.add_argument("--structural-ablations", action="store_true",
+                   help="Exploratory anchor-angle and value-address interventions on structured models")
     p.add_argument("--long-shapes", action="store_true")
     p.add_argument("--device", default="cuda")
     p.add_argument("--memory-limit-gb", type=float, default=92.)
@@ -204,6 +219,10 @@ def main():
         names = ["intact"]
         if args.ablations and model.config.rotary_mode in ("key_end", "key_all"):
             names += ["binding_off", "norm_off", "phase_redraw"]
+        if args.structural_ablations and model.structured:
+            names.append("anchor_angles_off")
+            if model.value_address is not None:
+                names.append("value_addresses_constant")
         for name in names:
             with intervention(model, name):
                 summary, arrays = lookup_probe(model, store, ix, vocabulary, special, args.batch, args.device)

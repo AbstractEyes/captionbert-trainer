@@ -37,3 +37,13 @@ averages and equally weighted per-caption averages are reported separately.
 The sampled captions, rather than their repeated query positions, are the
 independent input units. Long synthetic shapes establish execution and output
 shape only; training remained limited to256 tokens.
+
+The bounded exploratory follow-up also checks two structural dependencies:
+set only the hierarchical anchor-angle frequencies to zero, and replace each
+level's learned value-address rows with that level's digit-zero row. The latter
+preserves its default learned offset while removing address variation. Restore
+all tensors exactly after each intervention. Run these on the selected
+structured larger checkpoints; run the original binding/norm/phase checks on
+the complete KALLP screen pair even if that package is not promoted. Report
+development effects without treating a frozen intervention as an improved
+training recipe. This adds no new accuracy training.
