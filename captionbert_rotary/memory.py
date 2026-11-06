@@ -35,6 +35,8 @@ class MemoryGuard:
             self.limit = min(self.limit, 20_000_000_000)
         other = max(0, device_used_bytes(self.device) - torch.cuda.memory_reserved(self.device))
         allowance = min(total, self.limit) - other - 768 * 1024 ** 2
+        if "4090" in torch.cuda.get_device_name(self.device):
+            allowance = min(allowance, total * 0.73)
         if allowance < 1024 ** 3:
             raise RuntimeError("Insufficient GPU headroom under the total-device memory ceiling")
         torch.cuda.set_per_process_memory_fraction(allowance / total, self.device)

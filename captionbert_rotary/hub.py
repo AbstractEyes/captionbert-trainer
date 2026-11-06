@@ -57,7 +57,7 @@ class Uploader:
         entry = self.queue / f"{name}-{time.time_ns()}"
         print(f"Upload {name}: preparing immutable local snapshot...", flush=True)
         shutil.copytree(self.root / name, entry / "payload")
-        for manifest in ("experiment.json", "predictions.json", "summary.json", "environment.json",
+        for manifest in ("experiment.json", "predictions.json", "summary.json", "environment.json", "pip_freeze.txt",
                          "benchmark_revisions.json"):
             if (self.root / manifest).exists():
                 shutil.copy2(self.root / manifest, entry / "payload" / manifest)
@@ -96,7 +96,10 @@ class Uploader:
         payload = entry / "payload"
         payload.mkdir(parents=True)
         for path in source.iterdir():
-            if path.is_file() and (path.name in ("state.pt", "train.jsonl") or path.name.startswith("eval-")):
+            if path.is_dir() and path.name == "tensorboard":
+                shutil.copytree(path, payload / path.name)
+                continue
+            if path.is_file() and (path.name in ("state.pt", "train.jsonl", "run.json", "trajectory-mid.safetensors", "best.safetensors") or path.name.startswith("eval-")):
                 shutil.copy2(path, payload / path.name)
         atomic_json(payload / "resume.json", {**identity, "step": step})
         atomic_json(entry / "job.json", {"name": name, "kind": "checkpoint", "step": step,
@@ -164,6 +167,8 @@ def pull_completed(cfg, dataset_id=None):
         return
     import torch
     names = {f[len(prefix):].split("/")[0] for f in markers}
+    if hasattr(cfg, "selected_names"):
+        names &= set(cfg.selected_names)
     selected = []
     for name in sorted(names):
         marker_name = "result.json" if prefix + name + "/result.json" in files else "resume.json"
@@ -173,7 +178,7 @@ def pull_completed(cfg, dataset_id=None):
         if marker.get("config_id") != cfg.fingerprint() or (dataset_id is not None and marker.get("dataset_id") != dataset_id):
             raise ValueError(f"Incompatible remote run: {name}")
         destination = Path(cfg.output_dir) / name
-        if (destination / "result.json").exists() and (destination / "model.pt").exists():
+        if (destination / "result.json").exists() and ((destination / "model.pt").exists() or (destination / "model.safetensors").exists()):
             continue
         if marker_name == "resume.json" and (destination / "state.pt").exists():
             local = torch.load(destination / "state.pt", map_location="cpu", weights_only=True, mmap=True)

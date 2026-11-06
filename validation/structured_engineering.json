@@ -1,0 +1,234 @@
+{
+  "status": "engineering_only_before_scientific_training",
+  "tests": "62 passed, including optimizer/RNG/cursor replay and TensorBoard",
+  "source_parity": {
+    "passed": true,
+    "source_revision": "3f174e3f391f983428171cefc6901b34b22274d8",
+    "source_sha256": {
+      "anchored_rope.py": "0f4f4aea7cf3729706a55bb3de5455f06dcbe30a7b0eaa2742c5f8047f891a0a",
+      "key_rotary.py": "5b019441d640a5faa0ab8047339b62a861c4d03f227b1e5a22a7abdfadcb3213"
+    },
+    "checks": {
+      "frequency_fp64_max_error": 0.0,
+      "kinds_equal": true,
+      "query_angles_fp32_max_error": 0.0,
+      "key_angles_fp32_max_error": 0.0,
+      "record_only_norm_max_error": 0.0,
+      "wrong_rotation_control_delta": 0.28749698400497437
+    },
+    "scope": "Exact hierarchical angles and record-only pair norm; failing control. WordPiece phase construction is an explicit adaptation, not a byte-table parity claim."
+  },
+  "real_caption_census": {
+    "above128": 272,
+    "caption_revision": "4465c825e7f67abd5fdf1b681fb2052abbb06b82",
+    "continuation_piece_queries": 707,
+    "exact_label_phase_or_record_mismatches": 0,
+    "inspected_rows": 4096,
+    "reached256": 10,
+    "rows_with_pointer_targets": 2026,
+    "sampling": "first4096, descriptive only",
+    "sentence_count_quantiles": {
+      "0.5": 2.0,
+      "0.9": 6.0,
+      "0.99": 9.0,
+      "1": 15.0
+    },
+    "source_chunk_rows": 500000,
+    "supervised_query_positions": 11120,
+    "token_length_quantiles": {
+      "0": 5.0,
+      "0.5": 33.0,
+      "0.9": 118.0,
+      "0.99": 178.10000000000036,
+      "1": 256.0
+    },
+    "tokenizer_revision": "86b5e0934494bd15c9632b12f734a8a67f723594",
+    "training_target_rule": "exact WordPiece tuple; first ending is record; repeated content words only"
+  },
+  "auxiliary_gradient_gate": {
+    "base_gradient_norm_shared": 3.9568351380359634,
+    "base_loss": 2.121948719024658,
+    "between_caption_group_gradient_cosine": 0.043969983075375654,
+    "conditioning": "direct cross-entropy on lookup logits; no ill-conditioned inverse-reconstruction map",
+    "finite": true,
+    "gradient_cosine_shared": 0.002148300878887712,
+    "memory": {
+      "max_observed_device_gb": 4.47741952,
+      "peak_allocated_gb": 1.221498368,
+      "peak_reserved_gb": 1.386217472,
+      "total_device_limit_gb": 20.0
+    },
+    "novelty": 0.9978516991211123,
+    "passed": true,
+    "pointer_gradient_norm_shared": 14.831679100856958,
+    "pointer_loss": 4.681777000427246,
+    "pointer_positions": 56,
+    "rows": [
+      2,
+      3,
+      6,
+      12,
+      18,
+      21,
+      26,
+      27
+    ],
+    "scope": "Initialization apparatus/gradient test, eight real pairs; no optimizer step or accuracy claim",
+    "seed": 1,
+    "weighted_gradient_ratio": 0.3748369235373019
+  },
+  "local_cuda_preflight": {
+    "full_batch": false,
+    "note": "Synthetic engineering only: no sentence-quality or research verdict",
+    "passed": true,
+    "rows": [
+      {
+        "arm": "R8",
+        "batch": 8,
+        "finite": true,
+        "length": 256,
+        "losses": {
+          "grad_norm": 6.417652130126953,
+          "loss": 2.2774484157562256,
+          "mse": 0.0026617865078151226,
+          "nce": 2.2747867107391357,
+          "pointer": 0.0,
+          "pointer_opportunities": 2048,
+          "pointer_positions": 0
+        },
+        "memory": {
+          "max_observed_device_gb": 4.256169984,
+          "peak_allocated_gb": 1.126089216,
+          "peak_reserved_gb": 1.168113664,
+          "total_device_limit_gb": 20.0
+        },
+        "seconds": 0.6719999999040738
+      },
+      {
+        "arm": "N16",
+        "batch": 8,
+        "finite": true,
+        "length": 256,
+        "losses": {
+          "grad_norm": 6.393238544464111,
+          "loss": 2.255622148513794,
+          "mse": 0.0026585496962070465,
+          "nce": 2.2529635429382324,
+          "pointer": 0.0,
+          "pointer_opportunities": 2048,
+          "pointer_positions": 0
+        },
+        "memory": {
+          "max_observed_device_gb": 4.277141504,
+          "peak_allocated_gb": 1.13028352,
+          "peak_reserved_gb": 1.180696576,
+          "total_device_limit_gb": 20.0
+        },
+        "seconds": 0.21899999992456287
+      },
+      {
+        "arm": "H16",
+        "batch": 8,
+        "finite": true,
+        "length": 256,
+        "losses": {
+          "grad_norm": 6.436179161071777,
+          "loss": 2.2569644451141357,
+          "mse": 0.0026587711181491613,
+          "nce": 2.254305601119995,
+          "pointer": 0.0,
+          "pointer_opportunities": 2048,
+          "pointer_positions": 0
+        },
+        "memory": {
+          "max_observed_device_gb": 4.282384384,
+          "peak_allocated_gb": 1.13052928,
+          "peak_reserved_gb": 1.180696576,
+          "total_device_limit_gb": 20.0
+        },
+        "seconds": 0.2809999999590218
+      },
+      {
+        "arm": "KEND",
+        "batch": 8,
+        "finite": true,
+        "length": 256,
+        "losses": {
+          "grad_norm": 6.4365620613098145,
+          "loss": 2.256986141204834,
+          "mse": 0.0026587434113025665,
+          "nce": 2.2543272972106934,
+          "pointer": 0.0,
+          "pointer_opportunities": 2048,
+          "pointer_positions": 0
+        },
+        "memory": {
+          "max_observed_device_gb": 4.282384384,
+          "peak_allocated_gb": 1.13052928,
+          "peak_reserved_gb": 1.180696576,
+          "total_device_limit_gb": 20.0
+        },
+        "seconds": 0.28200000000651926
+      },
+      {
+        "arm": "KALL",
+        "batch": 8,
+        "finite": true,
+        "length": 256,
+        "losses": {
+          "grad_norm": 6.4365620613098145,
+          "loss": 2.256986141204834,
+          "mse": 0.0026587434113025665,
+          "nce": 2.2543272972106934,
+          "pointer": 0.0,
+          "pointer_opportunities": 2048,
+          "pointer_positions": 0
+        },
+        "memory": {
+          "max_observed_device_gb": 4.282384384,
+          "peak_allocated_gb": 1.13052928,
+          "peak_reserved_gb": 1.180696576,
+          "total_device_limit_gb": 20.0
+        },
+        "seconds": 0.21799999999348074
+      },
+      {
+        "arm": "KALLP",
+        "batch": 8,
+        "finite": true,
+        "length": 256,
+        "losses": {
+          "grad_norm": 6.440128326416016,
+          "loss": 2.8678925037384033,
+          "mse": 0.0026587434113025665,
+          "nce": 2.2543272972106934,
+          "pointer": 6.109064102172852,
+          "pointer_opportunities": 2048,
+          "pointer_positions": 2048
+        },
+        "memory": {
+          "max_observed_device_gb": 4.282384384,
+          "peak_allocated_gb": 1.13052928,
+          "peak_reserved_gb": 1.180696576,
+          "total_device_limit_gb": 20.0
+        },
+        "seconds": 0.2029999999795109
+      }
+    ]
+  },
+  "wheel_automodel": {
+    "package": "0.3.0",
+    "shape": [
+      2,
+      768
+    ],
+    "hidden_shape": [
+      2,
+      8,
+      128
+    ],
+    "max_abs_error": 2.9802322387695312e-08,
+    "hidden_max_abs_error": 0.0,
+    "finite": true
+  }
+}

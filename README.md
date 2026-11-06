@@ -1,5 +1,19 @@
 # CaptionBERT rotary trainer
 
+The **v0.3.0 structured campaign** adapts the final whole-key/every-position
+rotary mechanism to the full CaptionBERT encoder. Its [registered protocol](docs/structured_campaign_protocol.md)
+defines eight options, two seeds each, a hardware repeat, development-only
+selection, and matched-exposure experiments at four million caption rows.
+Scientific results are pending; the earlier screen below remains unchanged.
+
+Colab lanes: [1](https://colab.research.google.com/github/AbstractEyes/captionbert-trainer/blob/v0.3.0/notebooks/captionbert_structured_lane1.ipynb),
+[2](https://colab.research.google.com/github/AbstractEyes/captionbert-trainer/blob/v0.3.0/notebooks/captionbert_structured_lane2.ipynb),
+[3](https://colab.research.google.com/github/AbstractEyes/captionbert-trainer/blob/v0.3.0/notebooks/captionbert_structured_lane3.ipynb).
+Each includes TensorBoard, a full-batch GPU gate, streaming progress, durable
+checkpoints and remote continuation. Releases use `model.safetensors` and
+self-contained AutoConfig/AutoModel code; paired training-state replay and
+AutoModel round-trip tests are part of the suite.
+
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AbstractEyes/captionbert-trainer/blob/v0.2.0/notebooks/captionbert_rotary_screen.ipynb)
 
 Controlled stage-3 screen from `captionbert_8192_plan_doc.md`: learned absolute

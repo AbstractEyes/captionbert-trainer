@@ -73,6 +73,8 @@ def build_model(arm, cfg=None):
 
 
 def embed(model, ids, mask, positions):
+    if getattr(getattr(model, "config", None), "model_type", None) == "captionbert_structured_rotary":
+        return model(input_ids=ids, attention_mask=mask).pooler_output
     if isinstance(model, RotaryEncoder):
         return model(ids, mask, positions)
     return model(ids, mask)
