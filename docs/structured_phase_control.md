@@ -20,6 +20,6 @@ frozen-phase-constant-20261106 folder.
 The context restores the original word-feature function even after exceptions.
 Its CPU test verifies zero phases, unchanged masks/record identity, unchanged
 norm and restoration. The original queued source59ec953 remains untouched.
-A separate third-runtime job runs this finite control after its serving check;
+Each existing lane runs its completed seed after its optimizer/frozen queues;
 there is no additional accuracy training. It prepares only development chunk61,
 keeps two CPU threads, uses a92GB GPU ceiling and retains the full console.

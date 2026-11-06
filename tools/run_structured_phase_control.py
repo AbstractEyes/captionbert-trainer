@@ -18,6 +18,7 @@ def main():
     p.add_argument("--root", default="/content/captionbert-serving-validation")
     p.add_argument("--data", default="/content/captionbert-data")
     p.add_argument("--probe-revision", required=True)
+    p.add_argument("--seeds", nargs="+", type=int, choices=(1, 2), default=(1, 2))
     p.add_argument("--push", action="store_true")
     args = p.parse_args()
     if len(args.probe_revision) != 40:
@@ -27,7 +28,7 @@ def main():
     from captionbert_rotary.data import prepare
     root = Path(args.root)
     root.mkdir(parents=True, exist_ok=True)
-    cfg = CampaignConfig(stage="screen", arms=("KALLP",), seeds=(1, 2),
+    cfg = CampaignConfig(stage="screen", arms=("KALLP",), seeds=tuple(args.seeds),
         output_dir=str(root / "screen"), data_dir=args.data)
     if cfg.fingerprint() != "dc37215529c188be7b93804c4a21f125afa353e037b1a2a8fc11e5b2fc817d3a":
         raise ValueError("Preserve the original v0.3.0 training environment")
@@ -38,7 +39,7 @@ def main():
     urllib.request.urlretrieve("https://raw.githubusercontent.com/AbstractEyes/captionbert-trainer/"
         + args.probe_revision + "/tools/probe_structured_campaign.py", probe)
     source_hash = hashlib.sha256(probe.read_bytes()).hexdigest()
-    for seed in (1, 2):
+    for seed in args.seeds:
         directory = root / f"screen/KALLP-seed{seed}"
         if not (directory / "result.json").is_file():
             raise ValueError("Restore both completed KALLP models before this control")
